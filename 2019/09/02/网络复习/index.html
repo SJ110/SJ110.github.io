@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言拖了好几天，今天复习一下计算机网络中的一些知识点，感觉这门课我一直学的不太好，主要是因为实践也比较少，但是这些知识也是比较重要的，只能之后多看书多找点有关练习了。">
+<meta name="keywords" content="计网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络复习">
+<meta property="og:url" content="http://yoursite.com/2019/09/02/网络复习/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言拖了好几天，今天复习一下计算机网络中的一些知识点，感觉这门课我一直学的不太好，主要是因为实践也比较少，但是这些知识也是比较重要的，只能之后多看书多找点有关练习了。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/tcp.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/estanblish.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/destroy.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/control.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/yongsai.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/chongchuan.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/liucheng.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/02/网络复习/ip.png">
+<meta property="og:updated_time" content="2019-10-07T03:54:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络复习">
+<meta name="twitter:description" content="前言拖了好几天，今天复习一下计算机网络中的一些知识点，感觉这门课我一直学的不太好，主要是因为实践也比较少，但是这些知识也是比较重要的，只能之后多看书多找点有关练习了。">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/02/网络复习/tcp.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/09/02/网络复习/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>网络复习 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/02/网络复习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络复习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-02 12:42:21" itemprop="dateCreated datePublished" datetime="2019-09-02T12:42:21+08:00">2019-09-02</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-07 11:54:02" itemprop="dateModified" datetime="2019-10-07T11:54:02+08:00">2019-10-07</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/复习/" itemprop="url" rel="index"><span itemprop="name">复习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">5.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">5 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>拖了好几天，今天复习一下计算机网络中的一些知识点，感觉这门课我一直学的不太好，主要是因为实践也比较少，但是这些知识也是比较重要的，只能之后多看书多找点有关练习了。</p>
+<a id="more"></a>
+
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><strong>DNS:</strong> 识别主机的方式有两种，一种是通过主机名或者ip地址访问主机，还有一种就是DNS域名服务器。1. DNS是由一个分层的DNS服务器实现的分布式数据库。2. 一个允许主机查询分布式数据库的应用层协议。DNS一般运行在UDP上。DNS一般运行在其他应用层协议上，用于将用户提供的主机名解析为ip地址。使用端口号为53</p>
+<p>比如访问 <a href="http://www.hust.edu/index.html" target="_blank" rel="noopener">www.hust.edu/index.html</a> 时DNS的运行如下：1.同一主机上运行着DNS应用的客户机端。2. 浏览器从上述URL中抽取出主机名 <a href="http://www.hust.edu" target="_blank" rel="noopener">www.hust.edu</a>, 并将主机名传给应用的客户机端。 3.  DNS向DNS服务器发送一个包含主机名的请求。 4. DNS客户机收到一份应答报文，报文中包含主机名的ip地址 5. 浏览器通过该ip地址定位的http服务器建立tcp连接</p>
+<p>DNS缓存：为了改善时延性能并减少在因特网上到处传输的DNS报文数量，DNS广泛运用了缓存技术。原理是当一个DNS服务器在接收到一个DNS回答时，DNS服务器能将回答中的信息缓存在本地。</p>
+<p><strong>FTP：</strong>FTP是网络上用于文件传输的一套标准协议。使用客户/服务器模式，使用 TCP 数据报，提供交互式访问，双向传输。与HTTP的区别，使用两个并行的TCP连接来传输文件，一个是控制连接，一个是数据连接。FTP端口号 控制连接21，数据连接20</p>
+<p><strong>SMTP:</strong>使用TCP端口号25.是一组用于源地址到目的地址传送邮件的协议。控制邮件的中转方式，帮助每台计算机在发送或中转信件时找到下一个目的地。</p>
+<p><strong>HTTP:</strong>协议端口号为80 用于服务器传输超文本到本地浏览器的数据传送协议。web页面是由对象（html文件）组成的。 URL地址包含 两部分内容，主机地址+对象路径名。web服务器用于存储web对象，每个对象由URL寻址。web服务器实现了HTTP的服务器端。</p>
+<p>持久连接和非持久连接：当http协议运行在tcp协议上时，如果每个请求响应是分别由不同的tcp连接发送，那么称为非持久连接。如果所有请求都是由一个TCP连接发送称为持久连接。非持久连接需要对每个对象建立和维护一个TCP连接，如果是串行方式，则会造成严重的时延。持久连接在服务器响应后保持tcp连接打开。一段时间仍未使用则断开连接。</p>
+<p>http请求方法： GET：请求指定的页面信息，并返回实体主体。</p>
+<p>POST：  向指定资源提交数据进行处理（如提交表单或者上传文件），数据被包含在请求体中，post请求可能导致新的资源的建立或者已有的资源修改。</p>
+<p>PUT： 从客户端向服务器端传送的数据取代指定文档的内容。</p>
+<p>DELETE：请求服务器删除指定页面。</p>
+<p>状态码： 100 Continue:继续，客户端继续其请求<br>101 Switching Protocols:切换协议，服务器根据客户端的请求切换协议。只能切换到更高级的协议。</p>
+<p>200 OK 请求成功。</p>
+<p>301 Moved Permanently:永久移动，请求的资源已被永久的移动到新的URL，返回信息会包括新的 URL，浏览器会自动定向到新 URL。今后任何新的请求都应使用新的 URL 代替。</p>
+<p>400 Bad Request： 客户端请求语法错误，服务器无法理解。</p>
+<p>401 Unauthorized: 请求要求用户的身份认证。</p>
+<p>403 Forbidden： 服务器理解客户端的请求，但是拒绝执行此请求（权限不够）</p>
+<p>404 Not Found： 服务器无法根据客户端的请求找到资源.</p>
+<p>408 request timeout: 服务器等待客户端发送的请求时间过长，超时</p>
+<p>500 Internal Server Error: 服务器内部错误，无法完成请求。</p>
+<p>503 Service Unavailable： 由于超时或系统维护，服务器展示无法处理客户端的请求。</p>
+<p>504 Gateway Timeout:充当网关或代理服务器，未及时从远端服务器获取请求。</p>
+<p><strong>DHCP</strong> 动态主机设置协议，是一个局域网的网络协议，使用UDP工作，主要用于1. 内部网络或网络服务提供商自动分配ip地址给用户。2. 内部网络管理员作为对所有电脑作中央管理的手段。</p>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p>运输层协议为运行在不同主机上的应用进程提供了逻辑通信。<br>在协议栈中，运输层位于网络层上，运输层为运行在不同主机上的进程提供逻辑通信，而网络层提供了不同主机间的逻辑通信。</p>
+<p>多路分解和多路复用：将运输层报文段交付到正确的套接字称为多路分解。从源主机的不同套接字收集数据块，并为每个数据块封装上首部信息生成报文段称为多路复用。</p>
+<p>面向无连接的运输 UDP：</p>
+<p>如果应用程序开发使用UDP而不是TCP，则应用程序几乎直接与IP打交道，UDP从应用层得到数据，附加上多路复用和多路分解所需的源端口和目的端口号，再附加上报文长度，校验和，然后将形成的报文交付给主机。如果报文段到达主机，则根据目的端口号来将报文段中数据交付给正确的进程。整个过程发送方和接受方没有握手，因此是无连接的。</p>
+<p>UDP协议特征：无连接，不会引入建立连接的时延。尽可能交付，面向报文传输，没有拥塞控制，支持一对一，一对多，多对一，多对多交互通信，首部开销小，</p>
+<p>可靠数据传输协议TCP：是一种面向连接的、可靠的、基于字节流的传输层通信协议，其传输的单位是报文段。<br>特征： 面向连接， 点对点通信，可靠交互，全双工通信，面向字节流。</p>
+<p>tcp如何实现可靠交付：确认和超时重传，数据合理分片和排序，流量控制，拥塞控制，数据校验。    </p>
+<p>tcp字节流和UDP数据报的区别：两者的区别在于TCP接收的是一堆数据，而每次取多少由主机决定;而UDP发的是数据报，客户发送多少就接收多少。</p>
+<p>tcp报文格式：</p>
+<p><img src="/2019/09/02/网络复习/tcp.png" alt="tcp"></p>
+<p>tcp状态控制码：占6bits，含义如下：</p>
+<p>URG：紧急比特，当为1时，表明紧急指针字段有效，代表该封包为紧急封包，告诉系统该报文段为紧急数据，应尽快传输。</p>
+<p>ACK：确认bit，当为1时，确认号字段有效，代表封包为确认封包。</p>
+<p>PSH（push function）： 若为1，代表要求对方立即传送缓冲区内其他对应封包，无需等待缓冲满了再传。</p>
+<p>RST:复位比特，当为1时，表明TCP连接出现严重差错，必须释放连接重新建立。</p>
+<p>SYN：同步比特，为1时，表示这是一个请求连接或者连接接受报文，通常带有SYN报文表示要连接到对方。</p>
+<p>FIN：终止比特，用来释放一个连接，当为1时，表明此报文段的发送端数据已经发送完毕。要求释放连接。</p>
+<ul>
+<li><p>TCP三次握手连接建立：1.客户端发送SYN给服务器，说明客户端请求建立连接。2. 服务端收到客户端的SYN，并回复SYN+ACK表示同意连接。3. 客户端收到SYN+ACK后回复ACK给服务端表示收到了建立连接的同意报文。4.服务端收到客户端的ACK，表示连接已经建立，现在可以发送数据了。</p>
+</li>
+</ul>
+<p>进行三次握手的原因：1. 因为信道不可靠，而tcp确保可靠交付，需要在可靠信道上进行数据传输，而三次握手是理论上的最小值。 2. 因为双方都需要确认对方收到了自己发送的序列号，这个过程最少需要进行三次通信。3. 为了防止已经失效的连接请求报文端突然传送到服务器，导致错误。</p>
+<p><img src="/2019/09/02/网络复习/estanblish.png" alt="estan"></p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p>TCP四次挥手释放连接：1.客户端发送FIN给服务器，说明客户端不在发送数据给服务器了，请求释放连接。 2. 服务器收到客户端的FIN，并回复ACK给客户端（表示同意释放连接）。 3. 客户端收到来自服务器端的ACK，此时客户端到服务器的连接已经释放（但是服务器到客户端的连接还未释放），所以客户端还可以接收数据。 4. 服务器继续发送之前为发送完的数据给客户端。5. 服务端发送ACK+FIN给客户端，说明服务端此时已经发送全部数据，请求断开连接，就算没有收到客户端回复，过段时间也会断开连接。 6. 客户端接收到FIN+ACK，并恢复ACK给客户端。（同意释放连接。） 7. 服务端收到ACK后，两端断开连接。</p>
+<p>为什么要进行四次挥手： 因为TCP是全双工模式，客户端向服务器端关闭连接后（1 2），服务器端继续传输之前没有传完的数据，然后服务器端向客户端关闭连接（3 4）.所以tcp释放连接时服务器的ACK和FIN时分开发送的，中间还有剩余的数据传输。tcp建立链接时SYN和ACK时一起发送的，所以建立需要三次，释放需要四次。</p>
+<p>为什么TCP连接时可以ACK和SYN一起发送，而释放时ACK和FIN是分开发送呢？ 因为客户端请求建立连接时，服务器器收到SYN，因为此时没有传输数据，所以SYN和ACK一起传输。而释放连接时，在收到客户端的ACK后，服务器端还有数据没有发完，需要继续发送数据，因此FIN和ACK分开了。</p>
+<p><img src="/2019/09/02/网络复习/destroy.png" alt="destroy"></p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p>TCP黏包问题：原因：tcp是一个基于字节流的传输服务，流意味着TCP所传输的数据是没有边界的，可能出现两个数据包黏在一起的情况。</p>
+<p>解决：1. 发送定长包，如果每个消息长度都是一样的，那么接受对等放只需要累计接收数据，直到数据等于一个定长值就将其作为一个消息。2. 包头加上包体长度，接受对等方先接受包头长度，依据包头长度来接收包体。3. 使用更复杂的协议。</p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p>TCP流量控制： 就是为了让发送方速率不要太快，要让接受方来得及接收。</p>
+<p>方法，利用可变窗口进行流量控制。tcp通过让发送方维护一个称为接收窗口的变量来进行流量控制，接收窗口用于告诉发送方，该接收方还有多少可用的缓存空间。</p>
+<p><img src="/2019/09/02/网络复习/control.png" alt="control"></p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p>TCP拥塞控制<br>概念：拥塞控制是为了防止过多的数据注入到网络中，这样可以使网络的路由器不至于过载。</p>
+<p>方法： 慢启动 拥塞避免 快重传 快恢复</p>
+<p><img src="/2019/09/02/网络复习/yongsai.png" alt="yongsai"></p>
+<p><img src="/2019/09/02/网络复习/chongchuan.png" alt="chongchuan"></p>
+<p><img src="/2019/09/02/网络复习/liucheng.png" alt="liucheng"></p>
+<p>慢启动：由小逐渐增大发送窗口，每次接收到报文段时将窗口大小加倍。（初始发送方只能发送一个报文段。）当到达ssthresh时，为了方式拥塞窗口过大导致网络阻塞，使用拥塞避免。</p>
+<p>拥塞避免：当拥塞窗口逐渐增大，没经过一个RTT就将窗口增加1.是窗口大小按照线性增长。</p>
+<p>加法增大乘法减小，（乘法减小）只要出现超时，将窗口大小置为1，并开始慢启动。 （加法增大） 当网络频繁出现超时情况时，ssthresh就下降的很快。减小注入网络中的分组数。</p>
+<p>快重传： 要求首先接受方收到一个时需的报文段后立刻发出重复确认，不要等待自己发送数据时才稍待确认。</p>
+<p>快恢复：1. 当发送方连续收到三个重复确认后，执行乘法减小算法，将门限值减半，防止发生拥塞。2. 由于发送发现在认为网络可能没有发生阻塞，因此不执行慢启动，而是把拥塞窗口设置为慢启动门限减半后的值。然后执行拥塞避免算法。</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>运输层依赖于网络层提供的主机到主机的通信服务。网络层的重要区分：转发和选路。 转发：当一个分组到达某个路由器的输入链路时，该路由器必须将该分组移动到合适的输出链路。选路：当分组从发送放到接收方时，网络层必须决定这些分组所采用的路由或者路径。</p>
+<p>网络服务模型：确保交付，具有时延上界的确保交付，有序分组交付，确保最小带宽，完全性服务。</p>
+<p>虚电路网络和数据报网络：仅在网络层提供连接服务的网络称为虚电路网络。仅在网络层提供无连接服务的网络称为数据报网络。</p>
+<p>路由器：输入端口：完成将一条输入的物理链路端接到路由器的物理层也要完成远端数据链路层数据的交互。还要完成转发和查找。交换结构：是一台路由器中的网络，将路由器的输入端口连接到输出端口。 输出端口：存储经过交换结构转发给他的分组，并将这些分组转发。选路处理器：执行选路协议。</p>
+<p>网际协议：IP:是为计算机网络相互连接进行通信而设计的协议。ARP（地址解析协议），ICMP（网际控制报文协议），IGMP（网际组管理协议）</p>
+<p>IP地址分类{网络号+主机号}</p>
+<p><img src="/2019/09/02/网络复习/ip.png" alt="ip"></p>
+<p>DHCP协议：即插即用协议，主机可以自动获取ip地址，还可以获取一台主机的子网掩码，默认网关以及本地NDS服务器地址。四个步骤： 1. DHCP服务器发现，2. DHCP服务器提供，3. DHCP请求， 4. DHCP ACK</p>
+<p>NAT（网络地址转换）NAT能使路由器对外部网络隐藏了家庭网络的实现细节，NAT通过内部的NAT地址转换表，将一个外界传来的数据报转发给内部主机。</p>
+<p>ICMP（互联网报文控制协议）应用：1.PING（Packet InterNet Groper，分组网间探测）测试两个主机之间的连通性。 2.TTL（Time To Live，生存时间）该字段指定 IP 包被路由器丢弃之前允许通过的最大网段数量。</p>
+<p>IPV6：不允许在中间路由器上进行分片和重新组装，这种操作只能在目的地上进行，如果收到的数据报过大导致不能转发，则丢弃该数据报并发送一个ICMP差错报文。</p>
+<p>内部网关协议<br>RIP（Routing Information Protocol，路由信息协议）<br>OSPF（Open Sortest Path First，开放最短路径优先）</p>
+<p>外部网关协议<br>BGP（Border Gateway Protocol，边界网关协议）</p>
+<p><strong>note：2019.9.16 修改</strong></p>
+<p>ARP协议：每个主机都有一个ARP高速缓存，其中存放局域网中ip和硬件地址的映射关系。ARP是为了解决局域网内部主机硬件地址与ip映射问题所使用的协议。其运行过程大致如下：同一个局域网内的主机A要向主机B发送ip数据报，主机A会在ARP高速缓存中查找主机B的ip地址，如果查找到主机B对应的硬件地址，则将该硬件地址封装到MAC帧中，通过局域网发送过去。如果没有找到，就通过本网络进行广播将将目的mac地址封装发送给网络内部全部主机，主机B收到消息后进行响应，将自己的mac地址和ip封装发送给主机A。主机A收到后将映射写入缓存，将MAC帧发送给主机B。</p>
+<p>如果要同行的主机不在局域网内，则需要将分组发送给某个路由器，再由路由器将分组发送到下一个网络。</p>
+<p>路由器和交换机： 路由器：路由器工作在网络层,他的作用是通过运输层的协议实现不同主机间的通信,包括选路算法等. 路由器连接多个不同的广域网形成更大的广域网(多个局域网连接起来),实现不同ip间的通信. 交换机工作在数据链路层,它将不同的以太网连接形成更大的以太网(以太网可以看成是一种实现局域网通信的技术标准).通过mac地址进行转发.交换机转发的是数据帧，路由器转发的是ip数据报。数据帧在ip数据报基础上封装了帧头和帧尾。交换机主要用来组建局域网,路由器则是负责让主机连接外网。多台主机通过网线连接到交换机就形成了局域网。 路由器一般具有防火墙功能：能够对一些网络数据包进行过滤。</p>
+<p>网关:网关一般指主机间通信的第一跳路由器.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/计网/" rel="tag"><i class="fa fa-tag"></i> 计网</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/01/leetcode-5175-构建回文串检测/" rel="next" title="leetcode 5175. 构建回文串检测">
+                <i class="fa fa-chevron-left"></i> leetcode 5175. 构建回文串检测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/06/一些面试题目/" rel="prev" title="一些面试题目">
+                一些面试题目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用层"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运输层"><span class="nav-number">3.</span> <span class="nav-text">运输层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层"><span class="nav-number">4.</span> <span class="nav-text">网络层</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

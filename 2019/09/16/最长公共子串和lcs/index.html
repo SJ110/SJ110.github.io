@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言感觉我对算法这一块的总结比较少，leetcode做题后没太注意总结各种算法，有时候会出现一道题目感觉就是会做但是思路总是会出一点问题。之后还是需要多做总结才行。 今天第一个需要注意的是 memset这个库函数。 这个函数可以用来对一块连续的空间做初始化。但是有一点我已知没有注意。这个函数的特性是分别对每一个字节进行初始化，也就是说对于一个64位机中的int类型进行初始化时，0x00000000">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最长公共子串和lcs">
+<meta property="og:url" content="http://yoursite.com/2019/09/16/最长公共子串和lcs/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言感觉我对算法这一块的总结比较少，leetcode做题后没太注意总结各种算法，有时候会出现一道题目感觉就是会做但是思路总是会出一点问题。之后还是需要多做总结才行。 今天第一个需要注意的是 memset这个库函数。 这个函数可以用来对一块连续的空间做初始化。但是有一点我已知没有注意。这个函数的特性是分别对每一个字节进行初始化，也就是说对于一个64位机中的int类型进行初始化时，0x00000000">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/09/16/最长公共子串和lcs/lcs.png">
+<meta property="og:updated_time" content="2019-10-04T08:36:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最长公共子串和lcs">
+<meta name="twitter:description" content="前言感觉我对算法这一块的总结比较少，leetcode做题后没太注意总结各种算法，有时候会出现一道题目感觉就是会做但是思路总是会出一点问题。之后还是需要多做总结才行。 今天第一个需要注意的是 memset这个库函数。 这个函数可以用来对一块连续的空间做初始化。但是有一点我已知没有注意。这个函数的特性是分别对每一个字节进行初始化，也就是说对于一个64位机中的int类型进行初始化时，0x00000000">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/16/最长公共子串和lcs/lcs.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/09/16/最长公共子串和lcs/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>最长公共子串和lcs | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/最长公共子串和lcs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">最长公共子串和lcs
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 16:00:03" itemprop="dateCreated datePublished" datetime="2019-09-16T16:00:03+08:00">2019-09-16</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-04 16:36:24" itemprop="dateModified" datetime="2019-10-04T16:36:24+08:00">2019-10-04</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>感觉我对算法这一块的总结比较少，leetcode做题后没太注意总结各种算法，有时候会出现一道题目感觉就是会做但是思路总是会出一点问题。之后还是需要多做总结才行。</p>
+<p>今天第一个需要注意的是 memset这个库函数。 这个函数可以用来对一块连续的空间做初始化。但是有一点我已知没有注意。这个函数的特性是<strong>分别对每一个字节进行初始化，也就是说对于一个64位机中的int类型进行初始化时，0x00000000初始化为1的结果是0x01010101。</strong>这一点还是挺重要的。之前都没有注意到。 类似的char（一个字节）的初始化就不用担心出错了。下面回到正题。</p>
+<a id="more"></a>
+
+<h3 id="最长公共子串"><a href="#最长公共子串" class="headerlink" title="最长公共子串"></a>最长公共子串</h3><p>给定两个字符串，找出他们的最长公共子串。”abcde”和”bcdf”返回”bcd”,这个题目可以联想到lcs，所以我顺便复习下lcs（最长公共子序列）。只要对lcs还有一点残存的记忆，想法都是使用二维数组来解题。<br>下面是关于”abcde”和”bcdf”的情况。</p>
+<pre><code>  b c d f     
+a 0 0 0 0
+b 1 0 0 0
+c 0 1 0 0
+d 0 0 1 0
+e 0 0 0 0</code></pre><p>观察上面的结构，最长子序列会出现在斜线上，这是一个典型的动态规划，他的递推式为</p>
+<pre><code>s1[i]==s2[j]? dp[i][j]=dp[i-1][j-1]+1;
+最后结果就如下：
+
+    b c d f     
+  a 0 0 0 0
+  b 1 0 0 0
+  c 0 2 0 0
+  d 0 0 3 0
+  e 0 0 0 0</code></pre><p>时间复杂度o(n2)，空间复杂度o(n2);</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>代码如下：也可以输出其中的子串，方法比较多substr，或者遍历一下原串都可以。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;string.h&gt;
+
+using namespace std;
+
+int getlen(string&amp;s1,string &amp;s2){
+    int size1 = s1.size();
+    int size2 = s2.size();
+    int dp[size1][size2];
+    memset(dp, 0, sizeof(dp));
+
+    for (int i = 0; i &lt; size1;i++)
+        dp[0][i] = s2[i] == s1[0] ? 1 : 0;
+
+    for (int i = 0; i &lt; size2;i++)
+        dp[i][0] = s2[0] == s1[i] ? 1 : 0;
+
+
+    int ret = 0;
+    int indexx = 0;
+    for (int m = 1; m &lt; size1;m++){
+        for (int n = 1; n &lt; size2;n++){
+            if(s1[m]==s2[n]){
+                dp[m][n] = dp[m - 1][n - 1] + 1;
+                if(dp[m][n]&gt;ret){
+                    ret = dp[m][n];
+                    indexx = m;
+                }
+            }
+
+        }
+    }
+    for (int i = 0; i &lt; size1;i++){
+        for (int j = 0; j &lt; size2;j++)
+            cout &lt;&lt; dp[i][j] &lt;&lt; &quot; &quot;;
+         cout &lt;&lt; endl;
+    }
+
+
+    string tmp = &quot;&quot;;
+    for (int i = indexx,j=ret; j&gt;0&amp;&amp;i&gt;=0;i--,j--){
+        tmp =s1[i]+tmp;
+    }
+    cout &lt;&lt; tmp &lt;&lt; endl;
+    return ret;
+}
+
+int main(){
+    string s1,s2;
+    cin&gt;&gt;s1&gt;&gt;s2;
+    int len=getlen(s1,s2);
+    cout&lt;&lt;len&lt;&lt;endl;
+    return 0;
+}</code></pre><h3 id="lcs"><a href="#lcs" class="headerlink" title="lcs"></a>lcs</h3><p>给定两个字符串，找出其中最长的公共子序列，注意子序列可以不是连续的字符，但是相对顺序不能变。<br>lcs是动态规划的典型，有很多类似的模型。比如地图最短路径，最大/最小正方形等。</p>
+<p>这类问题的关键都是找到通项公式：lcs的通项如下：</p>
+<p><img src="/2019/09/16/最长公共子串和lcs/lcs.png" alt="lcs"></p>
+<p>所以一切的关键都在这个递归公式中，照着这个公式写就完全ok。有一篇文章图文并茂的博客总结的很好，感谢原作者.参考 <a href="https://blog.csdn.net/hrn1216/article/details/51534607" target="_blank" rel="noopener">https://blog.csdn.net/hrn1216/article/details/51534607</a> </p>
+<h4 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h4><p>可以在得出长度后再次返回去求得子串的组成元素。其中已经给出。</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;string.h&gt;
+using namespace std;
+
+int getlen(string&amp; s1,string&amp;s2){
+    int len1 = s1.size();
+    int len2 = s2.size();
+
+    int dp[len1+1][len2+1];
+    memset(dp, 0, sizeof(dp));
+
+    for (int i = 0; i &lt; len1;i++){
+        for (int j = 0; j &lt; len2;j++){
+            if(s1[i]==s2[j]){
+                dp[i + 1][j + 1] = dp[i][j]+1;
+            }else{
+                dp[i + 1][j + 1] = std::max(dp[i][j + 1], dp[i + 1][j]);
+            }
+        }
+    }
+
+    for (int i = 0; i &lt;= len1;i++){
+        for (int j = 0; j &lt;= len2;j++)
+            cout &lt;&lt; dp[i][j] &lt;&lt; &quot; &quot;;
+        cout &lt;&lt; endl;
+    }
+    int m = len1, n = len2;
+    string tmp = &quot;&quot;;
+    while(m&gt;0 &amp;&amp;n&gt;0 &amp;&amp; dp[m][n]!=0){
+        if(dp[m-1][n]==dp[m][n]){
+            m = m - 1;
+        }else if(dp[m][n-1]==dp[m][n]){
+            n = n - 1;
+        }else{
+            m = m - 1;
+            n = n - 1;
+            tmp = s1[m] + tmp;
+        }
+    }
+
+    cout &lt;&lt; tmp &lt;&lt; endl;
+    return dp[len1][len2];
+}
+
+int main(){
+    string s1, s2;
+    cin &gt;&gt; s1 &gt;&gt; s2;
+
+    int len = getlen(s1, s2);
+    cout &lt;&lt; len &lt;&lt; endl;
+    return 0;
+}</code></pre><p>以上代码都在牛客网对应题目中提交通过.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/" rel="next" title="5190. 反转每对括号间的子串 && 5191.K次串联后最大子数组之和">
+                <i class="fa fa-chevron-left"></i> 5190. 反转每对括号间的子串 && 5191.K次串联后最大子数组之和
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/23/一些感想/" rel="prev" title="一些感想">
+                一些感想 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最长公共子串"><span class="nav-number">2.</span> <span class="nav-text">最长公共子串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lcs"><span class="nav-number">3.</span> <span class="nav-text">lcs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考代码"><span class="nav-number">3.1.</span> <span class="nav-text">参考代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

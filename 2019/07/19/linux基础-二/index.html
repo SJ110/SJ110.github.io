@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="文件系统特性 文件系统分区完毕后需要进行格式化（format）才能被操作系统访问，因为不同的操作系统所使用的文件系统时不一样的，而且设置的权限和文件属性也不相同。常见的文件系统比如win98以前使用的 FAT/FAT16，winddow2000以后使用的NTFS文件系统。而linux的主流文件系统则是Ext2/Ext3/Ext4等。而U盘一般使用的则是FAT文件系统。Ext2文件系统数据访问方式为">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础--二">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/linux基础-二/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="文件系统特性 文件系统分区完毕后需要进行格式化（format）才能被操作系统访问，因为不同的操作系统所使用的文件系统时不一样的，而且设置的权限和文件属性也不相同。常见的文件系统比如win98以前使用的 FAT/FAT16，winddow2000以后使用的NTFS文件系统。而linux的主流文件系统则是Ext2/Ext3/Ext4等。而U盘一般使用的则是FAT文件系统。Ext2文件系统数据访问方式为">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-23T04:53:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础--二">
+<meta name="twitter:description" content="文件系统特性 文件系统分区完毕后需要进行格式化（format）才能被操作系统访问，因为不同的操作系统所使用的文件系统时不一样的，而且设置的权限和文件属性也不相同。常见的文件系统比如win98以前使用的 FAT/FAT16，winddow2000以后使用的NTFS文件系统。而linux的主流文件系统则是Ext2/Ext3/Ext4等。而U盘一般使用的则是FAT文件系统。Ext2文件系统数据访问方式为">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/19/linux基础-二/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>linux基础--二 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/linux基础-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux基础--二
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-19 09:23:53" itemprop="dateCreated datePublished" datetime="2019-07-19T09:23:53+08:00">2019-07-19</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-23 12:53:34" itemprop="dateModified" datetime="2019-09-23T12:53:34+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.1k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h4 id="文件系统特性"><a href="#文件系统特性" class="headerlink" title="文件系统特性"></a>文件系统特性</h4><p> 文件系统分区完毕后需要进行格式化（format）才能被操作系统访问，因为不同的操作系统所使用的文件系统时不一样的，而且设置的权限和文件属性也不相同。常见的文件系统比如win98以前使用的 <strong>FAT/FAT16</strong>，winddow2000以后使用的<strong>NTFS</strong>文件系统。而linux的主流文件系统则是<strong>Ext2/Ext3/Ext4</strong>等。而U盘一般使用的则是FAT文件系统。Ext2文件系统数据访问方式为inode/block形式，此种方法形成的文件系统有一级索引，二级间接索引等等。 inode中保存文件的权限等信息。每个inode可以对应多个block，这样在每个inode都可以知道其数据的存放位置。FAT文件系统中使用block的快连接起来，类似于一个链表，这种方式在io比较高时容易导致磁盘多转几圈才会访问到数据。</p>
+<a id="more"></a>
+<h4 id="挂载点"><a href="#挂载点" class="headerlink" title="挂载点"></a>挂载点</h4><p> 文件系统中都具有 inode，block superblock等信息，文件系统要被使用必须能够连接到目录树，将文件系统与目录树连接的操作成为挂载（mount），挂载点是一个目录，该目录为文件系统的入口。</p>
+<p>  linux VFS（virtual filesystem switch）读取和管理整个文件系统，用户并不知晓每个分区上的文件系统是什么。这些由VFS管理。</p>
+<h4 id="文件系统的简单操作"><a href="#文件系统的简单操作" class="headerlink" title="文件系统的简单操作"></a>文件系统的简单操作</h4><p> <strong>df</strong> 列出文件系统磁盘的整体使用量  速度较快</p>
+<p> <strong>du</strong> 列出文件系统的磁盘使用量    速度较慢</p>
+<h4 id="linux常见的压缩命令"><a href="#linux常见的压缩命令" class="headerlink" title="linux常见的压缩命令"></a>linux常见的压缩命令</h4><p><strong>*.Z</strong> compress程序压缩的文件</p>
+<p><strong>*.gz</strong> gzip程序压缩的文件</p>
+<p><strong>*.bz2</strong> bzip2压缩的文件</p>
+<p><strong>*.tar</strong> tar程序打包的文件，没有经过压缩</p>
+<p><strong>*.tar.gz</strong> tar程序打包的文件，经过gzip压缩</p>
+<p><strong>*.tar.bz2</strong> tar程序打包的文件，经过bzip2压缩</p>
+<p>compress属于比较老的压缩程序，此处不再介绍。</p>
+<h5 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h5><p>命令格式： gzip [-cdtv] filename</p>
+<p>-c: 将压缩数据输出到屏幕</p>
+<p>-d：解压缩参数</p>
+<p>-t: 检验压缩文件一致性</p>
+<p>-v： 显示源文件压缩比等信息</p>
+<h5 id="bzip2"><a href="#bzip2" class="headerlink" title="bzip2"></a>bzip2</h5><p>命令格式： bzip2 [-cdkzv] filename</p>
+<p>-c: 将数据输出到屏幕</p>
+<p>-d: 解压缩参数</p>
+<p>-k： 保留压缩后的源文件</p>
+<p>-z： 压缩的参数</p>
+<p>-v: 显示源文件压缩比等信息</p>
+<h5 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h5><p>命令格式： tar [-j|-z][cv] [-f 打包文件名] filename</p>
+<p>-c: 新建打包文件</p>
+<p>-t: 查看打包文件有哪些文件名</p>
+<p>-x: 解打包或解压缩 -x -c -t不能同时出现在一个命令中</p>
+<p>-j: 通过bzip2打包 文件名最好为*.tar.bz2</p>
+<p>-z: 通过zip进行打包，文件名最好为*.tar.gz</p>
+<p>-v: 将压缩过程中处理的文件名显示出来</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/17/linux基础/" rel="next" title="linux基础">
+                <i class="fa fa-chevron-left"></i> linux基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/22/leetcode930-和和相同的二元组/" rel="prev" title="leetcode930-和相同的二元组">
+                leetcode930-和相同的二元组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统特性"><span class="nav-number">1.</span> <span class="nav-text">文件系统特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载点"><span class="nav-number">2.</span> <span class="nav-text">挂载点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统的简单操作"><span class="nav-number">3.</span> <span class="nav-text">文件系统的简单操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux常见的压缩命令"><span class="nav-number">4.</span> <span class="nav-text">linux常见的压缩命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gzip"><span class="nav-number">4.1.</span> <span class="nav-text">gzip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#bzip2"><span class="nav-number">4.2.</span> <span class="nav-text">bzip2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tar"><span class="nav-number">4.3.</span> <span class="nav-text">tar</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

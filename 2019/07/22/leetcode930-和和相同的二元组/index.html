@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="题目题目如图">
+<meta name="keywords" content="coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode930-和相同的二元组">
+<meta property="og:url" content="http://yoursite.com/2019/07/22/leetcode930-和和相同的二元组/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="题目题目如图">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/07/22/leetcode930-和和相同的二元组/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/22/leetcode930-和和相同的二元组/2.png">
+<meta property="og:updated_time" content="2019-09-23T04:52:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode930-和相同的二元组">
+<meta name="twitter:description" content="题目题目如图">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/22/leetcode930-和和相同的二元组/1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/22/leetcode930-和和相同的二元组/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>leetcode930-和相同的二元组 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/leetcode930-和和相同的二元组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcode930-和相同的二元组
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-22 19:24:00" itemprop="dateCreated datePublished" datetime="2019-07-22T19:24:00+08:00">2019-07-22</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-23 12:52:00" itemprop="dateModified" datetime="2019-09-23T12:52:00+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.3k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>题目如图</p>
+<a id="more"></a>
+<p><img src="/2019/07/22/leetcode930-和和相同的二元组/1.png" alt="question"></p>
+<p>这里题意我个人认为不太清楚，这里解释一下：大致意思是从一个只由0和1组成的数组中找出所有连续数字之和为S的子数组。注意此处S可以为0。当然最后只需要统计总数。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="基本思路，超出时间限制"><a href="#基本思路，超出时间限制" class="headerlink" title="基本思路，超出时间限制"></a>基本思路，超出时间限制</h3><p>所以思路也比较清晰：大致就是遍历整个数组，然后得到最后的结果。既然要遍历数组那就需要索引，然后再从题目得知每个解都是一个数组，所以可以考虑双指针。基本思路确定后我们考虑下如何遍历整个数组。</p>
+<p>一个比较直接的思路是顺序扫描数组每个元素，和为S时对这一段进行处理。<br>处理的方式也有很多种，以left right作为左右索引为例，只要right指向的元素为0，则结果+1，直到指向的元素为1. 然后left+1，right=left，再从此处再一次遍历直到和为S， 退出循环的条件是<strong>right&lt;A.size()</strong>。这个思路带来的结果是会在后面几个样例超时。但此处还是给出具体代码。还需要指出的是0是一个特殊情况，我这里的处理是将0分开处理了。</p>
+<h4 id="超时代码"><a href="#超时代码" class="headerlink" title="超时代码"></a>超时代码</h4><pre><code>class Solution {
+public:
+int numSubarraysWithSum(vector&lt;int&gt;&amp; A, int S) {
+    int left=0;
+    int right=0;
+    int ret=0;
+    if(A.empty()) return 0;
+    int tmp=0;
+
+    // S=0 单独处理
+    if(S==0){
+        while(right&lt;A.size()){
+            if(A[right]==0){
+                ret++;
+                right++;
+                while(right&lt;A.size() &amp;&amp; A[right]==0){
+                    ret++;
+                    right++;
+                }
+                left++;
+                right=left;
+            }else {
+                right++;
+                left=right;
+            }
+        }
+        return ret;
+    }
+   while(right&lt;A.size()){
+       tmp=tmp+A[right];
+        if(tmp==S){
+            ret++;
+            left++;
+            right++;
+            while(right&lt;A.size() &amp;&amp; A[right]==0){
+                ret++;
+                right++;
+            }
+            tmp=0;
+            right=left;
+        } 
+       else right++;
+        }
+    return ret;
+}
+};</code></pre><p>上述代码的时间复杂度o(n^2),空间复杂度o(1)常数级别。</p>
+<h3 id="优化思路"><a href="#优化思路" class="headerlink" title="优化思路"></a>优化思路</h3><p> 上面的代码可以很容易的看出，其实每次在S==temp中都会使right倒退很多步，导致进行了很多重复的计算，所以考虑从这里优化。<br>从另一个角度来看，数组的每个元素都是0 或者1，因此我的思路是存储所有的1的下标，然后采用采用窗口滑动的形式从左到右依次处理每个窗口。<br>这里再提一点，就是计算每个窗口解的个数时我是计算left左边和right右边的0的个数得到的。 因为是窗口滑动，所以就不需要太多的重复计算，每个窗口大小即为S.</p>
+<h4 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h4><pre><code>class Solution {
+public:
+int numSubarraysWithSum(vector&lt;int&gt;&amp; A, int S) {
+    int left=0;
+    int right=0;
+    int ret=0;
+    if(A.empty()) return 0;
+
+    // S=0 单独处理
+    if(S==0){
+        while(right&lt;A.size()){
+            if(A[right]==0){
+                ret++;
+                right++;
+                while(right&lt;A.size() &amp;&amp; A[right]==0){
+                    ret++;
+                    right++;
+                }
+                left++;
+                right=left;
+            }else {
+                right++;
+                left=right;
+            }
+        }
+        return ret;
+    }
+
+
+   // while(right&lt;A.size()){
+   //     int tmp=0;
+   //     while(right&lt;A.size() &amp;&amp; tmp!=S){
+   //         tmp=tmp+A[right];
+   //         right++;
+   //     }
+   //     if(tmp!=S) break;
+   //      ret++;
+   //      left++;
+   //      while(right&lt;A.size() &amp;&amp; A[right]==0){
+   //          ret++;
+   //          right++;
+   //      }
+   //      right=left;
+   // }
+    int tmp=0;
+    vector&lt;int&gt; help;
+    for(int i=0;i&lt;A.size();i++){
+        if(A[i]==1) 
+            help.push_back(i);
+    }
+
+    if(S&gt;help.size()) return 0;
+    int i=0;
+    while(i+S&lt;=help.size()){
+        left=help[i];
+        right=help[S+i-1];
+        int countleft=0;
+        left--;
+        while(left&gt;=0 &amp;&amp; A[left]==0){
+            countleft++;
+            left--;
+        }
+
+        int countright=0;
+        right++;
+        while(right&lt;A.size() &amp;&amp; A[right]==0){
+            countright++;
+            right++;
+        }
+        ret=ret+(countleft+1)*(countright+1);
+        i++;
+    }
+
+    return ret;
+}
+};</code></pre><p>复杂度分析： 时间复杂度 o(n^2) 空间复杂度 o(n); 表面上看复杂度好像更高了，但是循环条件有所优化，内部第二层循环也没有过多重复，内部二层循环消耗不高，所以最后可以access。</p>
+<p>本题评论区有人做出了 o（n）时间复杂度，o(1)空间复杂度。可以去参考一下。</p>
+<p>最后贴一张ac的截图<br><img src="/2019/07/22/leetcode930-和和相同的二元组/2.png" alt="anwser"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/coding/" rel="tag"><i class="fa fa-tag"></i> coding</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/19/linux基础-二/" rel="next" title="linux基础--二">
+                <i class="fa fa-chevron-left"></i> linux基础--二
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/29/leetcode1139-最大的以1为边界的正方形/" rel="prev" title="leetcode1139-最大的以1为边界的正方形">
+                leetcode1139-最大的以1为边界的正方形 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思路，超出时间限制"><span class="nav-number">2.1.</span> <span class="nav-text">基本思路，超出时间限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#超时代码"><span class="nav-number">2.1.1.</span> <span class="nav-text">超时代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化思路"><span class="nav-number">2.2.</span> <span class="nav-text">优化思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AC代码"><span class="nav-number">2.2.1.</span> <span class="nav-text">AC代码</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

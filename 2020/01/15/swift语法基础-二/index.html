@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="基础部分swift中包含了C中所有的基础数据类型，Int，Double，Float，Bool，String。还提供了三种基本的集合类型，Array，Set，Dictionary。参考集合类型部分。 在swift中广泛使用值不可变的变量即常量，在swift中，如果你要处理的值不需要改变，那使用常量可使代码更加安全。 swift中还增加了高阶数据类型比如元组（Tuple），元组可以创建或者传递一组数据">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift语法基础(二)">
+<meta property="og:url" content="http://yoursite.com/2020/01/15/swift语法基础-二/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="基础部分swift中包含了C中所有的基础数据类型，Int，Double，Float，Bool，String。还提供了三种基本的集合类型，Array，Set，Dictionary。参考集合类型部分。 在swift中广泛使用值不可变的变量即常量，在swift中，如果你要处理的值不需要改变，那使用常量可使代码更加安全。 swift中还增加了高阶数据类型比如元组（Tuple），元组可以创建或者传递一组数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2020/01/15/swift语法基础-二/string.png">
+<meta property="og:updated_time" content="2020-01-17T04:20:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift语法基础(二)">
+<meta name="twitter:description" content="基础部分swift中包含了C中所有的基础数据类型，Int，Double，Float，Bool，String。还提供了三种基本的集合类型，Array，Set，Dictionary。参考集合类型部分。 在swift中广泛使用值不可变的变量即常量，在swift中，如果你要处理的值不需要改变，那使用常量可使代码更加安全。 swift中还增加了高阶数据类型比如元组（Tuple），元组可以创建或者传递一组数据">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/15/swift语法基础-二/string.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/01/15/swift语法基础-二/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>swift语法基础(二) | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/15/swift语法基础-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">swift语法基础(二)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-15 13:17:45" itemprop="dateCreated datePublished" datetime="2020-01-15T13:17:45+08:00">2020-01-15</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-17 12:20:44" itemprop="dateModified" datetime="2020-01-17T12:20:44+08:00">2020-01-17</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/swift/" itemprop="url" rel="index"><span itemprop="name">swift</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">9.9k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">9 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h3><p>swift中包含了C中所有的基础数据类型，Int，Double，Float，Bool，String。还提供了三种基本的集合类型，Array，Set，Dictionary。参考集合类型部分。</p>
+<p>在swift中广泛使用值不可变的变量即常量，在swift中，如果你要处理的值不需要改变，那使用常量可使代码更加安全。</p>
+<p>swift中还增加了高阶数据类型比如元组（Tuple），元组可以创建或者传递一组数据。作为一组返回值时，可以使用一个元组返回多个值。swift增加了可选类型，可选表示 “那儿有一个值，并且它等于 x ” 或者 “那儿没有值” 。</p>
+<p>swift时一门类型安全的语言，这意味着swift可以让你清楚地知道值得类型。</p>
+<a id="more"></a> 
+
+<h4 id="变量和常量"><a href="#变量和常量" class="headerlink" title="变量和常量"></a>变量和常量</h4><p>常量和变量必须在使用前声明，使用var声明变量，使用let声明常量。</p>
+<pre><code>let maximumNumberOfLoginAttempts = 10
+var currentLoginAttempt = 0</code></pre><p>可以在一行中声明多个常量或者变量，使用逗号隔开</p>
+<pre><code>var x = 0.0, y = 0.0, z = 0.0</code></pre><h4 id="类型注解"><a href="#类型注解" class="headerlink" title="类型注解"></a>类型注解</h4><p>当声明得常量或者变量时可以加上<em>类型注解</em>，说明要存储得值的类型。格式为：</p>
+<pre><code>var welcomeMessage: String
+welcomeMessage = &quot;Hello&quot;</code></pre><p>可以在一行中定义多个同样类型的变量，使用逗号分隔，在最后一个变量名之后添加类型注解：</p>
+<pre><code>var red, green, blue: Double
+//一般来说很少使用类型注解，在声明常量或者变量的时候赋给了初值，编译器可以推断出类型。</code></pre><p>常量和变量名不能包含数学符号，箭头，保留的Unicode码位，连线与制表符.也不能以数字开头。</p>
+<h4 id="输出常量和变量"><a href="#输出常量和变量" class="headerlink" title="输出常量和变量"></a>输出常量和变量</h4><p>使用print(_:separator:terminator:) 函数来输出当前常量或变量的值:print是一个用来输出一个或者多个值到适当输出区的全局函数，输出内容到console上，默认情况下，该函数通过添加换行符来结束当前行，如果不想换行，可以传递空字符串给terminator，比如：print(someValue, terminator:””)。</p>
+<p>也可以使用 \ ()的方式将字符串进行转义。</p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>swift中的注释和c语言中注释相似， 使用双斜杠。多行注释也相同。</p>
+<p>swift并不要求在每条语句结尾处使用分号，也可以添加分号。</p>
+<h4 id="整数，整数范围"><a href="#整数，整数范围" class="headerlink" title="整数，整数范围"></a>整数，整数范围</h4><p>可以使用不同整数类型的min和max属性来获取对应类型的最小值和最大值</p>
+<pre><code>let minValue = UInt8.min  // minValue 为 0，是 UInt8 类型
+let maxValue = UInt8.max  // maxValue 为 255，是 UInt8 类型</code></pre><p>Int：在32位平台上与Int32长度相同，在64位平台上与Int64相同</p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>浮点数类型比整数类型表示范围更大，Double表示64位浮点数，Float表示32位浮点数。</p>
+<h4 id="类型安全和类型推断"><a href="#类型安全和类型推断" class="headerlink" title="类型安全和类型推断"></a>类型安全和类型推断</h4><p>Swift 是一个类型安全（type safe）的语言。类型安全的语言可以让你清楚地知道代码要处理的值的类型。如果你的代码需要一个 String，你绝对不可能不小心传进去一个 Int。因此会在编译时进行类型检查。</p>
+<p>如果表达式中同时出现了整数和浮点数，会被推断为Double类型：</p>
+<pre><code>let anotherPi = 3 + 0.14159
+// anotherPi 会被推测为 Double 类型</code></pre><h4 id="数值型字面量"><a href="#数值型字面量" class="headerlink" title="数值型字面量"></a>数值型字面量</h4><ul>
+<li><p>一个十进制数，没有前缀</p>
+</li>
+<li><p>一个二进制数，前缀0b</p>
+</li>
+<li><p>一个八进制数，前缀0o</p>
+</li>
+<li><p>一个十六进制数，前缀0x</p>
+<p>  let decimalInteger = 17<br>  let binaryInteger = 0b10001       // 二进制的17<br>  let octalInteger = 0o21           // 八进制的17<br>  let hexadecimalInteger = 0x11     // 十六进制的17</p>
+</li>
+</ul>
+<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><p>不同类型的变量和常量如果超过范围编译器会报错</p>
+<pre><code>let cannotBeNegative: UInt8 = -1
+// UInt8 类型不能存储负数，所以会报错
+let tooBig: Int8 = Int8.max + 1
+// Int8 类型不能存储超过最大值的数，所以会报错</code></pre><p>要将一种数字类型转换为另一种。要用当前值来初始化一个期望类型的新数字。如下：</p>
+<pre><code>let twoThousand: UInt16 = 2_000
+let one: UInt8 = 1
+//UInt8和UInt16不能直接计算，需要转换
+let twoThousandAndOne = twoThousand + UInt16(one)</code></pre><p>SomeType(ofInitialValue)调用swift构造器并传入一个一个初值的默认方法。</p>
+<ul>
+<li><p>整数和浮点数转换<br>整数和浮点数的转换必须显式指定类型：</p>
+<pre><code>let three = 3
+let pointOneFourOneFiveNine = 0.14159
+let pi = Double(three) + pointOneFourOneFiveNine
+// pi 等于 3.14159，所以被推测为 Double 类型，如果不进行转化无法相加</code></pre></li>
+<li><p>浮点数到整数<br>浮点数到整数的转换会阶段小数部分。 </p>
+<pre><code>let pi=3.14159
+let integerPi = Int(pi)    
+// integerPi 等于 3，所以被推测为 Int 类型</code></pre></li>
+</ul>
+<h4 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h4><p>类型别名(type aliases)就是给现有类型定义另一个名字，使用关键字<strong>typealias</strong>：</p>
+<pre><code>typealias AudioSample = UInt16
+var maxAmplitudeFound = AudioSample.min
+// maxAmplitudeFound 现在是 0</code></pre><h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><p>Bool值包括true和false。在if判断和控制流作为条件。需要注意的是，当编写条件语句时，如果使用非Bool值则会报错</p>
+<pre><code>let i = 1
+if i { //i不是布尔值
+// 这个例子不会通过编译，会报错
+}
+
+let i = 1
+if i == 1 {  //i==1是布尔值
+// 这个例子会编译成功
+}    </code></pre><h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>元组是把多个值组成一个复合值。元组内的值可以是任意类型，<strong>并不要求是相同类型</strong>，如下http状态码：</p>
+<pre><code>let http404Error = (404, &quot;Not Found&quot;)
+// http404Error 的类型是 (Int, String)，值是 (404, &quot;Not Found&quot;)</code></pre><p>元组可以是两个或两个以上类型的组合，比如(Int,Int,Double)。<br>可以将一个元组的内容分解为单独的常量或者变量，就可以正常使用了。</p>
+<pre><code>let (statusCode, statusMessage) = http404Error
+print(&quot;The status code is \(statusCode)&quot;)
+// 输出“The status code is 404”
+print(&quot;The status message is \(statusMessage)&quot;)
+// 输出“The status message is Not Found”</code></pre><p>如果只需要其中一部分元组，分解的时候可以把忽略的部分用下划线(_)标记：</p>
+<pre><code>let (justTheStatusCode, _) = http404Error
+print(&quot;The status code is \(justTheStatusCode)&quot;)
+// 输出“The status code is 404”</code></pre><p>也可以通过下标访问元组中的某个元素，下标从0开始：</p>
+<pre><code>print(&quot;The status code is \(http404Error.0)&quot;)
+// 输出“The status code is 404”
+print(&quot;The status message is \(http404Error.1)&quot;)
+// 输出“The status message is Not Found”</code></pre><p>给元组中的元素命名后，可以通过名字获取元素的值：</p>
+<pre><code>let http200Status = (statusCode: 200, description: &quot;OK&quot;)
+//元组命名
+print(&quot;The status code is \(http200Status.statusCode)&quot;)
+// 输出“The status code is 200”
+print(&quot;The status message is \(http200Status.description)&quot;)
+// 输出“The status message is OK”</code></pre><h4 id="可选类型"><a href="#可选类型" class="headerlink" title="可选类型"></a>可选类型</h4><p>使用可选类型来处理值可能缺失的情况，可选类型表示两种可能，可以解析可选类型访问这个值， 或者根本没有值。</p>
+<pre><code>let possibleNumber = &quot;123&quot;
+let convertedNumber = Int(possibleNumber)
+// convertedNumber 被推测为类型 &quot;Int?&quot;， 或者类型 &quot;optional Int&quot;</code></pre><p>上述String转Int可能失败，因此返回一个可选类型(optional)Int。也即?Int</p>
+<pre><code>var serverResponseCode: Int? = 404
+// serverResponseCode 包含一个可选的 Int 值 404
+serverResponseCode = nil
+// serverResponseCode 现在不包含值    
+//nil不能用于非可选的常量和变量，如果代码中由常量或者变量需要处理值缺失的情况，声明为可选类型。
+
+var surveyAnswer: String?
+// surveyAnswer 被自动设置为 nil</code></pre><h4 id="if语句以及强制解析"><a href="#if语句以及强制解析" class="headerlink" title="if语句以及强制解析"></a>if语句以及强制解析</h4><p>可以使用if语句和nil比较来判断一个可选值是否包含值，使用==或者!=来判断。 如果可选类型有值，不等于nil：</p>
+<pre><code>if convertedNumber != nil {
+print(&quot;convertedNumber contains some integer value.&quot;)
+}
+// 输出“convertedNumber contains some integer value.”</code></pre><p>-可选绑定<br>使用可选绑定来判断可选类型是否包含值，如果包含就赋值给一个临时常量，如下： </p>
+<pre><code>if let actualNumber = Int(possibleNumber) {
+print(&quot;\&apos;\(possibleNumber)\&apos; has an integer value of \(actualNumber)&quot;)
+} else {
+print(&quot;\&apos;\(possibleNumber)\&apos; could not be converted to an integer&quot;)
+}
+// 输出“&apos;123&apos; has an integer value of 123”</code></pre><p><strong>notice：</strong>在if条件句中使用常量或者变量创建一个可选绑定，仅在if条件句的body中有效。</p>
+<h3 id="基本运算符"><a href="#基本运算符" class="headerlink" title="基本运算符"></a>基本运算符</h3><p>运算符是检查，改变，合并值得特殊符号或者短语。swift支持大部分标准C的运算符，且为了减少常见编码错误进行了部分改进，如：赋值符不再由返回值。算术运算符的结果会被检测并禁止值溢出，以此来避免变量大于或者小于所能表示范围导致的异常。</p>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><pre><code>let b = 10
+var a = 5
+a = b
+// a 现在等于 10</code></pre><p>如果赋值的右边是一个多元组，它的元素可以马上分解成多个常量或者变量：</p>
+<pre><code>let (x, y) = (1, 2)
+// 现在 x 等于 1，y 等于 2</code></pre><p><strong>notice：</strong>swift赋值操作不返回任何值，因此</p>
+<pre><code>if x = y {
+// 此句错误，因为 x = y 并不返回任何值
+}    </code></pre><h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><p>算术运算符除了基本数据类型的运算外，也可用于String的拼接：</p>
+<pre><code>&quot;hello, &quot; + &quot;world&quot;  // 等于 &quot;hello, world&quot;</code></pre><h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><p>所有标准C中的比较运算符都可以在swift中使用。比较运算符多用于if条件语句。</p>
+<p>如果两个元组的元素相同且长度相同，就可以进行比较，比较元组大小会按照从左到右，逐值比较的方式，直到两个值不等停止。</p>
+<pre><code>//元组比较
+(1, &quot;zebra&quot;) &lt; (2, &quot;apple&quot;)   // true，因为 1 小于 2
+(3, &quot;apple&quot;) &lt; (3, &quot;bird&quot;)    // true，因为 3 等于 3，但是 apple 小于 bird
+(4, &quot;dog&quot;) == (4, &quot;dog&quot;)      // true，因为 4 等于 4，dog 等于 dog</code></pre><p><strong>notice：</strong>如果元组中包含有Bool类型时不可以进行比较，</p>
+<pre><code>(&quot;blue&quot;, -1) &lt; (&quot;purple&quot;, 1)       // 正常，比较的结果为 true
+(&quot;blue&quot;, false) &lt; (&quot;purple&quot;, true) // 错误，因为 &lt; 不能比较布尔类型</code></pre><h4 id="空合运算符-Nil-Coalescing-Operator"><a href="#空合运算符-Nil-Coalescing-Operator" class="headerlink" title="空合运算符(Nil Coalescing Operator)"></a>空合运算符(Nil Coalescing Operator)</h4><p>空合运算符(a??b)将对可选类型a进行空判断，如果a包含一个值就进行解包，否则返回一个默认值b。表达式a必须时Optional类型，默认值b要合a存储值类型一致。</p>
+<pre><code>let defaultColorName = &quot;red&quot;
+var userDefinedColorName: String?   //默认值为 nil
+
+var colorNameToUse = userDefinedColorName ?? defaultColorName
+// userDefinedColorName 的值为空，所以 colorNameToUse 的值为 &quot;red&quot;</code></pre><h4 id="区间运算符"><a href="#区间运算符" class="headerlink" title="区间运算符"></a>区间运算符</h4><p>swift提供了几种方便表达一个区间的区间运算符</p>
+<ul>
+<li><p>闭区间  (a…b)  定义一个从a到b的闭区间 </p>
+</li>
+<li><p>半开区间 (a..&lt;b) 定义一个从a到b但不包括b的区间，</p>
+</li>
+<li><p>单侧区间 闭区间右另一个表达形式，可以表达往一侧无线延申的区间，</p>
+<pre><code>let names = [&quot;Anna&quot;, &quot;Alex&quot;, &quot;Brian&quot;, &quot;Jack&quot;]
+for name in names[2...] {
+    print(name)
+}
+// Brian
+// Jack
+
+for name in names[...2] {
+    print(name)
+}
+// Anna
+// Alex
+// Brian</code></pre><p>半开区间也有单侧表达形式：</p>
+<pre><code>for name in names[..&lt;2] {
+    print(name)
+}
+// Anna
+// Alex</code></pre></li>
+</ul>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><p>逻辑运算符与c语言中相同，且&amp;&amp; 和|| 都是左结合的运算符，意味着多元逻辑操作从左开始计算，也可以使用括号标明优先级。</p>
+<h3 id="字符和字符串"><a href="#字符和字符串" class="headerlink" title="字符和字符串"></a>字符和字符串</h3><p>字符串是一系列字符的集合，swift中使用String类型来表示，String中内容的访问可以使用Character值的集合。</p>
+<p>swift中的String和Character类型提供了一种快速且兼容Unicode的方式来处理代码中的文本。</p>
+<h4 id="多行字符串字面量"><a href="#多行字符串字面量" class="headerlink" title="多行字符串字面量"></a>多行字符串字面量</h4><p>如果需要一个字符串是跨越多行的，使用三个双引号包裹的文本字符集：</p>
+<pre><code>let quotation = &quot;&quot;&quot;
+The White Rabbit put on his spectacles.  &quot;Where shall I begin,
+please your Majesty?&quot; he asked.
+
+&quot;Begin at the beginning,&quot; the King said gravely, &quot;and go on
+till you come to the end; then stop.&quot;
+&quot;&quot;&quot;</code></pre><p>多行字符串在”””包围中。</p>
+<h4 id="初始化空字符串"><a href="#初始化空字符串" class="headerlink" title="初始化空字符串"></a>初始化空字符串</h4><p>要创建一个空字符串作为初始值，可以将空的字符串字面量赋值给变量，也可以初始化一个String实例</p>
+<pre><code>var emptyString = &quot;&quot;               // 空字符串字面量
+var anotherEmptyString = String()  // 初始化方法
+// 两个字符串均为空并等价。</code></pre><p>通过Bool类型的isEmpty判断字符串是否为空</p>
+<pre><code>if emptyString.isEmpty {
+    print(&quot;Nothing to see here&quot;)
+}
+// 打印输出：“Nothing to see here”</code></pre><h4 id="字符串可变性"><a href="#字符串可变性" class="headerlink" title="字符串可变性"></a>字符串可变性</h4><p>可以通过将一个特定字符串分配给变量对其进行修改，也可以分配一个常量来保证字符串不被修改。</p>
+<h4 id="字符串是值类型"><a href="#字符串是值类型" class="headerlink" title="字符串是值类型"></a>字符串是值类型</h4><p><strong>在swift中，如果创建一个新的字符串，那么当其进行常量，变量赋值或者在函数中传递时，会进行值拷贝，都会对已有字符串创建新副本，并对该新副本而非原始字符串进行传递或者赋值操作。</strong></p>
+<p>下面例子中使用for-in循环打印字符串中每个字符</p>
+<pre><code>for character in &quot;Dog!🐶&quot; {
+    print(character)
+}
+// D
+// o
+// g
+// !
+// 🐶</code></pre><p>另外，通过标明一个Character类型并用字符字面量自行赋值，可以建立一个独立的字符常量或者变量。</p>
+<pre><code>let exclamationMark: Character = &quot;!&quot;
+//创建一个字符</code></pre><p>字符串可以通过传递一个Character类型的数组作为自变量来初始化：</p>
+<pre><code>let catCharacters: [Character] = [&quot;C&quot;, &quot;a&quot;, &quot;t&quot;, &quot;!&quot;, &quot;🐱&quot;]
+let catString = String(catCharacters)
+print(catString)
+// 打印输出：“Cat!🐱”</code></pre><p>字符串可以进行连接，这与c语言相同。使用+ ，+=， append进行字符串连接。</p>
+<h4 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h4><p>Unicode是一个用于在不同书写系统中对文本进行编码、表示和处理的国际标准。它使你可以用标准格式表示来自任意语言几乎所有的字符，并能够对文本文件或网页这样的外部资源中的字符进行读写操作。Swift 的 String 和 Character 类型是完全兼容 Unicode 标准的。</p>
+<h4 id="计算字符数量"><a href="#计算字符数量" class="headerlink" title="计算字符数量"></a>计算字符数量</h4><p>使用count属性获取字符串中Character的个数。可以通过下标来访问和修改字符串。</p>
+<ul>
+<li>字符串索引 每一个String值都有一个关联的索引类型，String.Index,它对应字符串每个character的位置。<strong>不同的字符可能占用不同数量的内存空间，因此不可以使用integer来索引。</strong></li>
+</ul>
+<p><strong>使用startIndex获取String的第一个character的索引，使用endIndex获取最后一个character的下一位置索引。(和C++迭代器类似)。</strong>如果String是空串，straightIndex和endIndex是相等的。</p>
+<p>使用index(before:) 或者index(after:)方法，可以立即得到前面一个或者后面一个索引。 可以调用index(someString:offsetBy:)方法获取对应偏移量的索引。</p>
+<pre><code>let greeting = &quot;Guten Tag!&quot;
+greeting[greeting.startIndex]
+// G
+greeting[greeting.index(before: greeting.endIndex)]
+// !
+greeting[greeting.index(after: greeting.startIndex)]
+// u
+let index = greeting.index(greeting.startIndex, offsetBy: 7) //获取偏移下标
+greeting[index]
+// a</code></pre><p>获取越界的索引时会报错。</p>
+<ul>
+<li><p>使用indices属性创建一个包含全部索引的范围，用来访问字符串中的单个字符。</p>
+<pre><code>for index in greeting.indices {
+       print(&quot;\(greeting[index]) &quot;, terminator: &quot;&quot;)
+}
+// 打印输出“G u t e n   T a g ! ”</code></pre></li>
+<li><p>插入和删除</p>
+</li>
+</ul>
+<p>调用 insert(_:at:)方法可以在一个字符串的指定索引插入一个<strong>字符</strong>。调用insert(contentsOf:at:)方法可以在一个字符串指定索引插入一个<strong>段字符串</strong></p>
+<pre><code>var welcome = &quot;hello&quot;
+welcome.insert(&quot;!&quot;, at: welcome.endIndex)
+// welcome 变量现在等于 &quot;hello!&quot;
+
+welcome.insert(contentsOf:&quot; there&quot;, at: welcome.index(before: welcome.endIndex))
+// welcome 变量现在等于 &quot;hello there!&quot;</code></pre><p>调用remove(at:)可以在一个字符串的指定索引删除一个<strong>字符</strong>。调用removerSubrange(_:)可以在一个字符串的指定索引删除一个<strong>子字符串</strong></p>
+<pre><code>welcome.remove(at: welcome.index(before: welcome.endIndex))
+// welcome 现在等于 &quot;hello there&quot;
+
+let range = welcome.index(welcome.endIndex, offsetBy: -6)..&lt;welcome.endIndex
+welcome.removeSubrange(range)
+// welcome 现在等于 &quot;hello&quot;</code></pre><ul>
+<li>子字符串</li>
+</ul>
+<p>当从字符串中获取一个子串可以使用prefix(_:)方法。就可以得到一个subString实例。 subString中的绝大部分函数和String一样，但是如果需要长时间保存字符串时，使用subString转化为string的方法。</p>
+<pre><code>let greeting = &quot;Hello, world!&quot;
+let index = greeting.firstIndex(of: &quot;,&quot;) ?? greeting.endIndex
+let beginning = greeting[..&lt;index]
+// beginning 的值为 &quot;Hello&quot;
+
+// 把结果转化为 String 以便长期存储。
+let newString = String(beginning)</code></pre><ul>
+<li>String 和subString的区别<br>subString可以重用原String的内存空间，或者另一个subString的空间。String也有同样优化，但是如果两个String共享内存的话，那么他们相等。</li>
+</ul>
+<p><img src="/2020/01/15/swift语法基础-二/string.png" alt="string"></p>
+<p>如图所示：下方String是重新申请一块内存存放的。而subString和原来String共享一块内存空间。</p>
+<h4 id="比较字符串"><a href="#比较字符串" class="headerlink" title="比较字符串"></a>比较字符串</h4><p>swift提供了三种方式比较文本值，字符串字符相等，前缀相等，后缀相等。</p>
+<ul>
+<li><p>字符/字符串相等<br>可以使用==和!=操作符</p>
+<pre><code> let quotation = &quot;We&apos;re a lot alike, you and I.&quot;
+let sameQuotation = &quot;We&apos;re a lot alike, you and I.&quot;
+if quotation == sameQuotation {
+    print(&quot;These two strings are considered equal&quot;)
+}
+// 打印输出“These two strings are considered equal”</code></pre></li>
+<li><p>前缀/后缀相等<br>通过调用hasPrefix(<em>:)，hasSuffix(</em>:)检查字符串是否拥有特定的前缀和后缀。 两个方法接受一个String参数，返回一个bool值。</p>
+</li>
+</ul>
+<h4 id="字符串的unicode表示"><a href="#字符串的unicode表示" class="headerlink" title="字符串的unicode表示"></a>字符串的unicode表示</h4><p>当一个 Unicode 字符串被写进文本文件或者其他储存时，字符串中的 Unicode 标量会用 Unicode 定义的几种 编码格式（encoding forms）编码。每一个字符串中的小块编码都被称 代码单元（code units）。这些包括 UTF-8 编码格式（编码字符串为 8 位的代码单元）， UTF-16 编码格式（编码字符串位 16 位的代码单元），以及 UTF-32 编码格式（编码字符串32位的代码单元）。</p>
+<p>UTF8，UTF16,UTF32表示参考</p>
+<p><a href="https://swiftgg.gitbook.io/swift/swift-jiao-cheng/03_strings_and_characters" target="_blank" rel="noopener">https://swiftgg.gitbook.io/swift/swift-jiao-cheng/03_strings_and_characters</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/14/swift语法基础-一/" rel="next" title="swift语法基础(一)">
+                <i class="fa fa-chevron-left"></i> swift语法基础(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/17/swift语法基础-三/" rel="prev" title="swift语法基础(三)">
+                swift语法基础(三) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础部分"><span class="nav-number">1.</span> <span class="nav-text">基础部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量和常量"><span class="nav-number">1.1.</span> <span class="nav-text">变量和常量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型注解"><span class="nav-number">1.2.</span> <span class="nav-text">类型注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出常量和变量"><span class="nav-number">1.3.</span> <span class="nav-text">输出常量和变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">1.4.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#整数，整数范围"><span class="nav-number">1.5.</span> <span class="nav-text">整数，整数范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点数"><span class="nav-number">1.6.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型安全和类型推断"><span class="nav-number">1.7.</span> <span class="nav-text">类型安全和类型推断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值型字面量"><span class="nav-number">1.8.</span> <span class="nav-text">数值型字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型转换"><span class="nav-number">1.9.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型别名"><span class="nav-number">1.10.</span> <span class="nav-text">类型别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔值"><span class="nav-number">1.11.</span> <span class="nav-text">布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元组"><span class="nav-number">1.12.</span> <span class="nav-text">元组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可选类型"><span class="nav-number">1.13.</span> <span class="nav-text">可选类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句以及强制解析"><span class="nav-number">1.14.</span> <span class="nav-text">if语句以及强制解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本运算符"><span class="nav-number">2.</span> <span class="nav-text">基本运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#赋值运算符"><span class="nav-number">2.1.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算术运算符"><span class="nav-number">2.2.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较运算符"><span class="nav-number">2.3.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空合运算符-Nil-Coalescing-Operator"><span class="nav-number">2.4.</span> <span class="nav-text">空合运算符(Nil Coalescing Operator)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区间运算符"><span class="nav-number">2.5.</span> <span class="nav-text">区间运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算符"><span class="nav-number">2.6.</span> <span class="nav-text">逻辑运算符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符和字符串"><span class="nav-number">3.</span> <span class="nav-text">字符和字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多行字符串字面量"><span class="nav-number">3.1.</span> <span class="nav-text">多行字符串字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化空字符串"><span class="nav-number">3.2.</span> <span class="nav-text">初始化空字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串可变性"><span class="nav-number">3.3.</span> <span class="nav-text">字符串可变性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串是值类型"><span class="nav-number">3.4.</span> <span class="nav-text">字符串是值类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unicode"><span class="nav-number">3.5.</span> <span class="nav-text">Unicode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算字符数量"><span class="nav-number">3.6.</span> <span class="nav-text">计算字符数量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较字符串"><span class="nav-number">3.7.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串的unicode表示"><span class="nav-number">3.8.</span> <span class="nav-text">字符串的unicode表示</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

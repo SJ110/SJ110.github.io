@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言虽然数据库上学期刚结束，但还是感觉很多东西忘记了，而且运用的也比较少，就结合书和一些资料复习一下。 参考书籍— 《数据库系统概论第五版》">
+<meta name="keywords" content="database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="data_base 复习">
+<meta property="og:url" content="http://yoursite.com/2019/08/23/data-base-复习/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言虽然数据库上学期刚结束，但还是感觉很多东西忘记了，而且运用的也比较少，就结合书和一些资料复习一下。 参考书籍— 《数据库系统概论第五版》">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/23/data-base-复习/cy.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/23/data-base-复习/any.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/23/data-base-复习/shuju.jpg">
+<meta property="og:updated_time" content="2019-10-08T02:40:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="data_base 复习">
+<meta name="twitter:description" content="前言虽然数据库上学期刚结束，但还是感觉很多东西忘记了，而且运用的也比较少，就结合书和一些资料复习一下。 参考书籍— 《数据库系统概论第五版》">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/23/data-base-复习/cy.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/23/data-base-复习/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>data_base 复习 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/23/data-base-复习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">data_base 复习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-23 13:36:56" itemprop="dateCreated datePublished" datetime="2019-08-23T13:36:56+08:00">2019-08-23</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-08 10:40:18" itemprop="dateModified" datetime="2019-10-08T10:40:18+08:00">2019-10-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">5.9k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">5 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>虽然数据库上学期刚结束，但还是感觉很多东西忘记了，而且运用的也比较少，就结合书和一些资料复习一下。</p>
+<p>参考书籍— 《数据库系统概论第五版》 </p>
+<a id="more"></a>
+
+<h3 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h3><h4 id="基本概念："><a href="#基本概念：" class="headerlink" title="基本概念："></a>基本概念：</h4><p>数据：描述事物的符号记录</p>
+<p>数据库： 长期存储在计算机内，有组织的，可共享的大量数据的集合。数据库中的数据按一定的数据模型组织，描述和存储，具有较小的冗余度，较高的数据独立性和易扩展性。</p>
+<p>数据库管理系统：位于操作系统与用户间的一层数据管理软件，功能包括数据定义，数据操作，数据组织，存储和管理，数据库的事务运行和管理数据库的建立和维护</p>
+<p>数据库系统：由数据库，数据库管理系统，应用程序和数据库管理员组成的存储，管理，处理和维护数据的系统。</p>
+<p>数据模型包括概念模型，逻辑模型和物理模型</p>
+<p>概念模型主要用于数据库设计。</p>
+<p>逻辑模型主要包括层次模型，网状模型，关系模型，主要用于数据库系统实现。</p>
+<p>实体： 客观存在并可相互区别的事物称为实体。</p>
+<p>属性：实体具有的某一特性。</p>
+<p>码：唯一标识实体的属性称为码。</p>
+<p>实体型：用实体名及其属性名集合来抽象和刻画同类实体，称为实体型。比如学生（姓名，学号，院系）</p>
+<p>实体集：同一类型实体的集合称为实体集。</p>
+<p>联系：实体间的联系指不同实体集之间的联系</p>
+<h4 id="常用数据模型"><a href="#常用数据模型" class="headerlink" title="常用数据模型"></a>常用数据模型</h4><p>层次模型：1.有且只有一个节点没有双亲节点，称为根节点。2.根以外的其他节点有且只有一个双亲节点 。3.只能是一对多的实体联系。</p>
+<p>优缺点： 优点：数据结构比较简单，数据库的查询效率高。缺点：现实中很多模型都是非层次性的。</p>
+<p>网状模型：允许一个节点以上无双亲，一个节点可以有多余一个的双亲。</p>
+<p>优缺点：优点：具有良好的性能，存取效率高。能够更为直观的表述现实世界。缺点：结构复杂，加重了编写程序的负担。</p>
+<p>关系模型：</p>
+<p><strong>一些术语</strong></p>
+<p>关系：一个关系通常来说是一张表。</p>
+<p>元组：表中一行为一个元组。</p>
+<p>属性：表中一列为一个属性</p>
+<p>码：也称为码键，表中的某个属性组，它可以唯一确定一个元组。</p>
+<p>域：一组具有相同数据类型的值的集合。</p>
+<p>分量：元组中的一个属性值。</p>
+<p>关系模式：一般可表示为 关系（属性1，属性2，….）</p>
+<p>优缺点：优点：关系模式的存取路径对用户透明，从而具有更高的数据独立性，更好的安全保密性。缺点：查询效率较低。</p>
+<h4 id="数据库系统的三层模式结构"><a href="#数据库系统的三层模式结构" class="headerlink" title="数据库系统的三层模式结构"></a>数据库系统的三层模式结构</h4><p>模式：也称逻辑模式，是数据库中全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图。</p>
+<p>外模式：也称子模式或者用户模式，它是数据库用户能够看见的局部的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示。</p>
+<p>内模式：也称存储模式，一个数据库只有一个内模式，他是数据物理结构和存储方式的描述，是数据在数据库内部的组织方式。比如记录存储方式是按照什么属性进行存储，索引是按照什么方式。</p>
+<h3 id="关系数据库标准SQL语言"><a href="#关系数据库标准SQL语言" class="headerlink" title="关系数据库标准SQL语言"></a>关系数据库标准SQL语言</h3><h4 id="SQL的特点"><a href="#SQL的特点" class="headerlink" title="SQL的特点"></a>SQL的特点</h4><p>SQL的特点：综合统一：数据库系统的主要功能是通过数据库支持的数据语言来实现的。</p>
+<p>高度非过程化：在语句中只需要指出做什么，降低了用户的负担。</p>
+<p>面向集合的操作方式。</p>
+<p>以同一种语法结构提供多种使用方式。语言简洁，易学易用。</p>
+<h4 id="SQL语法"><a href="#SQL语法" class="headerlink" title="SQL语法"></a>SQL语法</h4><p>定义模式：</p>
+<pre><code>create schema &lt;模式名&gt; authorization &lt;用户名&gt;</code></pre><p>定义模式实际上定义了一个命名空间，在这个空间中可以进一步定义该模式包含的数据库对象，比如基本表，视图等。</p>
+<p>删除模式：</p>
+<pre><code>drop schema &lt;模式名&gt; &lt;cascade|restrict&gt;
+//cascade表示级联删除，restrict表示如果已经定义了下属的数据对象，则拒绝执行。</code></pre><p>定义基本表：</p>
+<pre><code>create table &lt;name&gt;(
+&lt;列名&gt; &lt;数据类型&gt; [完整性约束条件]
+...    
+) 
+eg: creat table student(
+name char(10),
+sex char(1),
+UID int primarykey
+)</code></pre><p>修改基本表：</p>
+<pre><code>alter table &lt;表名&gt; [add|drop|alter]
+//add 增加新列
+//drop  删除列
+//alter 修改列</code></pre><p>删除基本表：</p>
+<pre><code>drop table &lt;表名&gt; [restrict|cascade]
+//cascade 级联删除
+//restrict 被删除的表若含有外键/被其他表引用则拒绝执行。</code></pre><p>索引的建立与删除：</p>
+<p>常见索引包括，顺序文件上的索引，B+树索引，散列表索引，位图索引索引属于内模式设计范畴，用户不能显示的选择索引。</p>
+<pre><code>create unique index &lt;索引名&gt;on &lt;表名&gt;（列名）
+eg：
+create unique index stu on student(UID);</code></pre><p>修改索引    alter</p>
+<pre><code>alter index stu rename to sten;</code></pre><p>删除索引   drop</p>
+<pre><code>drop index stu;</code></pre><h4 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h4><p> 单表查询</p>
+<pre><code>eg:
+select Sno,sname from student;
+select * from student;
+select sage-2019 from student;
+
+
+关键字 distinct 如果查询结果中出现重复行，则去掉多余行
+select distinct sno from student;</code></pre><p>常用查询条件：</p>
+<p><img src="/2019/08/23/data-base-复习/cy.jpg" alt="changyongchaxun"></p>
+<pre><code>eg:
+select sage from student where sage&lt;20;
+确定范围：
+between...and /not between and
+select sname where sage between 20 and 23;
+
+确定集合：
+IN，用来查找在某个集合中的元组
+
+字符匹配
+like
+%表示任意长度字符串。  a%b 
+_ 表示单个字符。
+
+order by 子句 ASC 升序 desc 降序
+select sno,grade from sc where cno=&apos;2&apos; order by grade desc;</code></pre><p>聚集函数：</p>
+<pre><code>count()
+sum()
+avg()
+max()
+min()
+
+group by子句 将查询结构按某一列护着多列进行分组。值相等为一组。
+select cno,count(sno) from SC group by Cno;</code></pre><p>带有all/any的查询</p>
+<p><img src="/2019/08/23/data-base-复习/any.jpg" alt="anyall"></p>
+<p>基本语法其实也没有很多，后面的连接查询和嵌套查询都是在理解前面简单查询语句的基础上加以变化而来的，这个需要用到的时候查询资料即可。</p>
+<h4 id="数据更新"><a href="#数据更新" class="headerlink" title="数据更新"></a>数据更新</h4><p>插入数据：</p>
+<pre><code>insert into student values(10,20,&apos;zhangsan&apos;);</code></pre><p>插入子查询结构</p>
+<pre><code>//将查询结构插入新表中
+insert into Dept_age(...)  from student where ...;</code></pre><p>修改数据：</p>
+<pre><code>update student set age=22 where sname=&apos;zhangsan&apos;;</code></pre><p>删除数据：</p>
+<pre><code>delete from student where sname=&apos;zhangsan&apos;;
+
+//带子查询的删除语句
+delete from SC where(select子句)；</code></pre><h3 id="数据库完整性"><a href="#数据库完整性" class="headerlink" title="数据库完整性"></a>数据库完整性</h3><p>实体完整性：检查主码是否唯一，不唯一则拒绝插入或者删除。检查主码属性是否为空，为空就拒绝插入或者修改。为了避免全表扫描主码导致效率低下。可以为主码建立索引。(primary key)</p>
+<p>参照完整性：参照完整性将两个或者多个表级联起来，增删改操作时可能破坏参照完整性，一般用于外码</p>
+<p>用户自定义完整性：在创建表定义属性的同时根据表上的属性约束对属性值进行限制。（unique  check not null）</p>
+<p>触发器：是用户定义在关系表上的一类由时间驱动的特殊过程。触发器只能定义在基本表上，不能定义在视图上。</p>
+<h3 id="关系数据库理论"><a href="#关系数据库理论" class="headerlink" title="关系数据库理论"></a>关系数据库理论</h3><p>数据依赖：是一个关系内部属性与属性之间的一种约束关系。这种约束关系是通过属性值间的相等与否体现出来的数据间相关联系。</p>
+<p>最重要的数据依赖：函数依赖和多值依赖。</p>
+<p>范式： </p>
+<p>1NF：列不可再分，属性字段是最小单位</p>
+<p>2NF: 满足1NF,并且非主属性完全依赖于码（码：表中可以唯一确定一个元组的属性或者属性组）</p>
+<p>3NF:满足第二范式，消除了2NF的传递依赖。</p>
+<p>BCNF:满足3NF，所有非主属性对每一个码都是完全函数依赖，所有主属性对不包含它的码也是完全函数依赖</p>
+<h3 id="数据库恢复技术"><a href="#数据库恢复技术" class="headerlink" title="数据库恢复技术"></a>数据库恢复技术</h3><p>事务：是指用户定义的一个数据库操作序列，这些操作要么全做，要么全都不做。是一个不可分割的工作单位。</p>
+<p>事务一般 以 BEGIN TRANSACTION开始，以COMMIT或者ROLLBACK结束。</p>
+<p>事务的ACID特性： </p>
+<p>原子性： 事务是数据库的逻辑工作单位。事务中操作要么都做，要么都不做。</p>
+<p>一致性：事务的执行结果必须使数据库从一个状态变化到另一个一致性状态。</p>
+<p>隔离性：一个事务的执行不能被其他事务干扰。即一个事务使用的数据对其他事务是隔离的。</p>
+<p>持续性：一个事务一旦提交，对数据库的改变就是永久性的。</p>
+<p>事务故障种类：事务内部故障，进行回滚</p>
+<p>系统故障，介质故障，计算机病毒，不可以通过回滚来恢复。</p>
+<p>事务故障的恢复原理：冗余。</p>
+<h3 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h3><p>事务是并发控制的基本单位并发操作带来的数据不一致性包括丢失修改，不可重复读，读脏数据。</p>
+<p>丢失修改：两个事务读入同一个数据并修改，T2提交的结果破坏了T1提交的结果，导致T1的修改被丢失。</p>
+<p>不可重复读：三种情况1.事务T1读取某一数据后，T2对其进行了修改，当T1再次读取数据时得到与前一次结果不同的值。 2.事务T1按一定条件从数据库读取都写数据记录后，T2删除了部分记录，当T1再次读取时，发现某些记录消失了。 3.事务T1按一定条件从数据库读取一些数据后，T2向其中插入了一些数据，导致T1再次读取时发现多了一些数据。</p>
+<p>读脏数据： 事务T1修改某一数据将其写入磁盘，事务T2读取同样数据后T1由于某些原因被撤销，这时被T1修改过的数据恢复原值。T2读取的数据就和数据库中不一致。如下图所示</p>
+<p>幻读：类似于不可重复读。事务1读取了数据，事务二向其中插入了一些失数据，事务一再读时发现结果不同。</p>
+<p><img src="/2019/08/23/data-base-复习/shuju.jpg" alt="shuju"></p>
+<h4 id="并发控制的主要技术"><a href="#并发控制的主要技术" class="headerlink" title="并发控制的主要技术"></a>并发控制的主要技术</h4><p>基本锁类型：排他锁（X锁/写锁）加上X锁后只允许T读取和修改A,不能再加任何类型的锁。</p>
+<p> 共享锁（S锁/读锁）：加上S锁后不允许在加X锁，但是可以加S锁，允许读取，但不能修改。</p>
+<p>封锁，乐观控制法，悲观控制法。</p>
+<pre><code>悲观并发控制
+一个锁定系统，可以阻止用户以影响其他用户的方式修改数据。如果用户执行的操作导致应用了某个锁，只有这个锁的所有者释放该锁，其他用户才能执行与该锁冲突的操作。这种方法之所以称为悲观并发控制，是因为它主要用于数据争用激烈的环境中，以及发生并发冲突时用锁保护数据的成本低于回滚事务的成本的环境中。 
+
+乐观并发控制 
+在乐观并发控制中，用户读取数据时不锁定数据。当一个用户更新数据时，系统将进行检查，查看该用户读取数据后其他用户是否又更改了该数据。如果其他用户更新了数据，将产生一个错误。一般情况下，收到错误信息的用户将回滚事务并重新开始。这种方法之所以称为乐观并发控制，是由于它主要在以下环境中使用：数据争用不大且偶尔回滚事务的成本低于读取数据时锁定数据的成本。
+具体的区别与实例说明如下：
+
+悲观并发控制：假设A和B需要在SCC（Source Code Control）上修改同一个文件，那么在A锁定这个文件并修改的过程中，B无法修改这个文件，他只能等待A解锁文件后，他才能修改。由此可见，悲观并发控制是强调控制在前，确保整个过程不会出现文件版本的冲突。这样做会使得系统效率损耗在加锁机制上，尤其是加锁机制需要用到低速的外部存储（比如FileLocking）时，然而这样做就降低了事务的并发性，尤其是事务之间本来就不存在冲突的情况下。例如在A修改数据的时候，B只能等待。
+
+由此可见，悲观并发控制通过使用显式的加锁机制或者时间戳，对每一个事务进行增量同步校验。如果加锁机制的成本较高的话，悲观并发控制就会出现一些弊端。首先就是效率问题，尤其是使用低效率的外部存储系统实现加锁机制时，这样的问题会更加突出。其次，在不会出现冲突的事务处理（例如只读型事务）中，使用加锁机制就显得没有必要了，这样做只能增加系统负载。再次，这种方式降低了系统的并发性。
+
+乐观并发控制：同样假设A和B需要在SCC上修改同一个文件，他们都将这个文件获取到自己的机器上，A修改完以后，就把文件上传到SCC上了，此时B也修改完了，当他也打算将文件上传时，系统会告知B，已经有人上传了，并出现一个错误。剩下的问题只能由B手动解决，例如B可以在SCC上将文件中更改的内容再次复制一遍。乐观并发控制使得系统效率损耗在事务的后期处理中，比如B必须手动的去修改他已经修改过的东西，然而这种控制方式在极少出现冲突的多事务处理中显得十分高效。
+
+乐观并发控制将事务分为三个阶段：读取阶段、校验阶段以及写入阶段。在读取阶段，事务将数据写入本地缓冲（如上所述，A和B将文件都获取到自己的机器上），此时不会有任何校验操作；在校验阶段，系统会对所有的事务进行同步校验（比如在A或者B打算，但还没有，往SCC上写入更改后的文件时）；在写入阶段，数据将被最终提交。在完成读取阶段以后，系统会对每个事务分派一个时间戳。
+
+悲观并发控制中一个常见的问题就是死锁。例如A在修改文件T1，B在修改文件T2，他们分别锁定了这两个文件，假设T1和T2内容相关，B在修改T2的时候发现他还需要修改T1，可是T1却被A锁定；与此同时，A在修改T1的时候也发现了他还需要修改T2，可是T2又被B锁定了，这样就出现了死锁。当然，在实际操作中，这种情况可以由A和B协商解决，但是在错综复杂的多事务处理环境中，死锁将使得问题变得非常复杂。</code></pre><p>乐观锁 悲观锁</p>
+<p>乐观锁：乐观锁不是数据库中存在的锁机制，需要自己实现。是指在对数据库操作时认为此次操作不会导致冲突，读取数据后不会加锁，而是在修改后和数据库中数据对比，如果数据发生冲突，将丢失此次修改，重新对数据进行操作。</p>
+<p>悲观锁：悲观锁认为在读取数据时，此操作会造成冲突，因此会对数据进行加锁。而其他需要这个数据的事务需要等待锁解除后才能读取数据。因此悲观锁会消耗更多的时间和资源。比如数据库中常见的读锁和写锁都属于悲观锁的范畴。</p>
+<p>封锁协议：</p>
+<p>一级封锁协议：事务T在修改数据R前必须加上X锁（排他锁），直到事务结束才释放</p>
+<p>二级封锁协议：在一级封锁协议上事务T在读取数据前必须加S锁。读完后即可释放</p>
+<p>三级封锁协议：在一级封锁协议上事务T在读取数据前加S锁，直到事务结束后才释放</p>
+<p>活锁和死锁：</p>
+<p>活锁：事务永远处于等待状态，可以通过先来先服务避免。</p>
+<p>死锁：事务T1等待事务T2,同时事务T2等待事务T1,两个事务永远不能结束。</p>
+<p>死锁的预防：</p>
+<p>一次封锁法：每个事务必须一次将索要使用的数据全部加锁。</p>
+<p>顺序封锁法：预先对数据对象规定封锁顺序，所有事物按照顺序实施加锁。（难于实现，成本高）</p>
+<p>死锁的诊断与解除： 超时法，等待图法。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/database/" rel="tag"><i class="fa fa-tag"></i> database</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/C-static和const整理/" rel="next" title="C++ static和const整理">
+                <i class="fa fa-chevron-left"></i> C++ static和const整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/24/操作系统复习/" rel="prev" title="操作系统复习">
+                操作系统复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绪论"><span class="nav-number">2.</span> <span class="nav-text">绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念："><span class="nav-number">2.1.</span> <span class="nav-text">基本概念：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用数据模型"><span class="nav-number">2.2.</span> <span class="nav-text">常用数据模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库系统的三层模式结构"><span class="nav-number">2.3.</span> <span class="nav-text">数据库系统的三层模式结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关系数据库标准SQL语言"><span class="nav-number">3.</span> <span class="nav-text">关系数据库标准SQL语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL的特点"><span class="nav-number">3.1.</span> <span class="nav-text">SQL的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL语法"><span class="nav-number">3.2.</span> <span class="nav-text">SQL语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据查询"><span class="nav-number">3.3.</span> <span class="nav-text">数据查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据更新"><span class="nav-number">3.4.</span> <span class="nav-text">数据更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库完整性"><span class="nav-number">4.</span> <span class="nav-text">数据库完整性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关系数据库理论"><span class="nav-number">5.</span> <span class="nav-text">关系数据库理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库恢复技术"><span class="nav-number">6.</span> <span class="nav-text">数据库恢复技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发控制"><span class="nav-number">7.</span> <span class="nav-text">并发控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发控制的主要技术"><span class="nav-number">7.1.</span> <span class="nav-text">并发控制的主要技术</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

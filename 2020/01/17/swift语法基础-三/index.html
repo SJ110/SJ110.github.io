@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="集合类型swift使用数组，集合，字典三种基本的集合类型用来存储集合数据，数组是有序数据的集，集合是无序数据的集，字典是无序的键值对的集。 swift中的数组，集合和字典必须明确其中保存的键和值类型，这样可以防止插入数据类型不一致。  集合的可变性  如果创建一个数组，集合或者字典并且把它分配成一个变量，那么这个集合将会是可变的。可以进行增删数据。如果是常量则它的大小和内容都不可变。">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift语法基础(三)">
+<meta property="og:url" content="http://yoursite.com/2020/01/17/swift语法基础-三/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="集合类型swift使用数组，集合，字典三种基本的集合类型用来存储集合数据，数组是有序数据的集，集合是无序数据的集，字典是无序的键值对的集。 swift中的数组，集合和字典必须明确其中保存的键和值类型，这样可以防止插入数据类型不一致。  集合的可变性  如果创建一个数组，集合或者字典并且把它分配成一个变量，那么这个集合将会是可变的。可以进行增删数据。如果是常量则它的大小和内容都不可变。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2020/01/17/swift语法基础-三/set.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/17/swift语法基础-三/set2.png">
+<meta property="og:updated_time" content="2020-01-23T07:08:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift语法基础(三)">
+<meta name="twitter:description" content="集合类型swift使用数组，集合，字典三种基本的集合类型用来存储集合数据，数组是有序数据的集，集合是无序数据的集，字典是无序的键值对的集。 swift中的数组，集合和字典必须明确其中保存的键和值类型，这样可以防止插入数据类型不一致。  集合的可变性  如果创建一个数组，集合或者字典并且把它分配成一个变量，那么这个集合将会是可变的。可以进行增删数据。如果是常量则它的大小和内容都不可变。">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/17/swift语法基础-三/set.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/01/17/swift语法基础-三/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>swift语法基础(三) | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/swift语法基础-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">swift语法基础(三)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-17 12:23:04" itemprop="dateCreated datePublished" datetime="2020-01-17T12:23:04+08:00">2020-01-17</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-23 15:08:32" itemprop="dateModified" datetime="2020-01-23T15:08:32+08:00">2020-01-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/swift/" itemprop="url" rel="index"><span itemprop="name">swift</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">10k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">9 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h3><p>swift使用数组，集合，字典三种基本的集合类型用来存储集合数据，数组是有序数据的集，集合是无序数据的集，字典是无序的键值对的集。</p>
+<p>swift中的数组，集合和字典必须明确其中保存的键和值类型，这样可以防止插入数据类型不一致。</p>
+<ul>
+<li>集合的可变性</li>
+</ul>
+<p>如果创建一个数组，集合或者字典并且把它分配成一个变量，那么这个集合将会是可变的。可以进行增删数据。如果是常量则它的大小和内容都不可变。</p>
+<a id="more"></a> 
+
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组中相同的值可以出现在一个数组不同位置多次。简单语法为： Array &lt; Element&gt;，Element是这个数组中允许的数据类型，可以使用简单语法[Element]。</p>
+<ul>
+<li>创建空数组</li>
+</ul>
+<p>使用下面语法创建一个空数组：</p>
+<pre><code>var someInts = [Int]()
+print(&quot;someInts is of type [Int] with \(someInts.count) items.&quot;)
+// 打印“someInts is of type [Int] with 0 items.”</code></pre><p>如果代码中提供了类型信息，可以使用空数组语句将一个数组改为空数组</p>
+<pre><code>someInts.append(3)
+// someInts 现在包含一个 Int 值
+someInts = []
+// someInts 现在是空数组，但是仍然是 [Int] 类型的。</code></pre><ul>
+<li>创建一个带有默认值的数组</li>
+</ul>
+<p>swift中可以创建特定大小并且所有数据都被默认构造的方法。如下：</p>
+<pre><code>var threeDoubles = Array(repeating: 0.0, count: 3)
+// threeDoubles 是一种 [Double] 数组，等价于 [0.0, 0.0, 0.0]</code></pre><ul>
+<li>两个数组相加创建一个数组</li>
+</ul>
+<p>可以使用+来组合两个已经存在的相同类型数组，</p>
+<pre><code>var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
+// anotherThreeDoubles 被推断为 [Double]，等价于 [2.5, 2.5, 2.5]
+
+var sixDoubles = threeDoubles + anotherThreeDoubles
+// sixDoubles 被推断为 [Double]，等价于 [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]</code></pre><ul>
+<li>使用数组字面量构造数组</li>
+</ul>
+<p>可以使用数组字面量构造数组，这与C语言类似：</p>
+<pre><code>var shoppingList: [String] = [&quot;Eggs&quot;, &quot;Milk&quot;]
+// shoppingList 已经被构造并且拥有两个初始项。
+
+//由于swift的类型推断机制 ，可以这样写：
+var shoppingList = [&quot;Eggs&quot;, &quot;Milk&quot;]</code></pre><ul>
+<li>访问和修改数组</li>
+</ul>
+<p>可以通过数组的方法和属性来访问和修改数组，或者使用下标</p>
+<pre><code>//使用count属性获取数组数据项数量    
+print(&quot;The shopping list contains \(shoppingList.count) items.&quot;)
+// 输出“The shopping list contains 2 items.”（这个数组有2个项）</code></pre><p>使用isEmpty属性检查数组是否为空，使用append(_:)方法哎数组后面增加数据项：</p>
+<pre><code>shoppingList.append(&quot;Flour&quot;)
+// shoppingList 现在有3个数据项</code></pre><p>使用+=  + 属性进行同类型数组的数据增加</p>
+<pre><code>shoppingList += [&quot;Baking Powder&quot;]
+// shoppingList 现在有四项了
+shoppingList += [&quot;Chocolate Spread&quot;, &quot;Cheese&quot;, &quot;Butter&quot;]
+// shoppingList 现在有七项了</code></pre><p>使用下标语法获取数据项，下标从0开始。注意下标不能溢出。</p>
+<p><strong>还可以使用下标改变一系列的值，即使更新前后的数据量不同，也正确</strong></p>
+<pre><code>shoppingList[4...6] = [&quot;Bananas&quot;, &quot;Apples&quot;]
+// shoppingList 现在有6项
+//将三个数据替换为两个数据</code></pre><p>使用insert(_:at:)方法在某个<strong>指定索引值之前</strong>添加数据项</p>
+<pre><code>shoppingList.insert(&quot;Maple Syrup&quot;, at: 0)
+// shoppingList 现在有7项
+// 现在是这个列表中的第一项是“Maple Syrup”</code></pre><p>使用remover(at:)方法溢出数组中某一项，并且返回被溢出的数据项</p>
+<pre><code>let mapleSyrup = shoppingList.remove(at: 0)
+// 索引值为0的数据项被移除</code></pre><p><strong>值得注意的是，数据被溢出后，空出项会被自动填补。</strong></p>
+<p>如果通过是需要每个数据项的值和索引值，使用enumerated()方法遍历数组，enumerated()返回一个由索引值和数据值组成的元组数组。索引下标从0开始：</p>
+<pre><code>for (index, value) in shoppingList.enumerated() {
+    print(&quot;Item \(String(index + 1)): \(value)&quot;)
+}
+// Item 1: Six eggs
+// Item 2: Milk
+// Item 3: Flour
+// Item 4: Baking Powder
+// Item 5: Bananas</code></pre><h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>集合用来存储相同类型并且没有确定顺序的值，**当集合元素顺序不重要时或者希望确保每个元素只出现依次时可以使用集合。</p>
+<ul>
+<li>集合类型的hash值</li>
+</ul>
+<p>一个类型为了存储在集合中，该类型必须是可hash化的，即该类型必须提供一个方法来计算它的哈希值，哈希值类型是Int，相等的对象hash值必须相同，比如a==b，因此必须使用a.hashvalue==b.hashvalue. swift中所有基本类型都是可hash化的。可以作为集合值得类型或者字典键的类型。没有关联值得枚举成员值默认也是可hash化的。</p>
+<ul>
+<li>集合类型语法</li>
+</ul>
+<p>集合类型被写为Set&lt; Element&gt;，这里Element表示集合中允许存储的类型。</p>
+<ul>
+<li>创建一个空的集合</li>
+</ul>
+<p>可以通过构造器创建一个特定类型的空集合</p>
+<pre><code>var letters = Set&lt;Character&gt;()
+print(&quot;letters is of type Set&lt;Character&gt; with \(letters.count) items.&quot;)
+// 打印“letters is of type Set&lt;Character&gt; with 0 items.”</code></pre><p>可以通过上下文提供的类型信息，将一个集合设置为空的集合。</p>
+<pre><code>letters.insert(&quot;a&quot;)
+// letters 现在含有1个 Character 类型的值
+letters = []
+// letters 现在是一个空的 Set，但是它依然是 Set&lt;Character&gt; 类型</code></pre><ul>
+<li>使用数组字面量创建集合</li>
+</ul>
+<p>使用数组字面量来构造集合，与c语言类似</p>
+<pre><code>var favoriteGenres: Set&lt;String&gt; = [&quot;Rock&quot;, &quot;Classical&quot;, &quot;Hip hop&quot;]
+// favoriteGenres 被构造成含有三个初始值的集合</code></pre><p>由于swift的推断功能，可以无须写出集合类型，根据成员推断出</p>
+<pre><code>var favoriteGenres: Set = [&quot;Rock&quot;, &quot;Classical&quot;, &quot;Hip hop&quot;]</code></pre><ul>
+<li>访问和修改集合</li>
+</ul>
+<p>可以通过集合的属性和方法进行访问和修改</p>
+<p>使用count属性获取集合元素数量。</p>
+<p>使用isEmpty属性检查集合是否为空</p>
+<p>使用insert(_:)插入一个新元素。</p>
+<pre><code>favoriteGenres.insert(&quot;Jazz&quot;)
+// favoriteGenres 现在包含4个元素</code></pre><p>使用remove属性删除一个元素，如果是该元素存在则返回删除的元素，否则返回nil。可以通过removeAll()方法删除所有元素。</p>
+<pre><code>let removedGenre = favoriteGenres.remove(&quot;Rock&quot;)</code></pre><p>使用contains(_:)方法检察一个集合中是否包含特定的值。返回一个bool值。</p>
+<p>可以在for-in循环中遍历一个集合所有成员：</p>
+<pre><code>for genre in favoriteGenres {
+    print(&quot;\(genre)&quot;)
+}</code></pre><p><strong>notice：</strong>swift中Set类型没有确定顺序，为了保证返回一个有序数组，可以使用sorted()方法遍历集合，将元素按字典序排列后遍历。</p>
+<pre><code>for genre in favoriteGenres.sorted() {
+    print(&quot;\(genre)&quot;)
+}
+// Classical
+// Hip hop
+// Jazz</code></pre><ul>
+<li>集合操作</li>
+</ul>
+<p>可以使用集合的特性完成一些操作。比如判断两个集合是否全包含，部分包含或者不相交。</p>
+<p>下图描述了集合a和b，以及通过阴影部分显示集合各种操作的结果。</p>
+<p><img src="/2020/01/17/swift语法基础-三/set.png" alt="set"></p>
+<p>如上图：</p>
+<p>使用inertsection(_:)方法根据两个集合的交集创建一个新的集合。</p>
+<p>使用 symmetricDifference(_:) 方法根据两个集合不相交的值创建一个新的集合。</p>
+<p>使用union(_:)方法根据两个集合的所有值创建一个新的集合。</p>
+<p>使用subtracting(_:)方法根据不再一个集合中的值创建一个新的集合。</p>
+<pre><code>let oddDigits: Set = [1, 3, 5, 7, 9]
+let evenDigits: Set = [0, 2, 4, 6, 8]
+let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]
+
+oddDigits.union(evenDigits).sorted()
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+oddDigits.intersection(evenDigits).sorted()
+// []
+oddDigits.subtracting(singleDigitPrimeNumbers).sorted()
+// [1, 9]
+oddDigits.symmetricDifference(singleDigitPrimeNumbers).sorted()
+// [1, 2, 9]</code></pre><ul>
+<li>集合成员关系和相等</li>
+</ul>
+<p>下图描述了三个集合a,b,c以及通过重叠区域表述集合间共享的元素，a是b的父集合，b是a的子集合。b和c是不相交集合。</p>
+<p><img src="/2020/01/17/swift语法基础-三/set2.png" alt="set2"></p>
+<p>如上图：<br>使用 == 判断两个集合<strong>包含的值</strong>是否相同</p>
+<p>使用isSubset(of:)方法判断一个集合中的所有值是否也被包含在另外一个集合中。</p>
+<p>使用isSuperset(of:)方法判断一个集合是否包含另外一个集合所有值。</p>
+<p>使用isStrictSubset(of:)或者isStrictSuperset(of:)方法判断一个集合是否是另外一个集合子集合或者父集合并且两个集合并不相等。</p>
+<pre><code>let houseAnimals: Set = [&quot;🐶&quot;, &quot;🐱&quot;]
+let farmAnimals: Set = [&quot;🐮&quot;, &quot;🐔&quot;, &quot;🐑&quot;, &quot;🐶&quot;, &quot;🐱&quot;]
+let cityAnimals: Set = [&quot;🐦&quot;, &quot;🐭&quot;]
+
+houseAnimals.isSubset(of: farmAnimals)
+// true
+farmAnimals.isSuperset(of: houseAnimals)
+// true
+farmAnimals.isDisjoint(with: cityAnimals)
+// true</code></pre><h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><p>字典是一种无序的集合，存储的是键值对间的关系，所有键和值的类型需要相同。一个key对应一个value。</p>
+<ul>
+<li>字典简单语法</li>
+</ul>
+<p>使用Dictionary&lt;key,value&gt;定义。也可以使用 [key:value]这样的简化定义。</p>
+<ul>
+<li>创建一个空字典</li>
+</ul>
+<p>使用类似数组的方式创建一个空字典</p>
+<pre><code>var namesOfIntegers = [Int: String]()
+// namesOfIntegers 是一个空的 [Int: String] 字典</code></pre><p>如果上下文已经提供了类型信息，可以使用字面量来创建一个空字典，记作[:]</p>
+<pre><code>namesOfIntegers[16] = &quot;sixteen&quot;
+// namesOfIntegers 现在包含一个键值对
+namesOfIntegers = [:]
+// namesOfIntegers 又成为了一个 [Int: String] 类型的空字典</code></pre><ul>
+<li>使用字典字面量创建字典</li>
+</ul>
+<p>这个方法与之前创建数组类似：</p>
+<pre><code>var airports: [String: String] = [&quot;YYZ&quot;: &quot;Toronto Pearson&quot;, &quot;DUB&quot;: &quot;Dublin&quot;]
+//简化版
+var airports = [&quot;YYZ&quot;: &quot;Toronto Pearson&quot;, &quot;DUB&quot;: &quot;Dublin&quot;]</code></pre><ul>
+<li>访问和修改字典</li>
+</ul>
+<p>使用只读的count属性获取字典的数据项数量</p>
+<p>使用isEmpty属性检查字典是否为空</p>
+<p>使用下标语法给字典增加新的数据项。</p>
+<pre><code>airports[&quot;LHR&quot;] = &quot;London&quot;
+// airports 字典现在有三个数据项</code></pre><p>使用updataeValue(_:forkey:)方法可以更新特定键值对的值。<strong>这个方法会返回更新前的value值</strong>，</p>
+<pre><code>if let oldValue = airports.updateValue(&quot;Dublin Airport&quot;, forKey: &quot;DUB&quot;) {
+    print(&quot;The old value for DUB was \(oldValue).&quot;)
+}
+// 输出“The old value for DUB was Dublin.”</code></pre><p>使用removeValue(forkey:)方法在字典中移除键值对。这个方法在键值对存在时会返回被移除的值或者不存在时返回nil。</p>
+<ul>
+<li>字典遍历</li>
+</ul>
+<p>使用for-in遍历某个字典，每个数据项都已键值对形式返回，可以使用临时常量或者变量分解这些元组。</p>
+<pre><code>for (airportCode, airportName) in airports {
+    print(&quot;\(airportCode): \(airportName)&quot;)
+}
+// YYZ: Toronto Pearson
+// LHR: London Heathrow
+
+//访问key属性
+
+for airportCode in airports.keys {
+    print(&quot;Airport code: \(airportCode)&quot;)
+}
+// Airport code: YYZ
+// Airport code: LHR
+
+//访问value属性
+for airportName in airports.values {
+    print(&quot;Airport name: \(airportName)&quot;)
+}
+// Airport name: Toronto Pearson
+// Airport name: London Heathrow</code></pre><p>如果需要字典的键集合或者值集合。可以使用如下方法构建一个新数组：</p>
+<pre><code>let airportCodes = [String](airports.keys)
+// airportCodes 是 [&quot;YYZ&quot;, &quot;LHR&quot;]
+
+let airportNames = [String](airports.values)
+// airportNames 是 [&quot;Toronto Pearson&quot;, &quot;London Heathrow&quot;]</code></pre><p>需要有序遍历字典，可以使用sorted()方法。</p>
+<h3 id="控制流"><a href="#控制流" class="headerlink" title="控制流"></a>控制流</h3><p>swift提供了多种控制流结构，包括while， if，guard，switch，break，countinue，for-in。</p>
+<h4 id="for-in循环"><a href="#for-in循环" class="headerlink" title="for-in循环"></a>for-in循环</h4><p>使用for-in遍历集合中所有元素，或者某个范围内元素</p>
+<pre><code>let names = [&quot;Anna&quot;, &quot;Alex&quot;, &quot;Brian&quot;, &quot;Jack&quot;]
+for name in names {
+    print(&quot;Hello, \(name)!&quot;)
+}
+// Hello, Anna!
+// Hello, Alex!
+// Hello, Brian!
+// Hello, Jack!</code></pre><p>可以限定范围：</p>
+<pre><code>for index in 1...5 {
+        print(&quot;\(index) times 5 is \(index * 5)&quot;)
+}
+// 1 times 5 is 5
+// 2 times 5 is 10
+// 3 times 5 is 15
+// 4 times 5 is 20
+// 5 times 5 is 25</code></pre><p>如果不需要区间内的每一项，可以使用_忽略：</p>
+<pre><code>let base = 3
+let power = 10
+var answer = 1
+for _ in 1...power {
+    answer *= base
+}
+print(&quot;\(base) to the power of \(power) is \(answer)&quot;)
+// 输出“3 to the power of 10 is 59049”</code></pre><p>使用stride(from:through:by),可以遍历某一个间隔</p>
+<pre><code>let hours = 12
+let hourInterval = 3
+for tickMark in stride(from: 3, through: hours, by: hourInterval) {
+    // 每3小时渲染一个刻度线（3, 6, 9, 12）
+}</code></pre><h4 id="while循环和-Repeat-While"><a href="#while循环和-Repeat-While" class="headerlink" title="while循环和 Repeat-While"></a>while循环和 Repeat-While</h4><p>while循环，每次在循环开始时计算条件是否满足。</p>
+<p>repeat-while循环，每次在循环结束时计算条件是否满足。</p>
+<h4 id="if语句和switch语句"><a href="#if语句和switch语句" class="headerlink" title="if语句和switch语句"></a>if语句和switch语句</h4><p>swift中的if使用和c语言中一致。</p>
+<p>switch尝试把某个值与若干个case匹配i，匹配成功时执行相应代码。执行完相对应的case语句后不需要break可以自行跳出。</p>
+<p><strong>notice：</strong>每个case语句必须包含至少一条语句。</p>
+<p>swift中的case分支可以是一个值区间：</p>
+<pre><code>let approximateCount = 62
+let countedThings = &quot;moons orbiting Saturn&quot;
+let naturalCount: String
+switch approximateCount {
+case 0:
+    naturalCount = &quot;no&quot;
+case 1..&lt;5:
+    naturalCount = &quot;a few&quot;
+case 5..&lt;12:
+    naturalCount = &quot;several&quot;
+case 12..&lt;100:
+    naturalCount = &quot;dozens of&quot;
+case 100..&lt;1000:
+    naturalCount = &quot;hundreds of&quot;
+default:
+    naturalCount = &quot;many&quot;
+}
+print(&quot;There are \(naturalCount) \(countedThings).&quot;)
+// 输出“There are dozens of moons orbiting Saturn.”</code></pre><p>可以使用元组在同一个switch语句中测试多个值：</p>
+<pre><code>let somePoint = (1, 1)
+switch somePoint {
+case (0, 0):
+    print(&quot;\(somePoint) is at the origin&quot;)
+case (_, 0):
+    print(&quot;\(somePoint) is on the x-axis&quot;)
+case (0, _):
+    print(&quot;\(somePoint) is on the y-axis&quot;)
+case (-2...2, -2...2):
+    print(&quot;\(somePoint) is inside the box&quot;)
+default:
+    print(&quot;\(somePoint) is outside of the box&quot;)
+}
+// 输出“(1, 1) is inside the box”</code></pre><ul>
+<li>值绑定</li>
+</ul>
+<p>case分支允许将匹配的值声明为临时变量或者常量，并且允许在case分支内使用。这成为值绑定。</p>
+<pre><code>let anotherPoint = (2, 0)
+switch anotherPoint {
+case (let x, 0):
+    print(&quot;on the x-axis with an x value of \(x)&quot;)
+case (0, let y):
+    print(&quot;on the y-axis with a y value of \(y)&quot;)
+case let (x, y):
+    print(&quot;somewhere else at (\(x), \(y))&quot;)
+}
+//此处最后一个case可以匹配所有剩余情况    
+// 输出“on the x-axis with an x value of 2”</code></pre><ul>
+<li>where</li>
+</ul>
+<p>case分支可以使用<strong>where</strong>关键字来判断额外条件</p>
+<pre><code>let yetAnotherPoint = (1, -1)
+switch yetAnotherPoint {
+case let (x, y) where x == y:
+    print(&quot;(\(x), \(y)) is on the line x == y&quot;)
+case let (x, y) where x == -y:
+    print(&quot;(\(x), \(y)) is on the line x == -y&quot;)
+case let (x, y):
+    print(&quot;(\(x), \(y)) is just some arbitrary point&quot;)
+}
+// 输出“(1, -1) is on the line x == -y”</code></pre><ul>
+<li>复合型case</li>
+</ul>
+<p>当多个条件可以使用同一种方法来处理时，可以将几种可能放在一个case后面，用逗号隔开。</p>
+<pre><code>let someCharacter: Character = &quot;e&quot;
+switch someCharacter {
+case &quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;:
+    print(&quot;\(someCharacter) is a vowel&quot;)
+case &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;j&quot;, &quot;k&quot;, &quot;l&quot;, &quot;m&quot;,
+     &quot;n&quot;, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;s&quot;, &quot;t&quot;, &quot;v&quot;, &quot;w&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;:
+    print(&quot;\(someCharacter) is a consonant&quot;)
+default:
+    print(&quot;\(someCharacter) is not a vowel or a consonant&quot;)
+}
+// 输出“e is a vowel”</code></pre><h4 id="控制转移语句"><a href="#控制转移语句" class="headerlink" title="控制转移语句"></a>控制转移语句</h4><ul>
+<li>continue</li>
+</ul>
+<p>告诉循环体立刻停止本次循环，开始下一次循环。</p>
+<ul>
+<li>break</li>
+</ul>
+<p>立刻结束整个控制流的执行。</p>
+<ul>
+<li><p>Fallthrough<br>fallthrough 简单地使代码继续连接到下一个 case 中的代码，这和 C 语言标准中的 switch 语句特性是一样的。</p>
+<p>  let integerToDescribe = 5<br>  var description = “The number (integerToDescribe) is”<br>  switch integerToDescribe {<br>  case 2, 3, 5, 7, 11, 13, 17, 19:</p>
+<pre><code>description += &quot; a prime number, and also&quot;
+fallthrough</code></pre><p>  default:</p>
+<pre><code>description += &quot; an integer.&quot;</code></pre><p>  }<br>  print(description)<br>  // 输出“The number 5 is a prime number, and also an integer.”</p>
+</li>
+<li><p>带标签的语句和guard</p>
+</li>
+</ul>
+<p>参考此处：</p>
+<p><a href="https://swiftgg.gitbook.io/swift/swift-jiao-cheng/05_control_flow" target="_blank" rel="noopener">https://swiftgg.gitbook.io/swift/swift-jiao-cheng/05_control_flow</a></p>
+<ul>
+<li>检测API可用性</li>
+</ul>
+<p>swift内置支持API可用性，可以确保我们不会在当前部署机器上使用不可用API。</p>
+<pre><code>if #available(iOS 10, macOS 10.12, *) {
+// 在 iOS 使用 iOS 10 的 API, 在 macOS 使用 macOS 10.12 的 API
+} else {
+    // 使用先前版本的 iOS 和 macOS 的 API
+}</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/15/swift语法基础-二/" rel="next" title="swift语法基础(二)">
+                <i class="fa fa-chevron-left"></i> swift语法基础(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/23/swift语法基础-四/" rel="prev" title="swift语法基础(四)">
+                swift语法基础(四) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#集合类型"><span class="nav-number">1.</span> <span class="nav-text">集合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">1.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合"><span class="nav-number">1.2.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字典"><span class="nav-number">1.3.</span> <span class="nav-text">字典</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制流"><span class="nav-number">2.</span> <span class="nav-text">控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#for-in循环"><span class="nav-number">2.1.</span> <span class="nav-text">for-in循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while循环和-Repeat-While"><span class="nav-number">2.2.</span> <span class="nav-text">while循环和 Repeat-While</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句和switch语句"><span class="nav-number">2.3.</span> <span class="nav-text">if语句和switch语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制转移语句"><span class="nav-number">2.4.</span> <span class="nav-text">控制转移语句</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

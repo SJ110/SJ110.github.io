@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="&amp;#8195;&amp;#8195;虽然已经修过了操作系统，但是实验的时间一直比较的少，再加上都是用虚拟机进行操作。所以最近装了双系统玩了下。当然也是为了能够多了解下Linux。这条路还是比较漫长啊。   &amp;#8195;&amp;#8195;今天在看到《鸟哥的linux私房菜–基础篇》第六章，第七章时，发现其中很多命令行命令其实之前都已经见过，但是用的时候经常又会忘记。今天总结以下这两章看到的一些内容。作为Li">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础">
+<meta property="og:url" content="http://yoursite.com/2019/07/17/linux基础/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="&amp;#8195;&amp;#8195;虽然已经修过了操作系统，但是实验的时间一直比较的少，再加上都是用虚拟机进行操作。所以最近装了双系统玩了下。当然也是为了能够多了解下Linux。这条路还是比较漫长啊。   &amp;#8195;&amp;#8195;今天在看到《鸟哥的linux私房菜–基础篇》第六章，第七章时，发现其中很多命令行命令其实之前都已经见过，但是用的时候经常又会忘记。今天总结以下这两章看到的一些内容。作为Li">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/linux基础/1.png">
+<meta property="og:updated_time" content="2019-09-23T04:54:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础">
+<meta name="twitter:description" content="&amp;#8195;&amp;#8195;虽然已经修过了操作系统，但是实验的时间一直比较的少，再加上都是用虚拟机进行操作。所以最近装了双系统玩了下。当然也是为了能够多了解下Linux。这条路还是比较漫长啊。   &amp;#8195;&amp;#8195;今天在看到《鸟哥的linux私房菜–基础篇》第六章，第七章时，发现其中很多命令行命令其实之前都已经见过，但是用的时候经常又会忘记。今天总结以下这两章看到的一些内容。作为Li">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/17/linux基础/1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/17/linux基础/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>linux基础 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/linux基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-17 17:44:45" itemprop="dateCreated datePublished" datetime="2019-07-17T17:44:45+08:00">2019-07-17</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-23 12:54:06" itemprop="dateModified" datetime="2019-09-23T12:54:06+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.1k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <p> &#8195;&#8195;虽然已经修过了操作系统，但是实验的时间一直比较的少，再加上都是用虚拟机进行操作。所以最近装了双系统玩了下。当然也是为了能够多了解下Linux。这条路还是比较漫长啊。</p>
+<p>  &#8195;&#8195;今天在看到《鸟哥的linux私房菜–基础篇》第六章，第七章时，发现其中很多命令行命令其实之前都已经见过，但是用的时候经常又会忘记。今天总结以下这两章看到的一些内容。作为Linux的<strong>命令行</strong>和其他一些知识的复习。</p>
+<a id="more"></a>
+
+<h4 id="1-用户与用户组"><a href="#1-用户与用户组" class="headerlink" title="1.用户与用户组"></a>1.用户与用户组</h4><p>&#8195;&#8195;linux作为一个多任务多用户的操作系统，其中的各部分文件能够在各个用户的使用下不会引发错误，这些得益于每个文件的属性和权限。而linux文件的权限包括了 用户，用户组，other三种，用户的概念简单来说无论在创建虚拟机还是新建Ubuntu系统时（还有每次登录时），其中都有一步输入账户的过程，这就是创建一个用户的过程。</p>
+<p>&#8195;&#8195;而用户组的概念，举例来说，一家人里面有你和你哥哥姐姐，那家就是一个用户组，你和你家人有各自的房间，你房间里面的东西是你的私人物品，其他人不能使用，而客厅里的物品是大家都可以使用的，那other的意思就是除这家人以外的其他人了。linux下用户和用户组记录的文件存放在 <strong>/etc/passwd</strong>中，而密码记录在<strong>/etc/shadow</strong>文件下，所有组名记录在<strong>/etc/group</strong>下。</p>
+<h4 id="2-Linux权限的概念"><a href="#2-Linux权限的概念" class="headerlink" title="2.Linux权限的概念"></a>2.Linux权限的概念</h4><p>&#8195;&#8195;上面说到，Linux下的权限分为用户，用户组和other，可以在命令行执行<strong>ls -al</strong> 可以看到其中第一列显示了很多关于权限的信息，（此处我在git bash下执行此命令）</p>
+<p><img src="/2019/07/17/linux基础/1.png" alt="ls-al"></p>
+<p>首先 第一大列，表示文件的权限信息，第二列表示有多少文件链接到此节点，第三列表示文件的所有者 第四列表示文件的用户组，第五列是文件大小，第六列是最后修改时间，最后一列表示是一个目录还是一个文件，</p>
+<h5 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h5><p>&#8195;&#8195;其中有10个字符，注意观察发现第一个字符和后面的类型对应，如果是一个目录则是[d],是一个文件则是[-]，后面9个字符可以这样记忆。每个文件有读（read）写（write）可执行(execute)三种权限。第一组表示用户对该文件的权限，第二组表示用户组对该文件的权限，第三组表示other对该文件的权限。</p>
+<p>与此对应的一个重点是，每三位用三个二进制数表示，比如用户权限为rwx，则对应7（111）其余类似，这样可以方便我们修改文件权限。</p>
+<h4 id="3-更改文件属性和权限"><a href="#3-更改文件属性和权限" class="headerlink" title="3.更改文件属性和权限"></a>3.更改文件属性和权限</h4><p>&#8195;&#8195;<br><strong>chgrp</strong> 更改文件用户组权限<br><strong>chown</strong> 更改文件用户权限<br><strong>chmod</strong> 更改文件权限</p>
+<p>比如更改某个文件权限 chmod 777 [filename] //表示文件对所有用户可读，可写，可执行。</p>
+<h4 id="4-目录与文件的权限意义"><a href="#4-目录与文件的权限意义" class="headerlink" title="4.目录与文件的权限意义"></a>4.目录与文件的权限意义</h4><p>&#8195;&#8195;与表述相同，对于文件来说，rwx就表示文件是否可读，是否可写，是否可执行。对于一个目录来讲，具有x权限则表示可以进入这个目录， r表示可以读取这个目录下的文件名数据。w表示可以在此目录下新建，修改，删除文件。</p>
+<p>&#8195;&#8195;你也许会问，那对于一个ASCII码构成的文件，修改为x权限怎么办？是的，一个文件具有此权限是一回事，能不能表现出这个特点又是另一回事。所以只是具备这个特点，但是他无法表现出来而已。</p>
+<h4 id="5-linux目录配置"><a href="#5-linux目录配置" class="headerlink" title="5.linux目录配置"></a>5.linux目录配置</h4><p>/bin:系统中很多放置执行文件的目录。 主要有cat，chmod chgrp等等</p>
+<p>/boot：放置开机时使用的文件。</p>
+<p>/dev（device）：在Linux上，任何设备与接口设备都是以文件的形式存放于这个目录中。访问这个目录下的某个文件相当于访问某个设备。</p>
+<p>/etc：系统的主要配置文件都放于这个目录内部。</p>
+<p>/home：系统默认的主文件夹，可以用~表示。</p>
+<p>/lib： 放置系统的函数库，其中包括开机时需要用到的函数库。</p>
+<p>/media： 放置可删除的设备，比如DVC，光盘，软盘等。</p>
+<p>/mnt：用于暂时挂在某些设备，虚拟机中共享文件夹就存在于这个目录下。</p>
+<p>/opt： 用于存放第三方软件的目录。</p>
+<p>/root： 系统管理员的的主文件夹。</p>
+<p>/sbin： 其中包括了开机，修复，还原系统所需的命令。</p>
+<p>/srv（service）：网络服务启动后，服务所需数据的数据目录。</p>
+<p>/tmp： 用户暂时存放文件的目录。</p>
+<p>/usr（unix software resource）:于软件安装有关。</p>
+<p>/var（variable）：与系统运作过程有关。</p>
+<h4 id="6-一些常用的命令行命令-补充ing"><a href="#6-一些常用的命令行命令-补充ing" class="headerlink" title="6.一些常用的命令行命令(补充ing)"></a>6.一些常用的命令行命令(补充ing)</h4><p>绝对路径：从根目录开始写起。相对路径：相对于当前位置的路径</p>
+<p><strong>cd .</strong> 指当前目录 <strong>cd ..</strong> 指当前目录的上一级目录。在根目录下，二者得到的结果相同。</p>
+<p>cd 切换目录 </p>
+<p>mkdir 创建目录 mkdir ./tmp 在当前目录下创建一个tmp目录</p>
+<p>pwd 显示当前目录</p>
+<p>rmdir 移出一个空目录</p>
+<p>cp 复制一个文件 <strong>cp src dst</strong></p>
+<p>rm 删除一个文件 <strong>rm filename</strong></p>
+<p>mv 移动一个文件  <strong>mv filename dst</strong></p>
+<p>cat tac nl文件内容查阅</p>
+<p>touch 创建一个文件</p>
+<p>which 脚本文件查询</p>
+<p>whereis 文件查询 //此两种方式为数据库查询，速度较快</p>
+<p>localdate 文件查询</p>
+<p>find 文件查询 //速度较慢</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/08/leetcode144-二叉树前序遍历/" rel="next" title="leetcode144. 二叉树前序遍历">
+                <i class="fa fa-chevron-left"></i> leetcode144. 二叉树前序遍历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/19/linux基础-二/" rel="prev" title="linux基础--二">
+                linux基础--二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-用户与用户组"><span class="nav-number">1.</span> <span class="nav-text">1.用户与用户组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Linux权限的概念"><span class="nav-number">2.</span> <span class="nav-text">2.Linux权限的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#权限"><span class="nav-number">2.1.</span> <span class="nav-text">权限</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-更改文件属性和权限"><span class="nav-number">3.</span> <span class="nav-text">3.更改文件属性和权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-目录与文件的权限意义"><span class="nav-number">4.</span> <span class="nav-text">4.目录与文件的权限意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-linux目录配置"><span class="nav-number">5.</span> <span class="nav-text">5.linux目录配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-一些常用的命令行命令-补充ing"><span class="nav-number">6.</span> <span class="nav-text">6.一些常用的命令行命令(补充ing)</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

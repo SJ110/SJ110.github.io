@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言本着复习的理念，还是简单梳理一遍常见的排序算法，直接贴出代码，并且在代码中加以注释。 排序算法对比说到排序算法，那还是就放这张图就可以了。">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法梳理">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/排序算法梳理/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言本着复习的理念，还是简单梳理一遍常见的排序算法，直接贴出代码，并且在代码中加以注释。 排序算法对比说到排序算法，那还是就放这张图就可以了。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/排序算法梳理/sort.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/排序算法梳理/answer.png">
+<meta property="og:updated_time" content="2019-09-23T04:52:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序算法梳理">
+<meta name="twitter:description" content="前言本着复习的理念，还是简单梳理一遍常见的排序算法，直接贴出代码，并且在代码中加以注释。 排序算法对比说到排序算法，那还是就放这张图就可以了。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/27/排序算法梳理/sort.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/排序算法梳理/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>排序算法梳理 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/排序算法梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">排序算法梳理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-27 15:29:23" itemprop="dateCreated datePublished" datetime="2019-08-27T15:29:23+08:00">2019-08-27</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-23 12:52:40" itemprop="dateModified" datetime="2019-09-23T12:52:40+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/复习/" itemprop="url" rel="index"><span itemprop="name">复习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">5.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">5 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本着复习的理念，还是简单梳理一遍常见的排序算法，直接贴出代码，并且在代码中加以注释。</p>
+<h3 id="排序算法对比"><a href="#排序算法对比" class="headerlink" title="排序算法对比"></a>排序算法对比</h3><p>说到排序算法，那还是就放这张图就可以了。</p>
+<a id="more"></a>
+
+<p><img src="/2019/08/27/排序算法梳理/sort.png" alt="sort"></p>
+<p>本文实现了上述的几种算法，上面没提到的桶排序和基数排序并没有加以实现。 </p>
+<h4 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h4><p><strong>稳定</strong>：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</p>
+<p><strong>不稳定</strong>：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</p>
+<p>运行结果如下：</p>
+<p><img src="/2019/08/27/排序算法梳理/answer.png" alt="answer"></p>
+<pre><code>#include&lt;vector&gt;
+#include&lt;iostream&gt;
+#include&lt;string.h&gt;
+using namespace std;
+
+/*冒泡排序 时间复杂度 O(n^2);
+可以修改其中的条件使其稳定或者不稳定
+主要思路就是通过不断比较相邻的数据大小，并进行交换。
+如果数据原本就是有序的，那么无需交换，但是循环次数不变
+*/
+void Bubble_sort(vector&lt;int&gt;&amp; temp){
+    int size = temp.size();
+    for (int i = 0; i &lt; size-1;i++){
+        for (int j =  1; j &lt; size;j++){
+            if(temp[j-1]&gt;temp[j])
+                swap(temp[j-1], temp[j]);
+        }
+    }
+    return;
+}
+
+//select sort
+/*选择排序 O(n^2)
+    选择排序的思路也比较简单，多次循环数组，每次找到当前循环的最小值，记录下标，每次找到最小值后放到（swap）前面已排好序的末尾即可。
+    如果数组全都排好序，那就不必交换，但是循环次数不变。
+*/
+void select_sort(vector&lt;int&gt;&amp; tmp){
+    int size = tmp.size();
+    for (int i = 0; i &lt; size-1;i++){
+        int minindex = i;
+        for (int j = i+1; j &lt; size;j++){
+            if(tmp[j]&lt;tmp[minindex])
+                minindex = j;
+        }
+        swap(tmp[minindex], tmp[i]);
+    }
+    return;
+}
+/*插入排序 O(n^2)
+我习惯将插入排序和选择排序做比较，当然两者的思路都比较直接，每次从当前位置向前看，比前面的元素小就交换，否则继续下一次循环，因为每次向后推进前面的 元素都是已经排好序的。
+因此最好情况为O(n)
+*/
+void insert_sort(vector&lt;int&gt; &amp; tmp){
+    int size = tmp.size();
+    for (int i = 0; i &lt; size - 1;i++){
+        for (int j = i + 1; j &gt;0;j--){
+            if(tmp[j-1]&gt;tmp[j])
+                swap(tmp[j - 1], tmp[j]);
+            else break;
+        }
+    }
+    return;
+}
+/*希尔排序：思路不够直接，
+主要是先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序。复杂度O(n^2);最好为o(n);
+*/
+void shellsort(vector&lt;int&gt;&amp; tmp){
+    int size = tmp.size();
+    for (int gap = (size / 2); gap &gt; 0;gap=gap/2){
+        for (int i = gap; i &lt; size; i++)
+        {
+            int j = i;
+            int cur = tmp[i];
+            while((j-gap)&gt;=0 &amp;&amp; cur&lt;tmp[j-gap]){
+                tmp[j] = tmp[j - gap];
+                j = j - gap;
+            }
+            tmp[j] = cur;
+        }
+    }
+    return;
+}
+
+//quick_sort 复杂度O(nlogn)，如果数组原本有序，那么就会变为O(n^2)，个人认为退化为冒泡了;
+/*算法思想的典型使用，选取一个flag，从左右开始，小于flag就将交换left和right元素，同时left右移，大于flag也交换位置，同时right左移。
+当循环结束后将flag放回到left==right的位置
+分别对左部和右部进行相同的排序，递归出口为right-left&lt;=0
+*/
+void quick_sort(vector&lt;int&gt;&amp; tmp,int left,int right){
+    if(left&gt;=right)
+        return;
+    int flag = tmp[left];
+    int tmpl=left;
+    int tmpr = right;
+    while(tmpl&lt;tmpr){
+        while( tmpr&gt;tmpl &amp;&amp; tmp[tmpr]&gt;=flag)
+            tmpr--;
+        if(tmpr&gt;tmpl) 
+            tmp[tmpl] = tmp[tmpr];
+        while(tmpl&lt;tmpr &amp;&amp; tmp[tmpl]&lt;flag)
+            tmpl++;
+         if(tmpr&gt;tmpl)
+             tmp[tmpr] = tmp[tmpl];
+    }
+    //完成一遍后把flag放回tmp
+    tmp[tmpl] = flag;
+
+    quick_sort(tmp, left, tmpl);
+    quick_sort(tmp, tmpr + 1, right);
+}
+
+
+//heap sort  makeheap popheap sortheap
+// O(nlogn)
+/*三个步骤，make_heap:将最大元素放在堆（数组）首部
+pop_heap：取出最大元素放到heap（数组）尾部同时缩小堆范围
+sort_heap:循坏执行make和pop操作，逐渐减小堆。最后得到有序数组
+*/
+void makeheap(vector&lt;int&gt;&amp;tmp,int pare,int curlen){
+      int cur = tmp[pare];
+     int child = pare * 2 + 1; //左孩子
+      while(child&lt;curlen){
+        if(child+1&lt;curlen &amp;&amp; tmp[child+1]&gt;tmp[child]){
+              child++;
+        }
+         if(tmp[child]&gt;tmp[pare]){
+              swap(tmp[child], tmp[pare]);
+             pare = child;
+            child=child*2+1; 
+        }else break;          
+    } //o(logn)
+
+}
+
+void popheap(vector&lt;int&gt;&amp; tmp,int index){
+      swap(tmp[0], tmp[index]);
+}
+
+void heapsort(vector&lt;int&gt; &amp; tmp){
+      int size = tmp.size();
+      int child = size / 2 - 1; //确保第一个节点有孩子
+      for (int i = child; i &gt;= 0;i--)
+            makeheap(tmp, i, size);
+      for (int i = size - 1; i &gt; 0; i--){
+          popheap(tmp,i);
+         makeheap(tmp, 0, i);
+    }
+}
+
+///count_sort
+/* 复杂度为o(n);
+    一边用来数组差别不大的排序中，统计字符串中字母个数时也可以用到这个方法
+*/
+void counting_sort(vector&lt;int&gt;&amp;tmp){
+    int min=65535,max=-65535;
+    int size = tmp.size();
+    for (int i = 0; i &lt; size;i++){
+        if(tmp[i]&lt;min)
+            min = tmp[i];
+        if(tmp[i]&gt;max)
+            max = tmp[i];
+    }
+    int flag[max - min + 1];
+    memset(flag, 0, sizeof(flag));
+    for (int i = 0; i &lt; size;i++){
+        flag[tmp[i] - min]++;
+    }
+    int index = 0;
+    for (int i = 0; i &lt; max - min + 1;i++)
+        while(flag[i]&gt;0){
+            tmp[index++] = i + min;
+            flag[i]--;
+        }
+
+}
+/*归并排序：将数组分为各个部分排好序后再合并
+复杂度为O(nlogn)
+*/
+void merge(vector&lt;int&gt;&amp;tmp,int lefthelp,int mid,int right){
+    int left = lefthelp;
+    vector&lt;int&gt; help(right - left+1,0); //注意此处需要保证左右的空间，因此尽量让right指向back而不是end
+    int k = 0;
+    int index = mid + 1;
+    while(left&lt;=mid &amp;&amp;index&lt;=right){
+        if(tmp[left]&gt;tmp[index]){
+            help[k++] = tmp[index];
+            index++;
+        }else{
+            help[k++] = tmp[left];
+            left++;
+        }
+    }
+    //出现多余一个的情况
+    while(left&lt;=mid)
+        help[k++] = tmp[left++];
+    while(index&lt;=right) 
+        help[k++] = tmp[index++];
+    for (int i = 0; i &lt;= (right - lefthelp);i++)
+        tmp[i + lefthelp] = help[i];
+}
+
+void merge_sort(vector&lt;int&gt;&amp;tmp,int left,int right){
+    if(left&lt;right){
+        int mid = (left + right) / 2;
+        merge_sort(tmp, left, mid);
+        merge_sort(tmp, mid + 1, right);
+        merge(tmp,left,mid,right);
+    }
+}
+
+
+void print(const vector&lt;int&gt; tmp){
+    for (int i = 0; i &lt; tmp.size();i++)
+        cout &lt;&lt; tmp[i] &lt;&lt; &quot; &quot;;
+    cout &lt;&lt; endl;
+}
+
+int main(){
+    vector&lt;int&gt; test = {3,1, 40, 5, 18, 25, 33, 17, 17, 20,55};
+    //1.bubblesort
+    vector&lt;int&gt; tmp = test;
+    cout &lt;&lt; &quot;Bubble_sort&quot; &lt;&lt; endl;
+    Bubble_sort(tmp);
+    print(tmp);
+
+   // for (int i = 0; i &lt; tmp.capacity();i++)
+//     cout &lt;&lt; &amp;tmp[i] &lt;&lt; &quot; &quot;;
+//     //2.selectsort
+//  cout &lt;&lt; endl;
+    tmp = test;
+//  for (int i = 0; i &lt; tmp.capacity(); i++)
+//     cout &lt;&lt; &amp;tmp[i] &lt;&lt; &quot; &quot;;
+//  print(tmp);
+    cout &lt;&lt; &quot;select_sort&quot; &lt;&lt; endl;
+    select_sort(tmp);
+    print(tmp);
+    //3.insert_sort
+    cout &lt;&lt; &quot;insert_sort&quot; &lt;&lt; endl;
+    tmp = test;
+    insert_sort(tmp);
+    print(tmp);
+
+    //4.shell sort
+    tmp = test;
+    cout &lt;&lt; &quot;shell_sort&quot; &lt;&lt; endl;
+    shellsort(tmp);
+    print(tmp);
+
+    //5.merge_sort
+    tmp = test;
+    cout &lt;&lt; &quot;merge_sort&quot; &lt;&lt; endl;
+    merge_sort(tmp, 0, tmp.size()-1);
+    print(tmp);
+
+
+    //6.quick sort
+    tmp = test;
+    cout &lt;&lt; &quot;quick_sort&quot; &lt;&lt; endl;
+    quick_sort(tmp, 0, tmp.size() - 1);
+    print(tmp);
+
+    //7.heap_sort
+    tmp = test;
+    cout &lt;&lt; &quot;heap_sort&quot; &lt;&lt; endl;
+    heap_sort(tmp, tmp.size() - 1);
+    print(tmp);
+
+    //count_sort
+    tmp = test;
+    cout &lt;&lt; &quot;counting_sort&quot; &lt;&lt; endl;
+    counting_sort(tmp);
+    print(tmp);
+
+    return 0;
+};  </code></pre><p><strong>note</strong> 8.28补充</p>
+<p>我突然想到一个关于=的问题，上述的vector赋值我都是使用=进行赋值的，那么=对于很多类来说都是一个浅拷贝，当然如果vector自身已经重写了拷贝构造函数的话那就是一个深拷贝了。</p>
+<p>想到问题后，我找了一些资料，没有找到相应的源码，但是找到一篇关于这部分知识的博文，感觉还行。<a href="https://blog.csdn.net/vict_wang/article/details/88812389" target="_blank" rel="noopener">https://blog.csdn.net/vict_wang/article/details/88812389</a>，这来看，在vector中使用a=b,a(b)也都是深拷贝了，当然还有上述博客中的assign 和swap也是深拷贝模式，我也实践了一下，在源码中打印他们的地址，发现最后证明确实是深拷贝。所以上述的排序源码应该没问题吧。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/24/操作系统复习/" rel="next" title="操作系统复习">
+                <i class="fa fa-chevron-left"></i> 操作系统复习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/01/leetcode-5175-构建回文串检测/" rel="prev" title="leetcode 5175. 构建回文串检测">
+                leetcode 5175. 构建回文串检测 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序算法对比"><span class="nav-number">2.</span> <span class="nav-text">排序算法对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#稳定性"><span class="nav-number">2.1.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

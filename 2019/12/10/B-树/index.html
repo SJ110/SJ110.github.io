@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言最近需要完成一个构造数据库的索引的实验，实验要求使用B+树做索引结构，因为对于B+树不够了解，所以先复习一下B+树的特性在进行下一步。对于B+树，这篇文章讲的很好。https://www.cnblogs.com/nullzx/p/8729425.html">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B+树">
+<meta property="og:url" content="http://yoursite.com/2019/12/10/B-树/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言最近需要完成一个构造数据库的索引的实验，实验要求使用B+树做索引结构，因为对于B+树不够了解，所以先复习一下B+树的特性在进行下一步。对于B+树，这篇文章讲的很好。https://www.cnblogs.com/nullzx/p/8729425.html">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/insert1.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/insert2.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del1.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del2.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del3.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del4.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del5.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del6.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/10/B-树/del7.png">
+<meta property="og:updated_time" content="2019-12-22T01:31:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="B+树">
+<meta name="twitter:description" content="前言最近需要完成一个构造数据库的索引的实验，实验要求使用B+树做索引结构，因为对于B+树不够了解，所以先复习一下B+树的特性在进行下一步。对于B+树，这篇文章讲的很好。https://www.cnblogs.com/nullzx/p/8729425.html">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/10/B-树/insert1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/12/10/B-树/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>B+树 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/B-树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">B+树
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-10 21:15:25" itemprop="dateCreated datePublished" datetime="2019-12-10T21:15:25+08:00">2019-12-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-22 09:31:12" itemprop="dateModified" datetime="2019-12-22T09:31:12+08:00">2019-12-22</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近需要完成一个构造数据库的索引的实验，实验要求使用B+树做索引结构，因为对于B+树不够了解，所以先复习一下B+树的特性在进行下一步。对于B+树，这篇文章讲的很好。<a href="https://www.cnblogs.com/nullzx/p/8729425.html" target="_blank" rel="noopener">https://www.cnblogs.com/nullzx/p/8729425.html</a></p>
+<a id="more"></a> 
+
+<h3 id="B-树结构特点"><a href="#B-树结构特点" class="headerlink" title="B+树结构特点"></a>B+树结构特点</h3><p>B+tree是应文件系统所需而产生的一种B树的变形树，一棵m阶的B+树的特点：1.有n棵子树的节点中含有n个关键字。2.所有的叶子节点中包含了全部的关键字信息，及指向含有这些关键字记录的指针，且叶子节点本身依关键字的大小自小到大顺序链接。 3.所有的非叶子节点可以堪称是索引部分，节点中仅含有其子树根结点中最大（或最小）关键字。4.B+树的有效内容均在叶子节点。所有叶子节点中有志向兄弟节点的指针5.B+树的头指针有两个，一个指向根节点，一个指向关键字最小的元素,因此B+树有两种遍历方式。从根节点开始随机查询。从最小关键字顺序查询。</p>
+<h3 id="B-树的插入"><a href="#B-树的插入" class="headerlink" title="B+树的插入"></a>B+树的插入</h3><p>和其他树形结构一样，B+树也支持插入，删除，遍历等操作。在经过前面两周对B+树的了解后，我认为B+树中最难的应该是元素插入。相对简单的是元素遍历。当然这也是建立在B+树数据结构中具有良好的遍历字段的情况下的。作为同一种数据结构可以不断的修改内部的结构特点，根据实际需要，使得可以方便完成自己的需求。</p>
+<p>现在先讲以下B+树的插入：首先假定B+树每一个节点中可以最多可以包含2m个元素，因此对于任意节点来说，不能少于m个元素。对于每一次插入元素，必须遍历b+树的叶子节点，因为叶子中存放的才是有效的元素，在非叶子节点中都是对于叶子节点的索引。这也使得b+树在节点有序的同时，所有叶子节点元素都是有序的。</p>
+<p>元素插入分如下情况: 1.节点中元素个数满足m&lt;nodes&lt;2m-1,插入元素后直接返回。 2.节点元素有2m-1个，插入后由于节点满（这里可以根据实际情况决定最多放2m还是2m-1个）。需要进行节点分裂，节点分裂会产生新的节点，同时也会产生新的由父节点指向该节点的索引。此时需要从当前节点向根节点遍历，修改父节点的索引。</p>
+<ul>
+<li>eg1</li>
+</ul>
+<p><img src="/2019/12/10/B-树/insert1.png" alt="insert1"></p>
+<p>在此时的树中55，则插入元素后直接返回。</p>
+<ul>
+<li>eg2<br>若在刚才的树中依次插入元素13，21，40，则会造成节点分裂叶子节点分开，同时更新父节点索引，如下图</li>
+</ul>
+<p><img src="/2019/12/10/B-树/insert2.png" alt="insert2"></p>
+<p>如果不断插入元素导致非叶子节点也到达满的情况。按照叶子节点的分裂情况处理即可。</p>
+<h3 id="B-树的删除"><a href="#B-树的删除" class="headerlink" title="B+树的删除"></a>B+树的删除</h3><p>B+树的删除就相对来说比较困难了，如果删除元素后节点数满足m&lt;nodes&lt;2m,则可以直接返回，否则需要进行修改。</p>
+<p>B+树的删除分如下情况。 1.删除后节点元素个数满足m&lt;nodes&lt;2m,直接返回。但是如果删除的式节点中的第一个元素，则需要视情况更新索引。 2.删除后节点元素小于m，则考虑向左边或者右边借一个元素进行合并。 3.在2的条件下，左边叶子节点元素个数满足条件，则分一个给右边节点，同时因为元素的有序性，分给右边的元素占据第一个，所以需要更新当前节点索引。 4.在2的情况下，如果左节点不满足，则向右边节点借一个，如果右边节点满足，分出一个元素，同时需要更新右边节点的索引。 5. 如果3 4都不满足，则需要进行节点合并，与哪边合并都可以，此时需要删除父节点的一个索引。</p>
+<p>总体来看，删除操作略微复杂。</p>
+<ul>
+<li>eg1</li>
+</ul>
+<p><img src="/2019/12/10/B-树/del1.png" alt="del1"></p>
+<p>此时删除元素22后，可以直接返回</p>
+<p><img src="/2019/12/10/B-树/del2.png" alt="del2"></p>
+<ul>
+<li>eg2<br>删除22后，删除15,结果如下。</li>
+</ul>
+<p><img src="/2019/12/10/B-树/del3.png" alt="del3"></p>
+<p>此时需要借元素，同时更新索引</p>
+<p><img src="/2019/12/10/B-树/del4.png" alt="del4"></p>
+<ul>
+<li>eg3</li>
+</ul>
+<p>现在删除元素7，则需要进行节点合并，由于删除的7式一个索引，则也需要更新索引。</p>
+<p><img src="/2019/12/10/B-树/del5.png" alt="del5"></p>
+<p>合并后如下：</p>
+<p><img src="/2019/12/10/B-树/del6.png" alt="del6"></p>
+<p>由于更新后的父节点只有一个索引不满足条件，则该节点也需要合并，最后如下</p>
+<p><img src="/2019/12/10/B-树/del7.png" alt="del7"></p>
+<h3 id="B-树的遍历"><a href="#B-树的遍历" class="headerlink" title="B+树的遍历"></a>B+树的遍历</h3><p>B+树可以分两种遍历方式，可以从根节点进行遍历，页可以根据需要，适当修改节点数据结构，直接从最左边叶子节点遍历，两种情况都比较简单，第一种是O(logn）的复杂度，第二种是O(n)的复杂度。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>B+树整体操作如上述，当遇到问题时，其实一种数据结构有时候并不是那么高深莫测，它只是通过某些变形而已，需要结合实际情况，考虑所学的基本知识进行变通。尤其是对基础知识牢固把握时很重要的。并没有很难得知识点，都是通过基础一点点得变化而来。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/06/计算机图形学知识点整理（二）/" rel="next" title="计算机图形学知识点整理（二）">
+                <i class="fa fa-chevron-left"></i> 计算机图形学知识点整理（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/14/swift语法基础-一/" rel="prev" title="swift语法基础(一)">
+                swift语法基础(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树结构特点"><span class="nav-number">2.</span> <span class="nav-text">B+树结构特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的插入"><span class="nav-number">3.</span> <span class="nav-text">B+树的插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的删除"><span class="nav-number">4.</span> <span class="nav-text">B+树的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的遍历"><span class="nav-number">5.</span> <span class="nav-text">B+树的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

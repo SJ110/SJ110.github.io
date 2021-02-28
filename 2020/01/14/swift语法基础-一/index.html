@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="写在前面寒假开始了1周了，终于也是咸鱼了一周，在今天开始学点东西，既然之后要做ios开发的话，就打算学点swift。整个周期大概20天，先整体看一遍swift的语法，然后去leetcode刷题。因为是windows系统，所以这其中可能会有一些问题。不过只要有开头的话，后面慢慢来就行了。">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift语法基础(一)">
+<meta property="og:url" content="http://yoursite.com/2020/01/14/swift语法基础-一/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="写在前面寒假开始了1周了，终于也是咸鱼了一周，在今天开始学点东西，既然之后要做ios开发的话，就打算学点swift。整个周期大概20天，先整体看一遍swift的语法，然后去leetcode刷题。因为是windows系统，所以这其中可能会有一些问题。不过只要有开头的话，后面慢慢来就行了。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-15T05:15:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift语法基础(一)">
+<meta name="twitter:description" content="写在前面寒假开始了1周了，终于也是咸鱼了一周，在今天开始学点东西，既然之后要做ios开发的话，就打算学点swift。整个周期大概20天，先整体看一遍swift的语法，然后去leetcode刷题。因为是windows系统，所以这其中可能会有一些问题。不过只要有开头的话，后面慢慢来就行了。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/01/14/swift语法基础-一/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>swift语法基础(一) | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/swift语法基础-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">swift语法基础(一)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-14 13:42:19" itemprop="dateCreated datePublished" datetime="2020-01-14T13:42:19+08:00">2020-01-14</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-15 13:15:18" itemprop="dateModified" datetime="2020-01-15T13:15:18+08:00">2020-01-15</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/swift/" itemprop="url" rel="index"><span itemprop="name">swift</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">6.3k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">6 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>寒假开始了1周了，终于也是咸鱼了一周，在今天开始学点东西，既然之后要做ios开发的话，就打算学点swift。整个周期大概20天，先整体看一遍swift的语法，然后去leetcode刷题。因为是windows系统，所以这其中可能会有一些问题。不过只要有开头的话，后面慢慢来就行了。</p>
+<a id="more"></a> 
+
+<h3 id="swift初见"><a href="#swift初见" class="headerlink" title="swift初见"></a>swift初见</h3><h4 id="简单值"><a href="#简单值" class="headerlink" title="简单值"></a>简单值</h4><p> 1.使用let声明常量，使用var来声明变量，常量和变量定义和c语言中一样，常量只能赋值一次。变量可以多次赋值。<strong>可以不用明确的声明类型，这可以由编译器自动判断其类型。</strong>但是如果在申明时没有提供足够的信息表现出类型，需要如下表现：</p>
+<pre><code>//变量和常量
+var myVariable = 42
+myVariable = 50
+let myConstant = 42
+//类型
+let implicitInteger = 70
+let implicitDouble = 70.0
+let explicitDouble: Double = 70</code></pre><p>2.一个变量或者常量的值类型时保持不变的，如果需要类型转换，请显示进行。</p>
+<pre><code>let label = &quot;The width is&quot;
+let width = 94
+let widthLabel = label + String(width)
+//widthLabel = &quot;The width is 94&quot;</code></pre><p>上面例子中将 整形转化为String,还有一种更简单的值转化为字符串的方式： 把值写道括号中，在括号前加一个反斜杠。</p>
+<pre><code>let apples = 3
+let oranges = 5
+let appleSummary = &quot;I have \(apples) apples.&quot;
+//  &quot;I have 3 apples&quot;
+let fruitSummary = &quot;I have \(apples + oranges) pieces of fruit.&quot;
+//  &quot;I have 8 pieces of fruit&quot;</code></pre><p>使用三分双引号来包含多行字符串内容，<strong>每行行首的缩进会被去除</strong>，知道和结尾双引号相互匹配。</p>
+<pre><code>let quotation = &quot;&quot;&quot;
+I said &quot;I have \(apples) apples.&quot;
+And then I said &quot;I have \(apples + oranges) pieces of fruit.&quot;
+&quot;&quot;&quot;
+//一段三行的String</code></pre><p>3.和c语言类似，使用[]创建数组和字典，使用下标或者key来访问元素，<strong>最后一个元素后面语序有个逗号。</strong></p>
+<pre><code>var shoppingList = [&quot;catfish&quot;, &quot;water&quot;, &quot;tulips&quot;, &quot;blue paint&quot;]
+shoppingList[1] = &quot;bottle of water&quot;
+//通过下表访问数组
+var occupations = [
+&quot;Malcolm&quot;: &quot;Captain&quot;,
+&quot;Kaylee&quot;: &quot;Mechanic&quot;,
+]
+occupations[&quot;Jayne&quot;] = &quot;Public Relations&quot;
+//通过key访问数组
+shoppingList.append(&quot;blue paint&quot;)
+//使用append添加元素</code></pre><p>下面是数组或者字典的创建</p>
+<pre><code>let emptyArray = [String]() //数组
+let emptyDictionary = [String: Float]() //字典</code></pre><p>如前所述，如果可以推断出是数组或者字典，也可以如下声明：</p>
+<pre><code>var shoppingList = []
+var occupations = [:]</code></pre><h4 id="控制流"><a href="#控制流" class="headerlink" title="控制流"></a>控制流</h4><p>使用<strong>if</strong>和<strong>switch</strong>来进行条件操作，使用<strong>for-in</strong>，<strong>while</strong>，<strong>repeat-while</strong>来进行循环，包裹条件和循环变量的括号可以省略，但是条件或者循环体的大括号是必须的。</p>
+<p>1.在if语句中，条件表达式必须为一个布尔式。可选值：可选值是一个具体的值或者说是nil表示值缺失。在类型后面加一个问号标记这个变量的值是可选的。</p>
+<pre><code>var optionalName: String? = &quot;John Appleseed&quot;
+var greeting = &quot;Hello!&quot;
+if let name = optionalName {
+    greeting = &quot;Hello, \(name)&quot;
+}
+//如果常量name！=nil，执行if条件</code></pre><p>使用<strong>？？</strong>来提供一个默认值，如果可选值缺失，可以使用默认值来代替</p>
+<pre><code>let nickName: String? = nil
+let fullName: String = &quot;John Appleseed&quot;
+let informalGreeting = &quot;Hi \(nickName ?? fullName)&quot;
+//nickname值缺失，使用fullname informalGreeeting=&quot;HI john appleseed&quot;</code></pre><p>2.运行switch语句时，在switch中匹配到case语句后会直接推出，所以不必加上break，但是default需要特别注意。</p>
+<p>3.使用<strong>for-in</strong>来遍历字典，需要一对变量来表示每个键值对，字典时一个无序的集合，所以他们的键和值以任意顺序迭代结束。</p>
+<pre><code>let interestingNumbers = [
+&quot;Prime&quot;: [2, 3, 5, 7, 11, 13],
+&quot;Fibonacci&quot;: [1, 1, 2, 3, 5, 8],
+&quot;Square&quot;: [1, 4, 9, 16, 25],
+]
+var largest = 0
+for (kind, numbers) in interestingNumbers {
+//kind 和number表示一个键值对
+     for number in numbers {
+//number指向numbers的每一个成员
+        if number &gt; largest {
+            largest = number
+        }
+    }
+}
+print(largest)</code></pre><p>while的使用和c语言中一致，但是作为条件的括号可以省略。</p>
+<p>在循环中使用..&lt;表示下标范围。</p>
+<pre><code>var total = 0
+for i in 0..&lt;4 {
+total += i
+}
+print(total)</code></pre><p>使用 <strong>..&lt;</strong> 创建的范围不包含上界，如果想包含的话需要使用 <strong>…</strong>。</p>
+<h4 id="函数和闭包"><a href="#函数和闭包" class="headerlink" title="函数和闭包"></a>函数和闭包</h4><p>1.使用 func 来声明一个函数，使用名字和参数来调用函数。使用 -&gt; 来指定函数返回值的类型。</p>
+<pre><code>//函数调用
+func greet(person: String, day: String) -&gt; String {
+return &quot;Hello \(person), today is \(day).&quot;
+}
+greet(person:&quot;Bob&quot;, day: &quot;Tuesday&quot;)</code></pre><p>2.使用元组来生成复合值，让一个函数返回多个值，改元组的元素可以用名称或者数字来获取。<br>   //返回值为复合值<br>    func calculateStatistics(scores: [Int]) -&gt; (min: Int, max: Int, sum: Int) {<br>    var min = scores[0]<br>    var max = scores[0]<br>    var sum = 0</p>
+<pre><code>for score in scores {
+    if score &gt; max {
+        max = score
+    } else if score &lt; min {
+        min = score
+    }
+    sum += score
+}
+
+return (min, max, sum)
+}    
+let statistics = calculateStatistics(scores:[5, 3, 100, 3, 9])
+//两种方式访问sum
+print(statistics.sum)
+print(statistics.2)</code></pre><p>3.函数可以嵌套。被嵌套的函数可以访问外侧函数的变量，你可以使用嵌套函数来重构一个太长或者太复杂的函数。</p>
+<pre><code>func returnFifteen() -&gt; Int {
+var y = 10
+func add() { //函数没有返回值
+    y += 5
+}
+add()
+return y
+}
+returnFifteen()</code></pre><p>函数实际上是一种特殊的闭包，它是一段能之后被调用的代码，闭包中的代码能访问闭包作用于中的变量和函数。即使闭包是在一个不同的作用域被执行的，可以使用{}来创建一个匿名闭包，使用in将参数和返回值类型的声明与闭包函数体进行分离。</p>
+<h4 id="对象和类"><a href="#对象和类" class="headerlink" title="对象和类"></a>对象和类</h4><p>1.使用class和类名创建一个类，类中属性和的声明和常量变量的声明一样。唯一的区别是他们的上下文是类。</p>
+<pre><code>//创建一个类
+class Shape {
+var numberOfSides = 0
+func simpleDescription() -&gt; String {
+    return &quot;A shape with \(numberOfSides) sides.&quot;
+}
+}</code></pre><p>创建一个类的实例，在类名后面加上括号。使用如下方法访问实例的属性和方法。</p>
+<pre><code>var shape = Shape()
+shape.numberOfSides = 7
+var shapeDescription = shape.simpleDescription()</code></pre><p>2.在类中加入构造函数，使用init来创建一个构造器。</p>
+<pre><code>class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+
+    func simpleDescription() -&gt; String {
+        return &quot;A shape with \(numberOfSides) sides.&quot;
+    }
+}</code></pre><p>注意self用来区别实例变量name和构造器参数name，当创建实例的时候，像传入参数一样给类传入构造器的参数，每个属性都需要赋值。</p>
+<p>3.使用deinit来创建一个析构函数。</p>
+<p>4.子类的定义方法是在其类名后面加上父类的名字，使用冒号分隔。子类如果要重写父类的方法的话，需要使用override标记，编译器会检测override标记的方法是否确实在父类中。</p>
+<pre><code>class Square: NamedShape {
+var sideLength: Double
+
+init(sideLength: Double, name: String) {
+    self.sideLength = sideLength
+    super.init(name: name)
+    numberOfSides = 4
+}
+
+func area() -&gt;  Double {
+    return sideLength * sideLength
+}
+
+//重写父类方法
+override func simpleDescription() -&gt; String {
+    return &quot;A square with sides of length \(sideLength).&quot;
+}
+}
+let test = Square(sideLength: 5.2, name: &quot;my test square&quot;)
+test.area()
+test.simpleDescription()</code></pre><h4 id="枚举和结构体"><a href="#枚举和结构体" class="headerlink" title="枚举和结构体"></a>枚举和结构体</h4><p>使用enum来创建一个枚举，枚举可以包含方法。</p>
+<pre><code>enum Rank: Int {
+case ace = 1
+case two, three, four, five, six, seven, eight, nine, ten
+case jack, queen, king
+func simpleDescription() -&gt; String {
+    switch self {
+    case .ace:
+        return &quot;ace&quot;
+    case .jack:
+        return &quot;jack&quot;
+    case .queen:
+        return &quot;queen&quot;
+    case .king:
+        return &quot;king&quot;
+    default:
+        return String(self.rawValue)
+    }
+}
+}
+let ace = Rank.ace
+let aceRawValue = ace.rawValue</code></pre><p>上面例子中，使用rawValue属性来访问下一个枚举成员的值。</p>
+<p>使用struct创建一个结构体。结构体和类由很多先攻的地方，包括方法和构造器，他们最大的区别是结构体是传值，类是传引用。</p>
+<pre><code>struct Card {
+var rank: Rank
+var suit: Suit
+func simpleDescription() -&gt; String {
+    return &quot;The \(rank.simpleDescription()) of \(suit.simpleDescription())&quot;
+}
+}
+//值传递
+let threeOfSpades = Card(rank: .three, suit: .spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()</code></pre><h4 id="协议和扩展"><a href="#协议和扩展" class="headerlink" title="协议和扩展"></a>协议和扩展</h4><p>使用protocol来声明一个协议</p>
+<pre><code>protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    mutating func adjust()
+}</code></pre><p>类，枚举和结构体都可以遵循协议。</p>
+<pre><code>   //类继承协议
+class SimpleClass: ExampleProtocol {
+var simpleDescription: String = &quot;A very simple class.&quot;
+var anotherProperty: Int = 69105
+func adjust() {
+    simpleDescription += &quot;  Now 100% adjusted.&quot;
+}
+}
+var a = SimpleClass()
+a.adjust()
+let aDescription = a.simpleDescription
+//结构继承协议
+struct SimpleStructure: ExampleProtocol {
+var simpleDescription: String = &quot;A simple structure&quot;
+mutating func adjust() {
+    simpleDescription += &quot; (adjusted)&quot;
+}
+}
+var b = SimpleStructure()
+b.adjust()
+let bDescription = b.simpleDescription</code></pre><h4 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h4><p>在尖括号中写一个名字来创建一个泛型函数或者类型</p>
+<pre><code>func makeArray&lt;Item&gt;(repeating item: Item, numberOfTimes: Int) -&gt; [Item] {
+var result = [Item]()
+for _ in 0..&lt;numberOfTimes {
+    result.append(item)
+}
+return result
+}
+makeArray(repeating: &quot;knock&quot;, numberOfTimes: 4)</code></pre><p>也可以创建泛型函数，方法，类，枚举和结构体。</p>
+<pre><code>// 重新实现 Swift 标准库中的可选类型
+enum OptionalValue&lt;Wrapped&gt; {
+case none
+case some(Wrapped)
+}
+var possibleInteger: OptionalValue&lt;Int&gt; = .none
+possibleInteger = .some(100)    </code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/10/B-树/" rel="next" title="B+树">
+                <i class="fa fa-chevron-left"></i> B+树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/15/swift语法基础-二/" rel="prev" title="swift语法基础(二)">
+                swift语法基础(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swift初见"><span class="nav-number">2.</span> <span class="nav-text">swift初见</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单值"><span class="nav-number">2.1.</span> <span class="nav-text">简单值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制流"><span class="nav-number">2.2.</span> <span class="nav-text">控制流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数和闭包"><span class="nav-number">2.3.</span> <span class="nav-text">函数和闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象和类"><span class="nav-number">2.4.</span> <span class="nav-text">对象和类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#枚举和结构体"><span class="nav-number">2.5.</span> <span class="nav-text">枚举和结构体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协议和扩展"><span class="nav-number">2.6.</span> <span class="nav-text">协议和扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型"><span class="nav-number">2.7.</span> <span class="nav-text">泛型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

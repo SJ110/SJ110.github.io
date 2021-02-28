@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言发现之前对于散列表这个数据结构一直有点模糊不清，今天手上正好带了算法这本书，就系统的过一遍，加深下印象。 散列表特性散列表作为一种动态的结构，其空间是随着数据的插入和删除不断变化的，他也是数组概念的扩展，在支持insert，delete，search的操作的同时能够进一步降低时间复杂度。在设计合理的情况下，上述操作的复杂度能够降到o(1)。散列表的特性是1.实际存储的关键字数目比关键字总数小。">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="散列表">
+<meta property="og:url" content="http://yoursite.com/2019/10/04/‘散列表/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言发现之前对于散列表这个数据结构一直有点模糊不清，今天手上正好带了算法这本书，就系统的过一遍，加深下印象。 散列表特性散列表作为一种动态的结构，其空间是随着数据的插入和删除不断变化的，他也是数组概念的扩展，在支持insert，delete，search的操作的同时能够进一步降低时间复杂度。在设计合理的情况下，上述操作的复杂度能够降到o(1)。散列表的特性是1.实际存储的关键字数目比关键字总数小。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/10/04/‘散列表/liandizhi.jpg">
+<meta property="og:updated_time" content="2019-10-04T07:35:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="散列表">
+<meta name="twitter:description" content="前言发现之前对于散列表这个数据结构一直有点模糊不清，今天手上正好带了算法这本书，就系统的过一遍，加深下印象。 散列表特性散列表作为一种动态的结构，其空间是随着数据的插入和删除不断变化的，他也是数组概念的扩展，在支持insert，delete，search的操作的同时能够进一步降低时间复杂度。在设计合理的情况下，上述操作的复杂度能够降到o(1)。散列表的特性是1.实际存储的关键字数目比关键字总数小。">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/04/‘散列表/liandizhi.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/10/04/‘散列表/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>散列表 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/04/‘散列表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">散列表
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-04 10:35:48 / 修改时间：15:35:48" itemprop="dateCreated datePublished" datetime="2019-10-04T10:35:48+08:00">2019-10-04</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>发现之前对于散列表这个数据结构一直有点模糊不清，今天手上正好带了算法这本书，就系统的过一遍，加深下印象。</p>
+<h3 id="散列表特性"><a href="#散列表特性" class="headerlink" title="散列表特性"></a>散列表特性</h3><p>散列表作为一种动态的结构，其空间是随着数据的插入和删除不断变化的，他也是数组概念的扩展，在支持insert，delete，search的操作的同时能够进一步降低时间复杂度。在设计合理的情况下，上述操作的复杂度能够降到o(1)。散列表的特性是1.实际存储的关键字数目比关键字总数小。2.通过计算得到关键字的下标。对应的方式是hash中解决冲突的策略。</p>
+<a id="more"></a> 
+<h3 id="直接寻址表"><a href="#直接寻址表" class="headerlink" title="直接寻址表"></a>直接寻址表</h3><p>当关键字的域范围比较小时，可以使用直接寻址，使用一个数组作为直接寻址表，表中每一个位置称为slot（槽）,每个slot存放一个关键字。没有存放关键字的slot用特殊值代替。 优点是效率很高，缺点是条件很苛刻，属于比较理想的情况。对于空间的浪费比较严重。</p>
+<h3 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h3><p>在直接寻址方式中对于空间的浪费比较严重，所以考虑将关键字的域通过一个函数计算进行放缩，这个函数称为hash函数，h:U→{0，1，2，…m-1};</p>
+<p>通过这样一个函数对关键字进行计算将U范围的数据放缩到m的空间大小中，节约了很多空间，但是也带来了一个问题，可能有多个关键字会映射到一个slot上，称为冲突，不过有很多的办法来解决冲突。</p>
+<h4 id="链地址法"><a href="#链地址法" class="headerlink" title="链地址法"></a>链地址法</h4><p>链地址的存放方式如下:</p>
+<p><img src="/2019/10/04/‘散列表/liandizhi.jpg" alt="liandizhi"></p>
+<p>其中的链表可以采用单链表或者双向链表，在同一个链表中关键字的hash值是相同的。</p>
+<p>性能分析：定义装载因子为a=n/m,(n表示关键字个数，m表示散列表大小)，因此当m与n成正比时（a&lt;1）可以实现在o（1）的时间内进行查找，删除，和插入元素。</p>
+<h4 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h4><p>在设计散列函数时需要近似的满足简单均匀散列假设：每个关键字等可能的散列到槽位的任何一个。</p>
+<p>设计方法：1. 利用关键字分布的有用信息，尽量降低将相似符号散列到相同位置。2.一个好的方法导出的散列值应该可以独立数据可能存在的任何模式。3.让近似的关键字具有截然不同的散列值。</p>
+<h4 id="除法散列法"><a href="#除法散列法" class="headerlink" title="除法散列法"></a>除法散列法</h4><p>h(k)=kmodm;</p>
+<p>散列法设计的好坏关系到散列表的冲突大小，使用除法散列时尽量避免m为2的幂，可以选择接近2的幂的一个质数作为m.</p>
+<h4 id="乘法散列法"><a href="#乘法散列法" class="headerlink" title="乘法散列法"></a>乘法散列法</h4><p>乘法散列法的设计步骤1.用关键字k乘上常数A（0&lt;A&lt;1），提取kA的小数部分，步骤2.用m乘以这个数在向下取整 h(k)=m<em>(k</em>A mode 1);</p>
+<h4 id="寻址方式–开放寻址法"><a href="#寻址方式–开放寻址法" class="headerlink" title="寻址方式–开放寻址法"></a>寻址方式–开放寻址法</h4><p>在开放寻址法中，所有元素都存放在散列表中，也就是说，每一个表项或包含一个元素或者为空。当查找某个元素时，要系统的检查所有表项，直到找到所需的元素或者最终发现元素不在表中。这里面没有链表，元素都存放在散列表外，因此在开放寻址法中a不能超过1.</p>
+<h5 id="开放寻址法–线性探测"><a href="#开放寻址法–线性探测" class="headerlink" title="开放寻址法–线性探测"></a>开放寻址法–线性探测</h5><p>给定一个普通函数作为散列函数，h(k,i)=(h`(k)+i) mod m;  i=0,1,2…m-1; 给定一个关键字k，根据 h’(k)获得一个槽位，如果发生冲突，则使用上述公式推进到下一个位置。 极端情况是遍历了整个散列表。 因此存在的问题称为<strong>一次群集</strong>，随着占用槽位的不断增加，平均查找时间也会不断增加。</p>
+<h4 id="开放寻址法–二次探测"><a href="#开放寻址法–二次探测" class="headerlink" title="开放寻址法–二次探测"></a>开放寻址法–二次探测</h4><p>二次探测使用函数如下 h(k,i)=(h`(k)+c1<em>i+c2</em>i^2)mod m;i=0,1,2…m-1; 这个方式需要探查的槽位会比线性探测的方式少。但是也会出现<strong>二次群集</strong>的问题。</p>
+<h4 id="开放寻址法–双重散列"><a href="#开放寻址法–双重散列" class="headerlink" title="开放寻址法–双重散列"></a>开放寻址法–双重散列</h4><p>双重散列是对上述两种方式的优化， hash函数为 h(k,i)=(h1(k)+i*h2(k))mod m; 这种方式使得关键字以两种不同的方式依赖于hash函数，因此效果是比较理想的，但是在设计时为了遍历到整个散列表需要确保h2（k）与m互素。因为这样的数据相对密度可能较小。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/23/一些感想/" rel="next" title="一些感想">
+                <i class="fa fa-chevron-left"></i> 一些感想
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/17/过分崎岖的秋招之路/" rel="prev" title="过分崎岖的秋招之路">
+                过分崎岖的秋招之路 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表特性"><span class="nav-number">2.</span> <span class="nav-text">散列表特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接寻址表"><span class="nav-number">3.</span> <span class="nav-text">直接寻址表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表"><span class="nav-number">4.</span> <span class="nav-text">散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#链地址法"><span class="nav-number">4.1.</span> <span class="nav-text">链地址法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#散列函数"><span class="nav-number">4.2.</span> <span class="nav-text">散列函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#除法散列法"><span class="nav-number">4.3.</span> <span class="nav-text">除法散列法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乘法散列法"><span class="nav-number">4.4.</span> <span class="nav-text">乘法散列法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻址方式–开放寻址法"><span class="nav-number">4.5.</span> <span class="nav-text">寻址方式–开放寻址法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开放寻址法–线性探测"><span class="nav-number">4.5.1.</span> <span class="nav-text">开放寻址法–线性探测</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开放寻址法–二次探测"><span class="nav-number">4.6.</span> <span class="nav-text">开放寻址法–二次探测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开放寻址法–双重散列"><span class="nav-number">4.7.</span> <span class="nav-text">开放寻址法–双重散列</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

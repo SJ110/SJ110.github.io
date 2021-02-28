@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="造型技术实体模型的三类表示 边界表示：即用一组曲面来描述物体，这些曲面氛围内部和外部，边界表示具体又包括多边形表面模型和扫描表示两种。  构造实体几何表示：它将实体表示成立方体，长方体，圆柱体，圆锥体等基本体素的组合，可以采用并交差等运算构造新的形体。  空间分割表示：用来表示物体的内部性质，将包含物体的空间区域分成一组小的，非重叠的，连续实体。">
+<meta name="keywords" content="openGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机图形学知识点整理（二）">
+<meta property="og:url" content="http://yoursite.com/2019/12/06/计算机图形学知识点整理（二）/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="造型技术实体模型的三类表示 边界表示：即用一组曲面来描述物体，这些曲面氛围内部和外部，边界表示具体又包括多边形表面模型和扫描表示两种。  构造实体几何表示：它将实体表示成立方体，长方体，圆柱体，圆锥体等基本体素的组合，可以采用并交差等运算构造新的形体。  空间分割表示：用来表示物体的内部性质，将包含物体的空间区域分成一组小的，非重叠的，连续实体。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-14T08:11:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机图形学知识点整理（二）">
+<meta name="twitter:description" content="造型技术实体模型的三类表示 边界表示：即用一组曲面来描述物体，这些曲面氛围内部和外部，边界表示具体又包括多边形表面模型和扫描表示两种。  构造实体几何表示：它将实体表示成立方体，长方体，圆柱体，圆锥体等基本体素的组合，可以采用并交差等运算构造新的形体。  空间分割表示：用来表示物体的内部性质，将包含物体的空间区域分成一组小的，非重叠的，连续实体。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/12/06/计算机图形学知识点整理（二）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>计算机图形学知识点整理（二） | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/计算机图形学知识点整理（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机图形学知识点整理（二）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-06 12:25:47" itemprop="dateCreated datePublished" datetime="2019-12-06T12:25:47+08:00">2019-12-06</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-14 16:11:26" itemprop="dateModified" datetime="2020-01-14T16:11:26+08:00">2020-01-14</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/openGL/" itemprop="url" rel="index"><span itemprop="name">openGL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.2k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="造型技术"><a href="#造型技术" class="headerlink" title="造型技术"></a>造型技术</h3><h4 id="实体模型的三类表示"><a href="#实体模型的三类表示" class="headerlink" title="实体模型的三类表示"></a>实体模型的三类表示</h4><p> 边界表示：即用一组曲面来描述物体，这些曲面氛围内部和外部，边界表示具体又包括多边形表面模型和扫描表示两种。</p>
+<p> 构造实体几何表示：它将实体表示成立方体，长方体，圆柱体，圆锥体等基本体素的组合，可以采用并交差等运算构造新的形体。</p>
+<p> 空间分割表示：用来表示物体的内部性质，将包含物体的空间区域分成一组小的，非重叠的，连续实体。</p>
+<a id="more"></a> 
+
+<ul>
+<li><p>边界表示最普遍的方式是多边形表面模型，使用一组包围物体内部的平面<strong>多边形</strong>描述物体。多边形的平面包括两个面，内侧面和外侧面。一般来说，法向量方向指向物体外部，当多边形顶点序列指定后，它满足右手定则。多边形网格可以有两种，三角形带或者四边形网格。（多边形的点多余三个，多边形可能不再同一个平面上）</p>
+</li>
+<li><p>扫描转换法：将空间中的一个点，一条边或一个面沿着某一路径扫描时，所形成的轨迹定义为一个一维的二维的或三维的实体。旋转扫描时一种常用扫描方式</p>
+</li>
+<li><p>粒子系统描述非规则造型：是一组分散，微小的物体，这些微小物理大小和形状随时间变化。使用粒子系统描绘活=火，爆炸，落叶，云雾，雪等景象和视觉效果。  粒子系统的两个要素：粒子本身的造型，粒子的运动方式。 生成过程：模拟多个粒子及其运动过程。要实现这种粒子效果，需要连续不断的产生新粒子，并且让旧粒子逐渐消亡。</p>
+</li>
+<li><p>分形几何，以非整数的形式填充空间的形态特征，具有自像性。特点：不规则，从远距离上看时处处不规则的。 自相似：不同尺度上看，图形的规则性是相同的。</p>
+</li>
+</ul>
+<h3 id="观察与变换"><a href="#观察与变换" class="headerlink" title="观察与变换"></a>观察与变换</h3><p>在观察坐标系中的运动包括平移，旋转，比例，对称，错切。通过这些变换后可以产生新的图形。</p>
+<ul>
+<li><p>平移：将一个点从一个位置移动到另一个位置的重定位过程，不会产生形变的变换。</p>
+</li>
+<li><p>比例：对p点相对于坐标原点沿x轴放缩m倍，沿y放缩n倍。</p>
+</li>
+<li><p>旋转：将点p绕坐标原点转动一个角度得到一个新的点的过程。 </p>
+</li>
+<li><p>对称：将原图形关于对称轴变换后的图形。</p>
+</li>
+<li><p>错切：用于产生弹性物体的变形处理。</p>
+</li>
+</ul>
+<p>齐次坐标的引入：方便多种变换的进行。</p>
+<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><p>平行投影：投影中心在无穷远处，投影的图形就是平行投影。<br>透视投影：投影中心距离投影平面的距离是有限的就是透视投影。</p>
+<h3 id="裁剪与屏幕映射"><a href="#裁剪与屏幕映射" class="headerlink" title="裁剪与屏幕映射"></a>裁剪与屏幕映射</h3><p>只有经过裁剪后在观察空间内部的物体才能被映射到屏幕上。映射到屏幕上还需要进行一定的平移，旋转的操作。因为观察坐标系的坐标位置和屏幕坐标系有一些的区别。屏幕映射在可编程管线中是固定部分，因此计算都由GPU完成。</p>
+<h3 id="phong光照模型"><a href="#phong光照模型" class="headerlink" title="phong光照模型"></a>phong光照模型</h3><p>自然界中的光照是极其复杂的，为了进行模拟，进行了一定的简化，其中phong模型中的光照来源于三种光：环境光，漫反射光，镜面反射光。<br>1.环境光：模拟全局光照中间接光照的影响，即来自其他物体的反射光。2.漫反射光：模拟片段法向量与光源方向向量夹角间的关系，漫反射光使得物体上与光纤方向越接近的片段能从光源出获得更多亮度。3.镜面反射光：模拟模型表面上的两点，如果观察方向与光线方向间的夹角越小，表示受反射光影响越大。其效果就是使得我们能够看到高光点。 phong模型就是以上三种光的计算叠加，可以模拟现实中的光照。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/openGL/" rel="tag"><i class="fa fa-tag"></i> openGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/26/计算机图形学知识点整理（一）/" rel="next" title="计算机图形学知识点整理（一）">
+                <i class="fa fa-chevron-left"></i> 计算机图形学知识点整理（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/10/B-树/" rel="prev" title="B+树">
+                B+树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#造型技术"><span class="nav-number">1.</span> <span class="nav-text">造型技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实体模型的三类表示"><span class="nav-number">1.1.</span> <span class="nav-text">实体模型的三类表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察与变换"><span class="nav-number">2.</span> <span class="nav-text">观察与变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#投影"><span class="nav-number">3.</span> <span class="nav-text">投影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#裁剪与屏幕映射"><span class="nav-number">4.</span> <span class="nav-text">裁剪与屏幕映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phong光照模型"><span class="nav-number">5.</span> <span class="nav-text">phong光照模型</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

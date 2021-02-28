@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。 static整理static用法 static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ static和const整理">
+<meta property="og:url" content="http://yoursite.com/2019/08/21/C-static和const整理/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。 static整理static用法 static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/21/C-static和const整理/const1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/21/C-static和const整理/static2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/21/C-static和const整理/static3.png">
+<meta property="og:updated_time" content="2019-09-07T15:21:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ static和const整理">
+<meta name="twitter:description" content="前言前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。 static整理static用法 static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/21/C-static和const整理/const1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/21/C-static和const整理/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>C++ static和const整理 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/C-static和const整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++ static和const整理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+            <i class="fa fa-thumb-tack"></i>
+            <font color="7D26CD">top</font>
+            <span class="post-meta-divider">|</span>
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-21 14:38:07" itemprop="dateCreated datePublished" datetime="2019-08-21T14:38:07+08:00">2019-08-21</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-07 23:21:04" itemprop="dateModified" datetime="2019-09-07T23:21:04+08:00">2019-09-07</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.1k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。</p>
+<h3 id="static整理"><a href="#static整理" class="headerlink" title="static整理"></a>static整理</h3><h4 id="static用法"><a href="#static用法" class="headerlink" title="static用法"></a>static用法</h4><ol>
+<li>static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。<a id="more"></a> 
+
+
+</li>
+</ol>
+<pre><code>static int m, n;
+static int *a;
+int main(){
+cout &lt;&lt; m &lt;&lt; &quot; &quot; &lt;&lt; n;
+cout &lt;&lt; *a;
+return 0;
+}</code></pre><p>在不赋初值时默认为0，指针默认为NULL；打印看不到任何结果</p>
+<p><img src="/2019/08/21/C-static和const整理/const1.png" alt="normal_const"></p>
+<ol start="2">
+<li><p>修饰普通函数，表明函数的作用范围，只有定义在该函数的文件内才能使用，在多人开发的项目中为了防止命名空间中的函数重名，可以加上static</p>
+</li>
+<li><p>修饰成员变量时,所有的对象只保存一个该变量，并且不需要生成对象就可以访问该变量。<br>举个例子如下：</p>
+<pre><code>class A{
+public:
+static int a;
+int b;
+A(){
+    b = 3;
+}
+};
+int A::a = 5;
+
+int main(){
+
+cout &lt;&lt; A::a&lt;&lt;&quot; &quot;;
+A c;
+cout &lt;&lt; c.b;
+return 0;
+}</code></pre></li>
+</ol>
+<p><img src="/2019/08/21/C-static和const整理/static2.png" alt="static2"></p>
+<p>需要注意静态成员变量必须在类外初始化，值得注意的是，如果不初始化静态成员变量，将会报错（使用mingw编译）。而他的性质也符合类中的public private和protected的性质，需要注意的是他不属于类，是一个全局变量。<br>其实从代码也可以看出，是在类外初始化，他所占的内存是不变的。</p>
+<ol start="4">
+<li>修饰成员函数，使得成员函数不需要生成对象就可以访问该函数，但是static成员函数中无法访问this指针。也就是无法访问其他非静态成员。稍加思考也可以理解，静态成员函数。本身也不属于类。<strong>但是还是有一点很重要，static成员也可以通过对象进行访问，也就是说可以通过对象进行访问，也可以不通过对象进行访问，只要是已经初始化过。</strong></li>
+</ol>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+class A{
+    public:
+    static int a;
+    int b;
+    A(){
+        b = 3;
+    }
+
+    static void fun(){
+        cout &lt;&lt; &quot;this is fun&quot; &lt;&lt; endl;
+    }
+};
+int A::a = 5;
+
+int main(){
+    cout &lt;&lt; A::a&lt;&lt;&quot; &quot;;
+    A::fun();
+    A c;
+    cout &lt;&lt; c.b&lt;&lt;&quot; &quot;&lt;&lt;c.a;
+    c.fun();
+    return 0;
+}</code></pre><p>结果如下：<br><img src="/2019/08/21/C-static和const整理/static3.png" alt="static3"></p>
+<h3 id="const-整理"><a href="#const-整理" class="headerlink" title="const 整理"></a>const 整理</h3><h4 id="const用法"><a href="#const用法" class="headerlink" title="const用法"></a>const用法</h4><ol>
+<li>修饰变量，说明该变量不可以被改变</li>
+<li>修饰指针，分为指针常量和常量指针</li>
+<li>常量引用，经常用于形参类型，即避免了拷贝，有避免了对值的修改</li>
+<li>修饰成员函数，说明该成员函数不能修改成员变量。</li>
+</ol>
+<p>举例如下：</p>
+<pre><code>// 类
+class A
+{
+private:
+const int a;                // 常对象成员，只能在初始化列表赋值
+
+public:
+// 构造函数
+A() : a(0) { };
+A(int x) : a(x) { };        // 初始化列表
+
+// const可用于对重载函数的区分
+int getValue();             // 普通成员函数
+int getValue() const;       // 常成员函数，不得修改类中的任何数据成员的值
+
+
+void function()
+{
+// 对象
+A b;                        // 普通对象，可以调用全部成员函数、更新常成员变量
+const A a;                  // 常对象，只能调用常成员函数
+const A *p = &amp;a;            // 常指针
+const A &amp;q = a;             // 常引用
+
+// 指针
+char greeting[] = &quot;Hello&quot;;
+char* p1 = greeting;                // 指针变量，指向字符数组变量
+const char* p2 = greeting;          // 指针变量，指向字符数组常量
+char* const p3 = greeting;          // 常指针，指向字符数组变量
+const char* const p4 = greeting;    // 常指针，指向字符数组常量
+}
+
+// 函数
+void function1(const int Var);           // 传递过来的参数在函数内不可变
+void function2(const char* Var);         // 参数指针所指内容为常量
+void function3(char* const Var);         // 参数指针为常指针
+void function4(const int&amp; Var);          // 引用参数在函数内为常量
+
+// 函数返回值
+const int function5();      // 返回一个常数
+const int* function6();     // 返回一个指向常量的指针变量，使用：const int *p = function6();
+int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> static 和const中还是有很多容易混淆的东西，不过多写之后就会慢慢记住了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/C-new和malloc的区别/" rel="next" title="C++ new和malloc的区别">
+                <i class="fa fa-chevron-left"></i> C++ new和malloc的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/23/data-base-复习/" rel="prev" title="data_base 复习">
+                data_base 复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static整理"><span class="nav-number">2.</span> <span class="nav-text">static整理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static用法"><span class="nav-number">2.1.</span> <span class="nav-text">static用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-整理"><span class="nav-number">3.</span> <span class="nav-text">const 整理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#const用法"><span class="nav-number">3.1.</span> <span class="nav-text">const用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

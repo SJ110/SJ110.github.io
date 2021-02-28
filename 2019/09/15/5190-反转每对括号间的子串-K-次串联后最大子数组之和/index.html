@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言这次的周赛做的太菜了，不忍直视，我想图书馆对面那对情侣老是在那里叽叽喳喳，但是本质还是我太菜了。不过还是花了快一个下午时间+找参考资料把B和C过了。所以我再一次认为，多看下优秀的代码真的对自己很有帮助。 先看下题目B">
+<meta name="keywords" content="coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5190. 反转每对括号间的子串 &amp;&amp; 5191.K次串联后最大子数组之和">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言这次的周赛做的太菜了，不忍直视，我想图书馆对面那对情侣老是在那里叽叽喳喳，但是本质还是我太菜了。不过还是花了快一个下午时间+找参考资料把B和C过了。所以我再一次认为，多看下优秀的代码真的对自己很有帮助。 先看下题目B">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/B.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/C.png">
+<meta property="og:updated_time" content="2019-09-23T04:51:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5190. 反转每对括号间的子串 &amp;&amp; 5191.K次串联后最大子数组之和">
+<meta name="twitter:description" content="前言这次的周赛做的太菜了，不忍直视，我想图书馆对面那对情侣老是在那里叽叽喳喳，但是本质还是我太菜了。不过还是花了快一个下午时间+找参考资料把B和C过了。所以我再一次认为，多看下优秀的代码真的对自己很有帮助。 先看下题目B">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/B.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>5190. 反转每对括号间的子串 && 5191.K次串联后最大子数组之和 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">5190. 反转每对括号间的子串 && 5191.K次串联后最大子数组之和
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-15 17:24:49" itemprop="dateCreated datePublished" datetime="2019-09-15T17:24:49+08:00">2019-09-15</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-23 12:51:02" itemprop="dateModified" datetime="2019-09-23T12:51:02+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这次的周赛做的太菜了，不忍直视，我想图书馆对面那对情侣老是在那里叽叽喳喳，但是本质还是我太菜了。不过还是花了快一个下午时间+找参考资料把B和C过了。所以我再一次认为，多看下优秀的代码真的对自己很有帮助。</p>
+<p>先看下题目B</p>
+<a id="more"></a>
+
+<h3 id="题目B"><a href="#题目B" class="headerlink" title="题目B"></a>题目B</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>题意的话我还是直接贴图了。</p>
+<p><img src="/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/B.png" alt="B"></p>
+<p>当然对于这一类字符串去括号或者字符串压缩得题目还是使用stack比较有效。但是我当时就想着用一种新的办法做一下，没有考虑<strong>括号可能有没有嵌套得情况，</strong>直接就崩了。 所以遇到这类题目还是多注意下隐藏得测试用例好点。关键多思考。</p>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>既然明确了思路，就直接使用一个栈来完成，思考入栈和退栈，当需要退栈时都是在遇到”)”时，因为此时我们需要将”（）”内得字符串反转。那就很明显了。 遍历一遍字符串，遇到 “)”时退栈，遇到”(“时停止退栈。将得到的字符串反转在压栈。重复这个过程就可以得到结果了。</p>
+<p><strong>note</strong>：这里需要注意一点</p>
+<pre><code>string tmp=&quot;&quot;+&apos;i&apos;;//这个代码在mingw环境下输出一个空串。
+
+string tmp=&quot;&quot;;
+tmp=tmp+&apos;i&apos;;// 可以输出 i</code></pre><p><del>这个我觉得比较奇怪，但是还没有找到原因。 之后再来填吧。</del>  <strong>note:2019.9.16 填坑</strong>关于昨天这个问题，和班上一个大佬讨论了下，然后查了下资料，这应该是一个关于capacity的问题，string就好比vetcor<char>,当我使用上述第一种方式进行初试化时，我是用的tmp并没有被初始化，或者说他没有这样类型的构造函数，所以经过 tmp=””+’i’;后tmp的capacity还是0，所以就会打印不出任何东西。而它刚好有一个拷贝构造函数，这个构造函数底层还是深拷贝（毕竟stl），初始化后capacity不为0，就可以继续往下了。</char></p>
+<h4 id="ac代码"><a href="#ac代码" class="headerlink" title="ac代码"></a>ac代码</h4><p>思路大概清楚，就直接代码了</p>
+<pre><code>class Solution {
+public:
+    string reverseParentheses(string s) {
+        stack&lt;string&gt; str;
+        s= &apos;(&apos;+s+&apos;)&apos;;
+        int size=s.size();
+   //     cout&lt;&lt;size&lt;&lt;endl ;
+        for(int i=0;i&lt;size;i++){
+            string now=&quot;&quot;;
+            now=now+s[i];
+            str.push(now);
+            if(s[i]==&apos;)&apos;){
+                string tmp;
+                str.pop();
+                while(str.empty()==false &amp;&amp; str.top()!=&quot;(&quot;){
+                    tmp=str.top()+tmp;
+                    str.pop();
+                } 
+                reverse(tmp.begin(),tmp.end());  //o(n)
+                if(str.empty()==false)
+                    str.pop(); //pop (
+                str.push(tmp);
+            }
+        }
+        reverse(str.top().begin(),str.top().end());
+        return  str.top();
+    }
+};</code></pre><p>//这种方法我觉得应该算是比较快的了。就不贴ac图了。</p>
+<h3 id="题目C"><a href="#题目C" class="headerlink" title="题目C"></a>题目C</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>还是先贴题目吧<br><img src="/2019/09/15/5190-反转每对括号间的子串-K-次串联后最大子数组之和/C.png" alt="c"></p>
+<p>这道题是真的难(对于我来说)。自从之前做了一道叫 求<strong>数组的最大自序和</strong>之后，我的思路感觉就固化了,就是喜欢直接求整个数组的最大值去了，所以当然就是直接超时了。这道题我参考一些资料后，思路大概是这样的：</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>如果k为1 直接取最大值。 如果k&gt;1,需要计算出一个数组的和，一个数组左边开始的最大值，一个数组右边开始的最大值。然后分以下几种情况讨论：</p>
+<ol>
+<li>如果一个数组的和小于等于0，那么最大值应该为一个数组计算所得的最大值和 左边的最大值加右边的最大值进行比较</li>
+<li>否则的话，需要进行判断比较下列几种情况的最大值 A. k个数组的和 B.左边k-1个数组的和加上最后一个数组的左最大值。 C右边k-1个数组的和加上第一个数组的右最大值。C.中间k-2个数组的和+左右两边的数组的最大值。 比较他们的结果，最终得出最值。</li>
+</ol>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>根据上面的思路，就有了整体的代码：</p>
+<pre><code>class Solution {
+    const int BIG=1e9+7;
+public:
+    int kConcatenationMaxSum(vector&lt;int&gt;&amp; arr, int k) {
+        int size=arr.size();
+        long max=0,sum=0;
+        for(int i=0;i&lt;size;i++){
+            sum=sum+arr[i];
+            if(max&lt;sum)
+                max=sum;
+            if(sum&lt;0)
+                sum=0;
+        } //一个子数组最大和
+
+        //k==1 直接取最大
+        if(k==1) return max%BIG;
+        //k&gt;=2
+        long lmax=0,rmax=0;
+        long cntleft=0;
+        for(int i=0;i&lt;size;i++){
+            cntleft=cntleft+arr[i];
+            lmax=std::max(lmax,cntleft);
+        }//左边最大和
+
+        long cntright=0;
+        for(int i=size-1;i&gt;=0;i--){
+            cntright=cntright+arr[i];
+            rmax=std::max(rmax,cntright);
+        }//右边最大和
+
+        //分类讨论
+        long sumofone=0;
+        for(auto c: arr)
+            sumofone+=c;
+       // cout&lt;&lt;lmax&lt;&lt;&quot; &quot;&lt;&lt;rmax&lt;&lt;&quot; &quot;&lt;&lt;sumofone&lt;&lt;endl;
+        if(sumofone&lt;0){ //数组的和小于0，则比较max和左最大值加右最大值的和
+            max=std::max(max,(lmax+rmax));
+        }else{ //一个的和大于0，则比较第一个右最大值+k-1个数组的和，中间k-2个数组的和+左右两个的左右最大值，左边k-1个数组的和+最后一个数组左最大值。 k个数组的和。
+            max=std::max(sumofone*k,std::max(sumofone*(k-1)+lmax,sumofone*(k-1)+rmax));
+            //还有一种情况 中间k-2个的和 加上左右lmax和rmax的最大值在比交
+            max=std::max(sumofone*(k-2)+lmax+rmax,max);
+        }
+        return max%BIG;
+
+    }
+};</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/coding/" rel="tag"><i class="fa fa-tag"></i> coding</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/git基础/" rel="next" title="git基础">
+                <i class="fa fa-chevron-left"></i> git基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/16/最长公共子串和lcs/" rel="prev" title="最长公共子串和lcs">
+                最长公共子串和lcs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目B"><span class="nav-number">2.</span> <span class="nav-text">题目B</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意"><span class="nav-number">2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-number">2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ac代码"><span class="nav-number">2.3.</span> <span class="nav-text">ac代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目C"><span class="nav-number">3.</span> <span class="nav-text">题目C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意-1"><span class="nav-number">3.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析"><span class="nav-number">3.2.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>

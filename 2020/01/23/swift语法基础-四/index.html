@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="函数swift统一的函数语法非常灵活，可以用来表示任何函数，包括最简单的没有参数名字的c风格函数，到复杂的带局部外部参数名的OC风格参数，参数可以听过默认值，以简化函数调用。参数也可以及当作传入参数，也当作传出参数。也就是说，一旦函数执行，传入的参数值会被修改。 swift中每一个函数都有一个由函数的参数类型和返回值类型组成的类型。可以把函数类型当作任何其他变量类型处理。这样可以简单的把函数当作别">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift语法基础(四)">
+<meta property="og:url" content="http://yoursite.com/2020/01/23/swift语法基础-四/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="函数swift统一的函数语法非常灵活，可以用来表示任何函数，包括最简单的没有参数名字的c风格函数，到复杂的带局部外部参数名的OC风格参数，参数可以听过默认值，以简化函数调用。参数也可以及当作传入参数，也当作传出参数。也就是说，一旦函数执行，传入的参数值会被修改。 swift中每一个函数都有一个由函数的参数类型和返回值类型组成的类型。可以把函数类型当作任何其他变量类型处理。这样可以简单的把函数当作别">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-07T05:59:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift语法基础(四)">
+<meta name="twitter:description" content="函数swift统一的函数语法非常灵活，可以用来表示任何函数，包括最简单的没有参数名字的c风格函数，到复杂的带局部外部参数名的OC风格参数，参数可以听过默认值，以简化函数调用。参数也可以及当作传入参数，也当作传出参数。也就是说，一旦函数执行，传入的参数值会被修改。 swift中每一个函数都有一个由函数的参数类型和返回值类型组成的类型。可以把函数类型当作任何其他变量类型处理。这样可以简单的把函数当作别">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/01/23/swift语法基础-四/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>swift语法基础(四) | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/23/swift语法基础-四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">swift语法基础(四)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-23 15:12:12" itemprop="dateCreated datePublished" datetime="2020-01-23T15:12:12+08:00">2020-01-23</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-07 13:59:50" itemprop="dateModified" datetime="2020-02-07T13:59:50+08:00">2020-02-07</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/swift/" itemprop="url" rel="index"><span itemprop="name">swift</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">9.4k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">9 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>swift统一的函数语法非常灵活，可以用来表示任何函数，包括最简单的没有参数名字的c风格函数，到复杂的带局部外部参数名的OC风格参数，参数可以听过默认值，以简化函数调用。参数也可以及当作传入参数，也当作传出参数。也就是说，一旦函数执行，传入的参数值会被修改。</p>
+<p>swift中每一个函数都有一个由函数的参数类型和返回值类型组成的类型。可以把函数类型当作任何其他变量类型处理。这样可以简单的把函数当作别的函数的参数。也可以从其他函数中返回函数。函数定义可以写在其他函数定义中，这样可以在嵌套函数范围内实现封装。</p>
+<a id="more"></a>
+
+<h4 id="函数的定义和调用"><a href="#函数的定义和调用" class="headerlink" title="函数的定义和调用"></a>函数的定义和调用</h4><p>当定义一个函数时，可以定义一个或多个有名字和类型的值，作为函数的输入，称为参数，也可以定义某种类型的值作为函数执行结束的输出作为返回类型。</p>
+<p>每个函数有一个函数名，用来描述函数执行的任务，使用函数时，用函数名调用。并传给它匹配的输入值（实参），函数的实参必须与函数参数表里参数顺序一致。</p>
+<p>下面是一个 greet函数例子:</p>
+<pre><code>func greet(person: String) -&gt; String {
+    let greeting = &quot;Hello, &quot; + person + &quot;!&quot;
+    return greeting
+}
+print(greetAgain(person: &quot;Anna&quot;))
+// 打印“Hello again, Anna!”</code></pre><p>所有这些信息汇总起来称为函数定义，以func作为前缀。 -&gt; 后跟返回类型。</p>
+<h4 id="函数参数与返回值"><a href="#函数参数与返回值" class="headerlink" title="函数参数与返回值"></a>函数参数与返回值</h4><ul>
+<li><p>无参函数</p>
+<p>函数可以没有参数，这个函数就是一个无参数函数。但是函数名后面还是需要圆括号。</p>
+</li>
+<li><p>多参数函数</p>
+</li>
+</ul>
+<p>函数可以有多种输入参数，这些参数被包含在函数的括号中，用逗号分隔。</p>
+<pre><code>func greet(person: String, alreadyGreeted: Bool) -&gt; String {
+if alreadyGreeted {
+    return greetAgain(person: person)
+} else {
+    return greet(person: person)
+}
+}
+print(greet(person: &quot;Tim&quot;, alreadyGreeted: true))
+// 打印“Hello again, Tim!”</code></pre><ul>
+<li>无返回值函数</li>
+</ul>
+<p>函数可以没有返回值，如下：</p>
+<pre><code>func greet(person: String) {
+    print(&quot;Hello, \(person)!&quot;)
+}
+greet(person: &quot;Dave&quot;)
+// 打印“Hello, Dave!”</code></pre><ul>
+<li>多重返回值函数</li>
+</ul>
+<p>可以用元组类型让多个值作为一个复合值从函数中返回。如下:</p>
+<pre><code>func minMax(array: [Int]) -&gt; (min: Int, max: Int) {
+var currentMin = array[0]
+var currentMax = array[0]
+for value in array[1..&lt;array.count] {
+    if value &lt; currentMin {
+        currentMin = value
+    } else if value &gt; currentMax {
+        currentMax = value
+    }
+}
+    return (currentMin, currentMax)
+}</code></pre><p>该函数返回一个包含两个Int的元组，这些值被标记为min和max。</p>
+<pre><code>let bounds = minMax(array: [8, -6, 2, 109, 3, 71])
+print(&quot;min is \(bounds.min) and max is \(bounds.max)&quot;)
+// 打印“min is -6 and max is 109”</code></pre><p>需要注意的是元组成员不需要在元组从函数中返回时命名。因为名字已经在返回类型中指定了。</p>
+<ul>
+<li>可选元组返回类型</li>
+</ul>
+<p>如果函数返回的元组类型可能整个元组都没有值，可以使用可选的元组作为返回类型反映元组是nil。可以通过在元组类型的右括号后放置一个问号来定义一个可选元组。例如:(Int,Int)?或者 (String,Bool,Int)?</p>
+<p>前面minmax(array:)函数返回一个包含两个Int值的元组，但是函数不会对传入的数组执行任何安全检查，如果array是一个空数组，在执行时会触发错误。所以为了解决这个问题，函数改写为使用可选元组返回类型，当数组为空时返回nil:</p>
+<pre><code>func minMax(array: [Int]) -&gt; (min: Int, max: Int)? {
+if array.isEmpty { return nil }
+var currentMin = array[0]
+var currentMax = array[0]
+for value in array[1..&lt;array.count] {
+    if value &lt; currentMin {
+        currentMin = value
+    } else if value &gt; currentMax {
+        currentMax = value
+    }
+}
+    return (currentMin, currentMax)
+}</code></pre><ul>
+<li>隐式返回的函数</li>
+</ul>
+<p>如果一个函数的整个函数体是单行表达式，这个函数可以隐式的返回这个表达式。</p>
+<h4 id="函数标签和参数名称"><a href="#函数标签和参数名称" class="headerlink" title="函数标签和参数名称"></a>函数标签和参数名称</h4><p>每个函数都有一个参数标签以及一个参数名称，参数标签在调用函数的时候使用，调用的时候需要将函数的参数标签写在对应的参数前面。参数名称在函数的实现中使用，默认情况下，函数参数使用参数名称来作为参数标签。</p>
+<ul>
+<li>指定参数标签</li>
+</ul>
+<p>可以在参数名称前指定参数标签，中间用空格分隔:</p>
+<pre><code>func someFunction(argumentLabel parameterName: Int) {
+// 在函数体内，parameterName 代表参数值
+}</code></pre><p>一个新版greet例子:</p>
+<pre><code>func greet(person: String, from hometown: String) -&gt; String {
+return &quot;Hello \(person)!  Glad you could visit from \(hometown).&quot;
+}
+print(greet(person: &quot;Bill&quot;, from: &quot;Cupertino&quot;))
+// 打印“Hello Bill!  Glad you could visit from Cupertino.”</code></pre><p>参数标签能够让函数在调用是更有表达力。</p>
+<ul>
+<li>忽略参数标签</li>
+</ul>
+<p>如果不希望为某个参数添加一个标签，使用下划线代替:</p>
+<pre><code>func someFunction(_ firstParameterName: Int, secondParameterName: Int) {
+ // 在函数体内，firstParameterName 和 secondParameterName 代表参数中的第一个和第二个参数值
+}
+someFunction(1, secondParameterName: 2)</code></pre><ul>
+<li>默认参数值</li>
+</ul>
+<p>可以在函数体中通过给参数赋值来为任意一个参数定义默认值，默认值被定义后，调用这个函数时可以忽略这个参数。一般将带有默认值的参数放在末尾。</p>
+<ul>
+<li>可变参数</li>
+</ul>
+<p>可变参数可以接受0个或者多个值，函数调用时，可以用可变参数来指定函数参数可以被传入不确定的输入值。在变量类型名后加入(…)表示可变参数。</p>
+<pre><code>func arithmeticMean(_ numbers: Double...) -&gt; Double {
+var total: Double = 0
+for number in numbers {
+    total += number
+}
+ return total / Double(numbers.count)
+} //使用可变参数计算任意长度数字的平均数
+arithmeticMean(1, 2, 3, 4, 5)
+// 返回 3.0, 是这 5 个数的平均数。
+arithmeticMean(3, 8.25, 18.75)
+// 返回 10.0, 是这 3 个数的平均数。</code></pre><p><strong>notice：</strong>一个函数最多由一个可变参数。</p>
+<ul>
+<li>输入输出参数</li>
+</ul>
+<p>如果函数参数是常量，则不能在函数内修改。如果想要修改参数的值，并且想在这些修改在函数调用后任然存在，需要将参数定义为输入输出参数。</p>
+<p>定义一个输入输出参数时，在参数顶以前加<strong>inout</strong>关键字，一个输入输出参数由传入函数的值，这个值被函数修改，然后传出函数。</p>
+<p>只能传递变量给输入输出参数，当传入的参数作为输入输出参数时，需要在参数名前加 &amp;，表示这个值可以被函数修改。 例子如下：</p>
+<pre><code>func swapTwoInts(_ a: inout Int, _ b: inout Int) {
+    let temporaryA = a
+    a = b
+    b = temporaryA
+}
+//调用如下
+var someInt = 3
+var anotherInt = 107
+swapTwoInts(&amp;someInt, &amp;anotherInt)
+print(&quot;someInt is now \(someInt), and anotherInt is now \(anotherInt)&quot;)
+// 打印“someInt is now 107, and anotherInt is now 3”</code></pre><h4 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h4><p>每个函数都有中特定的函数类型，函数的类型由函数的参数类型和返回类型组成。</p>
+<pre><code>func addTwoInts(_ a: Int, _ b: Int) -&gt; Int {
+    return a + b
+}
+func multiplyTwoInts(_ a: Int, _ b: Int) -&gt; Int {
+    return a * b
+}</code></pre><p>这两个函数的类型为(Int,Int)-&gt;Int</p>
+<pre><code>func printHelloWorld() {
+    print(&quot;hello, world&quot;)
+}
+//函数类型为 ()-&gt; void</code></pre><ul>
+<li>使用函数类型</li>
+</ul>
+<p>使用函数类型可以：定义一个类型为函数的常量或者变量，将适当的函数赋值给他。</p>
+<pre><code>var mathFunction: (Int, Int) -&gt; Int = addTwoInts</code></pre><p>上面代码解读为: 定义一个mathFunction的变量，类型是一个有两个Int的参数，并返回一个Int的函数。让这个新变量指向addTwoInts函数。</p>
+<p>现在可以使用mathFunction调用被复制的函数。</p>
+<pre><code>print(&quot;Result: \(mathFunction(2, 3))&quot;)
+// Prints &quot;Result: 5&quot;</code></pre><p>也可以将相同类型匹配的不同函数赋值给同一个变量：</p>
+<pre><code>mathFunction = multiplyTwoInts
+print(&quot;Result: \(mathFunction(2, 3))&quot;)
+// Prints &quot;Result: 6&quot;</code></pre><p>也可以简单写法，使用swift的推断机制，推出变量为函数类型：</p>
+<pre><code>let anotherMathFunction = addTwoInts
+// anotherMathFunction 被推断为 (Int, Int) -&gt; Int 类型</code></pre><ul>
+<li>函数类型作为参数类型</li>
+</ul>
+<p>使用(Int,Int)-&gt;Int 这样的函数作为另一个函数的参数类型，这样可以将函数的一部分实现留给函数的调用者提供。如下例子：</p>
+<pre><code>func printMathResult(_ mathFunction: (Int, Int) -&gt; Int, _ a: Int, _ b: Int) {
+print(&quot;Result: \(mathFunction(a, b))&quot;)
+}
+printMathResult(addTwoInts, 3, 5)
+// 打印“Result: 8”</code></pre><p>如上定义了一个 printMathResult(<em>:</em>:_:)函数，有三个参数，第一个参数为函数类型，可以传入任何类型的这个函数。它不关心传入的函数如何实现，只关心传入函数是不是一个正确的类型。</p>
+<ul>
+<li>函数类型作为返回类型</li>
+</ul>
+<p>可以用函数类型作为另一个函数的返回类型，需要做的是在返回箭头(-&gt;)后写一个完成的函数类型，例子如下：</p>
+<pre><code>func stepForward(_ input: Int) -&gt; Int {
+    return input + 1
+}
+func stepBackward(_ input: Int) -&gt; Int {
+    return input - 1
+}
+
+func chooseStepFunction(backward: Bool) -&gt; (Int) -&gt; Int {
+    return backward ? stepBackward : stepForward
+}
+//chooseStepFunction返回类型是(Int)-&gt;(Int),</code></pre><p>现在可以使用如下方式调用该函数:</p>
+<pre><code>var currentValue = 3
+let moveNearerToZero = chooseStepFunction(backward: currentValue &gt; 0)
+// moveNearerToZero 现在指向 stepBackward() 函数。</code></pre><p>现在 moveNearToZero是一个函数类型，可以像函数那样使用它:</p>
+<pre><code>print(&quot;Counting to zero:&quot;)
+// Counting to zero:
+while currentValue != 0 {
+    print(&quot;\(currentValue)... &quot;)
+    currentValue = moveNearerToZero(currentValue)
+}
+print(&quot;zero!&quot;)
+// 3...
+// 2...
+// 1...
+// zero!</code></pre><ul>
+<li>嵌套函数</li>
+</ul>
+<p>函数可以定义在别的函数体中，称为嵌套函数，默认情况下,嵌套函数对外界不可见，但是可以被他们的外围函数调用，一个外围函数可以返回他的某个嵌套函数，使得这个函数可以在其他域中被使用。下面例子chooseStepFunction(backward:) 函数：</p>
+<pre><code>func chooseStepFunction(backward: Bool) -&gt; (Int) -&gt; Int {
+func stepForward(input: Int) -&gt; Int { return input + 1 }
+func stepBackward(input: Int) -&gt; Int { return input - 1 }
+return backward ? stepBackward : stepForward
+}
+var currentValue = -4
+let moveNearerToZero = chooseStepFunction(backward: currentValue &gt; 0)
+// moveNearerToZero now refers to the nested stepForward() function
+while currentValue != 0 {
+    print(&quot;\(currentValue)... &quot;)
+    currentValue = moveNearerToZero(currentValue)
+}
+print(&quot;zero!&quot;)
+// -4...
+// -3...
+// -2...
+// -1...
+// zero!</code></pre><h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包是自包含的函数代码块，可以在代码中被传递和使用。闭包可以捕获和存储其所在上下文中任意常量和变量的引用。被称为包裹常量和变量。swift会管理在捕获过程中涉及的所有内存操作。前面介绍的全局和嵌套函数实际也是特殊的闭包。闭包采用如下三种形式之一:</p>
+<pre><code>1. 全局函数是一个有名字但不会捕获任何值得闭包
+2. 嵌套函数是一个有名字并可以捕获其封闭函数域内值得闭包
+3. 闭包表达式是一个利用轻量级语法所写的可以捕获上写问中变量或常量的匿名闭包。</code></pre><p>swift的闭包表达式风格简单，鼓励在常见场景中进行语法优化，主要优化如下：</p>
+<pre><code>1. 利用上下文推断参数和返回值类型
+2. 隐式返回单表达式闭包，即表达式闭包可以省略return关键字
+3. 参数名称缩写
+4. 尾随闭包语法</code></pre><h4 id="闭包表达式"><a href="#闭包表达式" class="headerlink" title="闭包表达式"></a>闭包表达式</h4><p>闭包表达式是一种构建内敛闭包的方式，语法简洁，在保证不丢失它语法清晰明了的同时，闭包表达式提供了几种优化的语法简写形式，下面例子通过对sorted(by:)这个案例的多次迭代改进来展示这个过程：</p>
+<p> swift标准库提供了 sorted(by:)的方法。会基于提供的闭包表达式的判断结果对数组中的值进行排序，一旦完成排序过程，该方法返回一个与就数组大小相同类型的新数组，该数组的元素有着正确的排序顺序，原数组不会被该方法修改。</p>
+<p>sorted(by:)方法接受一个闭包，该闭包函数需要传入与数组元素类型相同的两个值，并返回一个布尔值表明排序顺序。</p>
+<pre><code>let names = [&quot;Chris&quot;, &quot;Alex&quot;, &quot;Ewa&quot;, &quot;Barry&quot;, &quot;Daniella&quot;]
+func backward(_ s1: String, _ s2: String) -&gt; Bool {
+    return s1 &gt; s2
+} //倒序排列
+var reversedNames = names.sorted(by: backward)
+// reversedNames 为 [&quot;Ewa&quot;, &quot;Daniella&quot;, &quot;Chris&quot;, &quot;Barry&quot;, &quot;Alex&quot;]</code></pre><ul>
+<li>闭包表达式语法</li>
+</ul>
+<p>闭包表达式有如下一般形式:</p>
+<pre><code>{ (parameters) -&gt; return type in
+    statements
+}</code></pre><p>闭包表达式参数可以是inout参数，但不能设定默认值，如果命名了可变参数，可以使用可变参数，元组也可以作为参数和返回值。如下是backward函数对应闭包表达式代码：</p>
+<pre><code>reversedNames = names.sorted(by: { (s1: String, s2:     String) -&gt; Bool in
+        return s1 &gt; s2
+})</code></pre><p>需要注意的是内敛闭包参数和返回值类型声明与backward(<em>:</em>:)类型声明相同。但在内连闭包表达式中，<strong>函数和返回值类型都写在大括号内而不是大括号外</strong>。<strong>闭包的函数体部分由关键字in</strong>引入。该关键字表示闭包的参数和返回值类型定义已经完成，闭包函数体即将开始。 </p>
+<ul>
+<li>根据上下文推断类型</li>
+</ul>
+<p>sorted(by:)方法的参数是传入的，swift可以推断其参数和返回值类型，sorted被一个字符串数组调用，因此参数必须为(string,string)-&gt;bool类型的函数。这意味者(string,string) 和bool类型不需要作为闭包表达式的一部分，因为所有的类型都可以被正确推断，返回箭头和围绕在参数周围的括号也可以省略：</p>
+<pre><code>reversedNames = names.sorted(by: { s1, s2 in return s1 &gt; s2 } )//类型推断省略了参数类型以及箭头</code></pre><p>实际上，通过闭包表达式构造的闭包作为参数传递给函数或者方法时，总是可以推断出闭包的参数和返回值类型。因此可以不需要完整的格式构造内联闭包。</p>
+<ul>
+<li>但表达式闭包的隐式返回</li>
+</ul>
+<p>单行表达式闭包可以通过省略return来隐式返回单行表达式的结果。</p>
+<pre><code>reversedNames = names.sorted(by: { s1, s2 in s1 &gt; s2 } )</code></pre><ul>
+<li>参数名称缩写</li>
+</ul>
+<p>swift自动为内联闭包提供了参数名称缩写，可以通过$0,$1,$2…来顺序调用闭包参数。</p>
+<p>如果在闭包表达式中使用名称缩写，可以在闭包定义中省略参数列表，并且对应参数名称缩写的类型会通过函数类型进行推断。in关键字也可以省略，因为此时闭包表达式完全由闭包函数体构成。</p>
+<pre><code>reversedNames = names.sorted(by: { $0 &gt; $1 } )</code></pre><ul>
+<li>运算符方法</li>
+</ul>
+<p>swift中的string类型定义了关于大于号(&gt;)的字符串实现，其作为一个函数接受两个string类型的参数并返回bool类型。刚好满足sorted函数的参数要求。因此可以如下:</p>
+<pre><code>reversedNames = names.sorted(by: &gt;)</code></pre><ul>
+<li>尾随闭包</li>
+</ul>
+<p>如果<strong>需要将一个很长的闭包表达式作为最后一个参数传递给函数</strong>，这个闭包替换成尾随闭包的形式效果更好。尾随闭包格式如下：</p>
+<pre><code>    func someFunctionThatTakesAClosure(closure: () -&gt; Void) {
+    // 函数体部分
+}
+
+// 以下是不使用尾随闭包进行函数调用
+someFunctionThatTakesAClosure(closure: {
+    // 闭包主体部分
+})
+
+// 以下是使用尾随闭包进行函数调用
+someFunctionThatTakesAClosure() {
+    // 闭包主体部分
+}</code></pre><p>在闭包表达式语法章节字符串闭包可以作为尾随闭包的形式改写为：</p>
+<pre><code>reversedNames = names.sorted() { $0 &gt; $1 }</code></pre><p>当闭包表达式时函数或者方法的唯一参数，当你使用尾随闭包时，可以省略为如下：</p>
+<pre><code>reversedNames = names.sorted { $0 &gt; $1 } //省略括号</code></pre><p>当闭包非常长不能一行书写时，尾随闭包非常有用。举例来说，下面介绍了如何在map(_:)方法中使用尾随闭包将Int类型数组[16,58,510]转换为包含对应string类型的值的数组。</p>
+<pre><code>let digitNames = [
+0: &quot;Zero&quot;, 1: &quot;One&quot;, 2: &quot;Two&quot;,   3: &quot;Three&quot;, 4: &quot;Four&quot;,
+5: &quot;Five&quot;, 6: &quot;Six&quot;, 7: &quot;Seven&quot;, 8: &quot;Eight&quot;, 9: &quot;Nine&quot;
+]
+let numbers = [16, 58, 510]</code></pre><p>上述代码创建了一个整型数位和他们英文名映射的字典，和一个转换数组。现在可以通过传递一个尾随闭包给numbers数组的map(_:)方法来创建对应的字符串版本数组。</p>
+<pre><code>let strings = numbers.map {
+(number) -&gt; String in
+var number = number
+var output = &quot;&quot;
+repeat {
+    output = digitNames[number % 10]! + output
+    number /= 10
+} while number &gt; 0
+return output
+}
+// strings 常量被推断为字符串类型数组，即 [String]
+// 其值为 [&quot;OneSix&quot;, &quot;FiveEight&quot;, &quot;FiveOneZero&quot;]</code></pre><p>上述例子中，number为前面定义的局部变量，因此可以在闭包函数体内对其进行修改。闭包表达式指定了返回类型为string。闭包表达式每次调用时创建一个output并返回结果。</p>
+<ul>
+<li>值捕获</li>
+</ul>
+<p>闭包可以在其被定义的上下文中捕获常量或者变量。即使定义这些常量的原作用域已经不存在，但是闭包任然可以在闭包函数体内引用和修改这些值。swift中捕获值得最简单形式是嵌套函数，嵌套函数可以捕获其外部函数得所有参数以及定义得常量和变量。</p>
+<ul>
+<li>闭包是引用类型</li>
+</ul>
+<p>无论是将函数或闭包赋值给一个常量还是变量，你实际上都是将常量或者变量的值设置为对应函数或闭包的引用。这意味着将闭包赋值给两个不同的常量或者变量，两个值都指向同一个闭包。</p>
+<p>逃逸闭包，自动闭包参考<a href="https://swiftgg.gitbook.io/swift/swift-jiao-cheng/07_closures" target="_blank" rel="noopener">https://swiftgg.gitbook.io/swift/swift-jiao-cheng/07_closures</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/17/swift语法基础-三/" rel="next" title="swift语法基础(三)">
+                <i class="fa fa-chevron-left"></i> swift语法基础(三)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/16/blog-record/" rel="prev" title="blog record">
+                blog record <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数的定义和调用"><span class="nav-number">1.1.</span> <span class="nav-text">函数的定义和调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数参数与返回值"><span class="nav-number">1.2.</span> <span class="nav-text">函数参数与返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数标签和参数名称"><span class="nav-number">1.3.</span> <span class="nav-text">函数标签和参数名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数类型"><span class="nav-number">1.4.</span> <span class="nav-text">函数类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包"><span class="nav-number">2.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包表达式"><span class="nav-number">2.1.</span> <span class="nav-text">闭包表达式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">119k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:48</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
