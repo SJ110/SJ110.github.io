@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言本文主要收录一些Ios面试中常会问到的一些题目 1、frame和bounds的区别&amp;ensp; &amp;ensp; 1、frame：该view在父视图坐标系中的位置和大小，参考坐标系为父视图。 2、bounds：该view在自己坐标系中位置和大小，参考坐标系为自己。3、要想知道自身的坐标，只需要知道其在父视图中的坐标即可。因此当一个父视图包含一个子视图时，可以通过修改父视图的bounds属性修改其在">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios常见面试题">
+<meta property="og:url" content="http://yoursite.com/2021/06/07/ios常见面试题/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言本文主要收录一些Ios面试中常会问到的一些题目 1、frame和bounds的区别&amp;ensp; &amp;ensp; 1、frame：该view在父视图坐标系中的位置和大小，参考坐标系为父视图。 2、bounds：该view在自己坐标系中位置和大小，参考坐标系为自己。3、要想知道自身的坐标，只需要知道其在父视图中的坐标即可。因此当一个父视图包含一个子视图时，可以通过修改父视图的bounds属性修改其在">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2021/06/07/ios常见面试题/mvvm.png">
+<meta property="og:updated_time" content="2021-08-23T10:31:59.846Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ios常见面试题">
+<meta name="twitter:description" content="前言本文主要收录一些Ios面试中常会问到的一些题目 1、frame和bounds的区别&amp;ensp; &amp;ensp; 1、frame：该view在父视图坐标系中的位置和大小，参考坐标系为父视图。 2、bounds：该view在自己坐标系中位置和大小，参考坐标系为自己。3、要想知道自身的坐标，只需要知道其在父视图中的坐标即可。因此当一个父视图包含一个子视图时，可以通过修改父视图的bounds属性修改其在">
+<meta name="twitter:image" content="http://yoursite.com/2021/06/07/ios常见面试题/mvvm.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2021/06/07/ios常见面试题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ios常见面试题 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/07/ios常见面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ios常见面试题
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-06-07 19:19:14" itemprop="dateCreated datePublished" datetime="2021-06-07T19:19:14+08:00">2021-06-07</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-08-23 18:31:59" itemprop="dateModified" datetime="2021-08-23T18:31:59+08:00">2021-08-23</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">5.4k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">5 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本文主要收录一些Ios面试中常会问到的一些题目</p>
+<h3 id="1、frame和bounds的区别"><a href="#1、frame和bounds的区别" class="headerlink" title="1、frame和bounds的区别"></a>1、frame和bounds的区别</h3><p>&ensp; &ensp; 1、frame：该view在父视图坐标系中的位置和大小，参考坐标系为父视图。 2、bounds：该view在自己坐标系中位置和大小，参考坐标系为自己。3、要想知道自身的坐标，只需要知道其在父视图中的坐标即可。因此当一个父视图包含一个子视图时，可以通过修改父视图的bounds属性修改其在父视图中的相对位置。 因为bounds参考坐标系为自身，因此修改bounds的x,y坐标相当于修改其自身坐标原点的位置，从而修改了子视图参考父视图的位置。</p>
+<h3 id="2、面向协议编程-pop-即-protocol-oriented-programming"><a href="#2、面向协议编程-pop-即-protocol-oriented-programming" class="headerlink" title="2、面向协议编程(pop  即 protocol oriented programming)"></a>2、面向协议编程(pop  即 protocol oriented programming)</h3><p>&ensp; &ensp; 讲到pop现将oop（面向对象编程）,oop具有如下优点。1、<strong>封装和权限控制</strong>，在.h文件中申明公有方法和属性，在.m文件中申明私有方法和属性。2、<strong>扩展性</strong>，在oc中可以通过分类的方式在不破坏原本封装性的同时增加新的方法。还可以通过协议（protocol）和代理（delegate）实现类的灵活扩展。3、<strong>继承和多态</strong>，将公有的属性和方法放在父类中，子类继承时根据自身需要扩展新的方法和属性，增加代码灵活性。在ios中，消息可能会转发给不同的对象，需要根据消息类型确定转发的对象，从而调用不同的类别的方法，这种称为运行时多态，也是动态多态。</p>
+<p>&ensp; &ensp; oop的缺点1、<strong>隐式共享</strong>，说动隐式共享就需要提到深拷贝和浅拷贝，在对变量向另一个变量赋值时，如果该变量只是一个值引用类型，那么赋值后的两个变量都会指向同一块内存区域。造成数据混乱。需要需要对数据进行区分，需要重新向内存区申请一块新的地址存放新的数据。</p>
+<p>&ensp; &ensp; pop相比oop的优势：1、<strong>更加灵活</strong>，比如当希望一个类需要具有某种能力时，可以使用protocol的方式，如果该类继承了该协议，并且实现了协议方法，就说明其具有处理这种场景的能力。这样的好处是不必去基类种增加方法。降低的冗余性。2、<strong>降低依赖</strong>，需要 这种能力的类就去实现这个协议，否则就不必实现，这样可以使得父类的只有通用的方法。</p>
+<p>&ensp; &ensp; 考虑下面的场景，如果给一个button添加一个点击后带有抖动的效果，如何实现。1、实现一个自定义的Uibutton类，在其中添加shake方法。这种方式的代码缺乏复用性，如果其他地方需要这个能力，就必须重新实现一遍shake方法。2、写一个UIbutton类的分类，扩展其自身的能力。这种方式虽然可以解决问题，但是如果不同的场景需要不同shake方式，就需要增加条件判断，而且并不是所有人都知道存在这个分类方法。3、定义一个protocol协议，继承了该协议的类就需要实现shake方法。这种方法具有高度的定制划，需要什么类型的shake就自行定义。代码扩展能力很强。</p>
+<h3 id="3、IOS-MVC和MVVM"><a href="#3、IOS-MVC和MVVM" class="headerlink" title="3、IOS MVC和MVVM"></a>3、IOS MVC和MVVM</h3><p>&ensp; &ensp; 在公司中一般编程都是采用MVC的设计方式，即view和model进行交互，model的来源又由controller管理，同时controller持有view，当数据来源变更时会由view触发model的变化，model变化反过来影响view的展示。大致这样一个过程。在听说MVVM的设计方式后，感觉没有用过总是不知道是如何实现的。网上搜博客也是简单的给出两个图，一个是MVC，一个是MVVM，光看图还是难以理解两者之间的真正差别。此处就不在介绍MVC模式的方式，这种方式也比较简单上手，理解比较容易。</p>
+<p>&ensp; &ensp; <a href="https://www.jianshu.com/p/548980de876a" target="_blank" rel="noopener">https://www.jianshu.com/p/548980de876a</a> 这篇博客中给出了一个demo比较简单的一个MVVM架构。可以做一定的参考。下面根据博客内容对MVVM模式做一个简单介绍。</p>
+<p>&ensp; &ensp; <img src="/2021/06/07/ios常见面试题/mvvm.png" alt="MVVM"></p>
+<p>&ensp; &ensp; 如图中所示：1、VC还是管理view的生命周期，但是view不在和model进行数据交互，而是和Viewmodel进行交互。2、model的数据更新不在告知view需要更新视图。而是通过viewmodel，viewmodel告知view需要更新视图。3、大致流程可以理解为，服务端数据来之后VC触发viewmodel更新，viewmodel更新引起model和View的更新。这个流程里面数据变化引起的视图变化主要工作交给了Viewmodel去处理。这样可以使VC中的代码量大大降低。</p>
+<p>&ensp; &ensp; 文中demo也大致如下，当列表刷新时会触发tableView的reloaddata方法，从而调用cellforrow重新渲染数据，在cellforRow中viewModel通过indexpath去为每个cell创建一个model，但是这个model是由ViewModel持有的，看起来model和cell之间没有任何关系。（就是在model和cell之间加了一个屏障，这个屏障基本做了之前model和cell之间要做的事。）既然Viewmodel持有了model，那么所有model内的数据就可以轻松拿到了。</p>
+<h3 id="4、Ios-method-swizzling"><a href="#4、Ios-method-swizzling" class="headerlink" title="4、Ios method swizzling"></a>4、Ios method swizzling</h3><p>&ensp; &ensp; 方法交换在很多app内都有运用，<a href="https://www.jianshu.com/p/ff19c04b34d0" target="_blank" rel="noopener">https://www.jianshu.com/p/ff19c04b34d0</a> ，这篇博客对其解释的比较详细，可以参考一下。其原理祖耀是利用oc的runtime时候的消息发送机制。使用method swizzling将两个method进行互换。</p>
+<p>&ensp; &ensp; 我现在所在公司主要是做货运相关的，app内有很多的货源列表，试想这样一种场景，给所有列表增加一个页面时长统计的功能，1、我们可以给在每一个列表的viewWillappear中开始计时，然后在dealloc里面结束计时。这样的话工作量是比较大的。2、可以让所有的列表都有继承自同一个基类列表，这样只需要在基类列表中做处理即可。我们公司如今就是这样的处理方案。3、给viewcontrlloer增加一个分类，使用method swizzling，交换需要实现的方法和viewWillappear方法。</p>
+<p>使用method swizzling主要有几个方法比较重要：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">///获取一个实例方法method 第一个参数实该类的类名，第二个参数是方法的选择子</span><br><span class="line">class_getInstanceMethod(Class _Nullable cls, SEL _Nonnull name)</span><br><span class="line">///获取一个类方法</span><br><span class="line">class_getClassMethod(Class _Nullable cls, SEL _Nonnull name)</span><br><span class="line">/*</span><br><span class="line">第一个参数是该类类名，第二个参数是要被添加的方法的选择子，第三个参数是添加的新方法的指针，第四个参数是新添加方法的参数列表</span><br><span class="line">如果方法交换成功返回yes，否则no</span><br><span class="line">*/</span><br><span class="line">class_addMethod(Class _Nullable cls, SEL _Nonnull name, IMP _Nonnull imp, const char * _Nullable types) </span><br><span class="line">/// 进行原方法和目的方法的交换</span><br><span class="line">method_exchangeImplementations(Method _Nonnull m1, Method _Nonnull m2)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Method-Swizzling类簇"><a href="#Method-Swizzling类簇" class="headerlink" title="Method Swizzling类簇"></a>Method Swizzling类簇</h4><p>&ensp; &ensp; 在项目开发中经常容易遇见NSArray数组越界或者NSDictionary取到的vlaue/key为nil导致crash，苹果的这种做法有些狠了。但是在使用method swizzling为数组越界做判断时，却发现不起作用。这是因为method swizzling对NSarray类簇不起作用，其内部有很多继承子当前类的子类，比如 objectAtIndex:这个方法会在内部创建不同的抽象类进行操作，所以我们进行method swizzling时实际操作的是NSArray的父类。 可以使用runtime方法获取其真正的类。</p>
+<h3 id="5、-UITabBarController-amp-amp-UINavigationController"><a href="#5、-UITabBarController-amp-amp-UINavigationController" class="headerlink" title="5、 UITabBarController &amp;&amp; UINavigationController"></a>5、 UITabBarController &amp;&amp; UINavigationController</h3><p>&ensp; &ensp; 今天主要梳理了下tabBarcontroller和navigationController的运用。首先和和同事商量了一下app页面的组织形式。目前常见的app页面形式主要是首页底部一个tabbar，顶部一个navi，中间是用于展示的视图。也就是底部一个tabBarController持有了一个navigationcontroller,然后navi由持有了一个用于展示的视图。</p>
+<p>&ensp; &ensp; 当前我公司大致也是这种设计思路。如果想操作tabBar，可以自行实现tabBar的相关协议。如果想修改Navi，可以通过uiViewController的navigationItem取到相关属性进行操作。</p>
+<p>&ensp; &ensp; 如果想要设置navi上的背景色，可以如下使用，否则navi可能会看起来有一层蒙层一般。这种效果在app内一般设置在基类中，免得所有继承的子类都要重新设置一次。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//背景色</span><br><span class="line">[nav.navigationBar setBarTintColor:[UIColor orangeColor]];</span><br><span class="line">//元素颜色</span><br><span class="line">[nav.navigationBar setTintColor:[UIColor whiteColor]];</span><br><span class="line">[nav.navigationBar setTitleTextAttributes:@&#123;NSFontAttributeName:[UIFont systemFontOfSize:19],</span><br><span class="line">                                                                      NSForegroundColorAttributeName:[UIColor redColor]&#125;];</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、iOS开发中-property的属性nonatomic-retain-readonly-strong等介绍"><a href="#6、iOS开发中-property的属性nonatomic-retain-readonly-strong等介绍" class="headerlink" title="6、iOS开发中@property的属性nonatomic retain readonly strong等介绍"></a>6、iOS开发中@property的属性nonatomic retain readonly strong等介绍</h3><h4 id="nonatomic和atomic"><a href="#nonatomic和atomic" class="headerlink" title="nonatomic和atomic"></a>nonatomic和atomic</h4><p>&ensp; &ensp; 默认是有这个atomic这个属性的，这是为了保证在多线程情况下编译器自动生成互斥锁代码防止读写不同步。如果该对象无需考虑多线程的场景，使用nonatomic修饰。</p>
+<h4 id="copy，assign，retain"><a href="#copy，assign，retain" class="headerlink" title="copy，assign，retain"></a>copy，assign，retain</h4><p>&ensp; &ensp; assgin:默认类型，setter方法直接赋值，不进行热河retain操作，不改变引用计数，一般用于处理基本的数据类型。（float，double，integer）。  retain：释放旧的对象，将旧对象的值赋值给新对象，再另新对象的引用计数为1.应该是拷贝一份原来的指针，赋值给新的对象，再将原来的对象释放。 copy：copy和retain处理流程比较类似，释放旧对象，copy新对象，但是会重新申请一块内存，使用copy需要保证对象符合NSCopying协议，如果是NSArray对象，copy只会是浅拷贝，即将原Array的地址赋值一份。</p>
+<h4 id="assign和retain"><a href="#assign和retain" class="headerlink" title="assign和retain"></a>assign和retain</h4><p>&ensp; &ensp; assign主要是用于修饰一些基础数据类型，并且没有引用计数，retain会有引用计数，只有当一个属性的引用计数为0时才会销毁。</p>
+<h4 id="copy与retain"><a href="#copy与retain" class="headerlink" title="copy与retain"></a>copy与retain</h4><p>&ensp; &ensp; retain 和copy的区别主要是是否重新创建一块新地址。如果是copy，会重新申请一块内存保存新的属性。如果是retain，赋值时引用计数加1.两者会指向同一块内存区。</p>
+<h4 id="strong和weak"><a href="#strong和weak" class="headerlink" title="strong和weak"></a>strong和weak</h4><p>&ensp; &ensp; 一般来讲使用weak是为了防止出现循环引用的问题，外层调用了内层的属性，内层将某些方法放到外层调用（delegate），使用strong会出现retain cycle。 声明weak的指针，在指针被释放时，本身会指向nil，防止野指针问题。 还有一遍类的内部属性使用strong，在外部时比如（delegate）为weak</p>
+<h3 id="7、Ios-block原理浅析"><a href="#7、Ios-block原理浅析" class="headerlink" title="7、Ios block原理浅析"></a>7、Ios block原理浅析</h3><p>&ensp;&ensp; block底层是一个结构体，该结构体中有一个isa指针，本质是一个OC对象，block的变量捕获方式：局部变量通过值传递的形式，因此在block外部定义的局部变量，在block内部改变值大小时block内部是不会改变的，因为局部变量有可能在block执行时已经销毁。 局部静态变量的访问方式是指针传递，因为指针存放在堆区，在block运行时可以捕获到。全局变量：全局变量具有全局作用域，不需要block传值，内部可以直接访问修改。</p>
+<p>&ensp; &ensp; block类型，在以下几种情况下，编译器会自动将栈上的block复制到堆上。1、block作为函数返回值时。2、block使用strong修饰时，3、block作为gcdAPI的方法参数时。堆上的block内部持有强引用的变量时，会造成变量无法释放，造成内存泄漏。正确的做法是在block内部弱引用变量，消除循环。</p>
+<p>&ensp; &ensp; __block修饰符, __block可以用来解决block内部无法修改局部变量值的问题， __block不能修饰全局变量，静态变量。 __block作用是将变量使用一个结构体包装起来，其内部使用一个指针指向包装的结构体，使得block内部通过指针访问到变量修改值。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/31/dart学习笔记/" rel="next" title="dart学习笔记">
+                <i class="fa fa-chevron-left"></i> dart学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/23/ios属性修饰符copy/" rel="prev" title="ios属性修饰符copy">
+                ios属性修饰符copy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、frame和bounds的区别"><span class="nav-number">2.</span> <span class="nav-text">1、frame和bounds的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、面向协议编程-pop-即-protocol-oriented-programming"><span class="nav-number">3.</span> <span class="nav-text">2、面向协议编程(pop  即 protocol oriented programming)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、IOS-MVC和MVVM"><span class="nav-number">4.</span> <span class="nav-text">3、IOS MVC和MVVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Ios-method-swizzling"><span class="nav-number">5.</span> <span class="nav-text">4、Ios method swizzling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Method-Swizzling类簇"><span class="nav-number">5.1.</span> <span class="nav-text">Method Swizzling类簇</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-UITabBarController-amp-amp-UINavigationController"><span class="nav-number">6.</span> <span class="nav-text">5、 UITabBarController &amp;&amp; UINavigationController</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、iOS开发中-property的属性nonatomic-retain-readonly-strong等介绍"><span class="nav-number">7.</span> <span class="nav-text">6、iOS开发中@property的属性nonatomic retain readonly strong等介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nonatomic和atomic"><span class="nav-number">7.1.</span> <span class="nav-text">nonatomic和atomic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#copy，assign，retain"><span class="nav-number">7.2.</span> <span class="nav-text">copy，assign，retain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#assign和retain"><span class="nav-number">7.3.</span> <span class="nav-text">assign和retain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#copy与retain"><span class="nav-number">7.4.</span> <span class="nav-text">copy与retain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strong和weak"><span class="nav-number">7.5.</span> <span class="nav-text">strong和weak</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、Ios-block原理浅析"><span class="nav-number">8.</span> <span class="nav-text">7、Ios block原理浅析</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">137k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:04</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
