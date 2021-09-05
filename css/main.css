@@ -1736,7 +1736,7 @@ ext\\source\\images\\sanji.jpg");
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #460577;
+  background: #c2ffb6;
 }
 .feed-link,
 .chat {
@@ -2466,6 +2466,6 @@ body {
   margin-top: 60px;
   padding: 60px 60px 60px 60px;
   background: #fff;
-  opacity: 0.7;
+  opacity: 0.9;
   min-height: 500px;
 }
