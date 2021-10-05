@@ -121,7 +121,9 @@
 <meta property="og:image" content="http://yoursite.com/2021/09/12/iOS动画基础/CAAnimation.png">
 <meta property="og:image" content="http://yoursite.com/2021/09/12/iOS动画基础/CATransform3D.png">
 <meta property="og:image" content="http://yoursite.com/2021/09/12/iOS动画基础/fire.png">
-<meta property="og:updated_time" content="2021-09-27T06:59:57.008Z">
+<meta property="og:image" content="http://yoursite.com/2021/09/12/iOS动画基础/flappybird1.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/12/iOS动画基础/flappybird2.png">
+<meta property="og:updated_time" content="2021-10-05T04:16:54.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS动画基础">
 <meta name="twitter:description" content="前言&amp;ensp;&amp;ensp;这边博客主要是总结一下最近看到ios动画开发的一些基础知识。主要包含如下一些知识点。主要参考自《iOS开发实战：从入门到上架APPsotre》 1234567891011121、使用UIImageView播放图片组动画2、使用block回调创建UIView层过渡动画3、使用block回调创建UIView层转场动画4、使用commit方式创建UIView层过渡动画5、使用">
@@ -420,7 +422,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-09-27 14:59:57" itemprop="dateModified" datetime="2021-09-27T14:59:57+08:00">2021-09-27</time>
+                <time title="修改时间：2021-10-05 12:16:54" itemprop="dateModified" datetime="2021-10-05T12:16:54+08:00">2021-10-05</time>
               </span>
             
           
@@ -584,8 +586,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/// 使用uiimageView播放gif图</span><br><span class="line">   UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 500, 280, 300)];</span><br><span class="line">   [self.view addSubview:imgView];</span><br><span class="line">   NSString *dataPath = [[NSBundle mainBundle] pathForResource:@&quot;mygif&quot; ofType:@&quot;gif&quot;];</span><br><span class="line">   CGImageSourceRef source = CGImageSourceCreateWithURL((CFURLRef)[NSURL fileURLWithPath:dataPath], NULL);</span><br><span class="line">   size_t count = CGImageSourceGetCount(source);</span><br><span class="line">   CGFloat allTime = 0;</span><br><span class="line">   NSMutableArray *imageArray = [[NSMutableArray alloc] init];</span><br><span class="line">   NSMutableArray *timeArray = [[NSMutableArray alloc] init];</span><br><span class="line">   NSMutableArray *heightArray = @[].mutableCopy;</span><br><span class="line">   NSMutableArray *widthArray = @[].mutableCopy;</span><br><span class="line">   for (size_t i = 0; i&lt;count; i++) &#123;</span><br><span class="line">       CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);</span><br><span class="line">       [imageArray addObject:(__bridge UIImage *)image];</span><br><span class="line">       CGImageRelease(image);</span><br><span class="line">       /// 图片信息</span><br><span class="line">       NSDictionary *info = (__bridge NSDictionary *)CGImageSourceCopyPropertiesAtIndex(source, i, NULL);</span><br><span class="line">       CGFloat width = [[info objectForKey:(__bridge NSString *)kCGImagePropertyPixelWidth] floatValue];</span><br><span class="line">       CGFloat height = [[info objectForKey:(__bridge NSString *)kCGImagePropertyPixelHeight] floatValue];</span><br><span class="line">       [widthArray addObject:[NSNumber numberWithFloat:width]];</span><br><span class="line">       [heightArray addObject:[NSNumber numberWithFloat:height]];</span><br><span class="line">       NSDictionary *timeDic = [info objectForKey:(__bridge NSDictionary *)kCGImagePropertyGIFDictionary];</span><br><span class="line">       CGFloat time = [[timeDic objectForKey:(__bridge NSString *)kCGImagePropertyGIFDelayTime] floatValue];</span><br><span class="line">       allTime +=time;</span><br><span class="line">       [timeArray addObject:[NSNumber numberWithFloat:time]];</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@&quot;contents&quot;];</span><br><span class="line">   NSMutableArray *times = @[].mutableCopy;</span><br><span class="line">   CGFloat currentTime = 0;</span><br><span class="line">   for (int i=0; i&lt;imageArray.count; i++) &#123;</span><br><span class="line">       [times addObject:[NSNumber numberWithFloat:currentTime/allTime]];</span><br><span class="line">       currentTime += [timeArray[i] floatValue];</span><br><span class="line">   &#125;</span><br><span class="line">   [animation setKeyTimes:times];</span><br><span class="line">   [animation setValues:imageArray];</span><br><span class="line">   [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];</span><br><span class="line">   animation.repeatCount = MAXFLOAT;</span><br><span class="line">   animation.duration = allTime;</span><br><span class="line">   [imgView.layer addAnimation:animation forKey:@&quot;gifAnimation&quot;];</span><br></pre></td></tr></table></figure>
 
 <p>&ensp;&ensp;最后效果和前面的WkWebView相同，展示了一个gif图。不过代码比较繁琐。从中也可以看出，如果要对gif图中的某一部分进行操作也是可以通过这种方式实现的。</p>
-<p><strong>以上代码demo参考<a href="https://github.com/SJ110/ios-animation-demo" target="_blank" rel="noopener">这里</a></strong></p>
-<h4 id="小游戏Flappy-Bird设计"><a href="#小游戏Flappy-Bird设计" class="headerlink" title="小游戏Flappy Bird设计"></a>小游戏Flappy Bird设计</h4>
+<p><strong>以上代码demo请参考<a href="https://github.com/SJ110/ios-animation-demo" target="_blank" rel="noopener">这里</a></strong></p>
+<h4 id="小游戏Flappy-Bird设计"><a href="#小游戏Flappy-Bird设计" class="headerlink" title="小游戏Flappy Bird设计"></a>小游戏Flappy Bird设计</h4><p>&ensp;&ensp; flppy bird小游戏是对ios动画的一个小应用，也是参考书中的一个小demo，其中小鸟的动作通过动画实现。需要抓住的点是背景的移动是通过定时器实现的，在1/60秒内，屏幕上的背景会向左移动一个像素，从而实现了背景的移动。给小鸟所在的屏幕增加一个点击事件，每次点击小鸟的坐标都可以变化一定的像素。通过随机数设置障碍物的位置。下面是两张截图: 源码请参考<a href="https://github.com/SJ110/flappy-bird" target="_blank" rel="noopener">这里</a></p>
+<p><img src="/2021/09/12/iOS动画基础/flappybird1.png" alt="flappybird1"></p>
+<p><img src="/2021/09/12/iOS动画基础/flappybird2.png" alt="flappybird2"></p>
+
       
     </div>
 
@@ -915,7 +920,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">164k</span>
+    <span title="站点总字数">165k</span>
   
 
   
