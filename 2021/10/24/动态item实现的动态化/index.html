@@ -110,22 +110,19 @@
         border-left-color: #1E92FB;    /*��߿���ɫ*/
     }
 </style>
-  <meta name="description" content="前言前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。 static整理static用法 static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。">
-<meta name="keywords" content="C++">
+  <meta name="description" content="前言&amp;ensp;&amp;ensp;和匹配侧的各位同学一起维护动态item已经有一段时间了,一开始接触感觉这个东西很高深莫测,随着接触时间的增加,相关业务开发的处理,算是对动态item整个渲染过程有一些理解.在这里写一篇日志记录一下.&amp;ensp;&amp;ensp;动态item以更加快速的构建用户ui视图,可以降低app发版诉求甚至在一些场景下可以免于app发版.&amp;ensp;&amp;ensp;其中快速构建视图是通过动态">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ static和const整理">
-<meta property="og:url" content="http://yoursite.com/2019/08/21/C-static和const整理/index.html">
+<meta property="og:title" content="动态item实现的动态化">
+<meta property="og:url" content="http://yoursite.com/2021/10/24/动态item实现的动态化/index.html">
 <meta property="og:site_name" content="xiaopingpp">
-<meta property="og:description" content="前言前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。 static整理static用法 static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。">
+<meta property="og:description" content="前言&amp;ensp;&amp;ensp;和匹配侧的各位同学一起维护动态item已经有一段时间了,一开始接触感觉这个东西很高深莫测,随着接触时间的增加,相关业务开发的处理,算是对动态item整个渲染过程有一些理解.在这里写一篇日志记录一下.&amp;ensp;&amp;ensp;动态item以更加快速的构建用户ui视图,可以降低app发版诉求甚至在一些场景下可以免于app发版.&amp;ensp;&amp;ensp;其中快速构建视图是通过动态">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/08/21/C-static和const整理/const1.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/21/C-static和const整理/static2.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/21/C-static和const整理/static3.png">
-<meta property="og:updated_time" content="2019-09-07T15:21:04.000Z">
+<meta property="og:image" content="http://yoursite.com/2021/10/24/动态item实现的动态化/process.png">
+<meta property="og:updated_time" content="2021-10-24T02:32:01.822Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ static和const整理">
-<meta name="twitter:description" content="前言前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。 static整理static用法 static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/21/C-static和const整理/const1.png">
+<meta name="twitter:title" content="动态item实现的动态化">
+<meta name="twitter:description" content="前言&amp;ensp;&amp;ensp;和匹配侧的各位同学一起维护动态item已经有一段时间了,一开始接触感觉这个东西很高深莫测,随着接触时间的增加,相关业务开发的处理,算是对动态item整个渲染过程有一些理解.在这里写一篇日志记录一下.&amp;ensp;&amp;ensp;动态item以更加快速的构建用户ui视图,可以降低app发版诉求甚至在一些场景下可以免于app发版.&amp;ensp;&amp;ensp;其中快速构建视图是通过动态">
+<meta name="twitter:image" content="http://yoursite.com/2021/10/24/动态item实现的动态化/process.png">
 
 
 
@@ -135,7 +132,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/08/21/C-static和const整理/">
+  <link rel="canonical" href="http://yoursite.com/2021/10/24/动态item实现的动态化/">
 
 
 
@@ -145,7 +142,7 @@
   };
 </script>
 
-  <title>C++ static和const整理 | xiaopingpp</title>
+  <title>动态item实现的动态化 | xiaopingpp</title>
   
 
 
@@ -356,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/C-static和const整理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/24/动态item实现的动态化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaopingpp">
@@ -373,7 +370,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++ static和const整理
+          <h1 class="post-title" itemprop="name headline">动态item实现的动态化
 
               
             
@@ -405,7 +402,7 @@
                 
               
 
-              <time title="创建时间：2019-08-21 14:38:07" itemprop="dateCreated datePublished" datetime="2019-08-21T14:38:07+08:00">2019-08-21</time>
+              <time title="创建时间：2021-10-24 10:25:49 / 修改时间：10:32:01" itemprop="dateCreated datePublished" datetime="2021-10-24T10:25:49+08:00">2021-10-24</time>
             </span>
           
 
@@ -413,18 +410,23 @@
             
 
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-09-07 23:21:04" itemprop="dateModified" datetime="2019-09-07T23:21:04+08:00">2019-09-07</time>
-              </span>
-            
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/动态化/" itemprop="url" rel="index"><span itemprop="name">动态化</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -446,7 +448,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2.1k</span>
+              <span title="本文字数">2.2k</span>
             </span>
           
 
@@ -476,121 +478,16 @@
       
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前面刚刚整理了一下new和const的关系 ，突然觉得static和const也是面试的时候一个比较常问的方面，现在也来稍微整理下。</p>
-<h3 id="static整理"><a href="#static整理" class="headerlink" title="static整理"></a>static整理</h3><h4 id="static用法"><a href="#static用法" class="headerlink" title="static用法"></a>static用法</h4><ol>
-<li>static修饰普通变量，修改变量的存储区域和生命周期，是变量存储在静态区,在main函数运行前就已经分配了空间，如果有初始值就用初试值初始化，没有就使用系统默认初值。<a id="more"></a> 
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&ensp;&ensp;和匹配侧的各位同学一起维护动态item已经有一段时间了,一开始接触感觉这个东西很高深莫测,随着接触时间的增加,相关业务开发的处理,算是对动态item整个渲染过程有一些理解.在这里写一篇日志记录一下.<br>&ensp;&ensp;动态item以更加快速的构建用户ui视图,可以降低app发版诉求甚至在一些场景下可以免于app发版.<br>&ensp;&ensp;其中快速构建视图是通过动态item提前将描述ui视图结构通过描述性语言事先存放,在渲染阶段通过读取描述性的json文件,使用事先规定好的规则将视图渲染上屏.<br>&ensp;&ensp;让app免于发版是通过将描述文件放置到服务端,通过app冷启动接口下发,这样可以做到增量更新,一些新的需求发布之后,只需修改描述文件中的某一项,不需要改动到native代码,即可完成视图的渲染,降低了发版次数.</p>
+<a id="more"></a>
+<h3 id="渲染流程–流程图"><a href="#渲染流程–流程图" class="headerlink" title="渲染流程–流程图"></a>渲染流程–流程图</h3><p>&ensp;&ensp;因为动态item存在这样的特性,相较于一般的ui层渲染,他需要多一个配置文件. 整个渲染流程图如下</p>
+<p><img src="/2021/10/24/动态item实现的动态化/process.png" alt="process"></p>
+<h3 id="渲染流程–配置文件"><a href="#渲染流程–配置文件" class="headerlink" title="渲染流程–配置文件"></a>渲染流程–配置文件</h3><p>&ensp;&ensp;在业务中中动态item主要用于列表的渲染,下面就以列表卡片为例概述下整个流程,因为卡片样式改动较小,并且交互较低.所以一次配置文件完成后,可以较长时间内不在变动.<br>&ensp;&ensp;对于一个列表卡片,渲染流程中主要关注tableview的两个代理方法一个是cellforrow方法,一个是heighforrow方法.其中cellforrow方法需要返回一个卡片,在这个方法内就可以按需进行ui的搭建.<br>&ensp;&ensp;&ensp;&ensp;动态item的ui搭建使用从上到下从做到右的顺序进行每一行作为一个容器,整个卡片又作为一个更大的容器,因此,在内部可以实现递归的UI搭建:以其中一条数据搭建为例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">      &quot;fontColor&quot;: &quot;#333333&quot;,</span><br><span class="line"></span><br><span class="line">      &quot;fontSize&quot;: 18,</span><br><span class="line"></span><br><span class="line">      &quot;isBold&quot;: 1,</span><br><span class="line"></span><br><span class="line">      &quot;hasTags&quot;: 1,</span><br><span class="line"></span><br><span class="line">      &quot;key&quot;: &quot;startAndEnd&quot;,</span><br><span class="line"></span><br><span class="line">      &quot;maxLines&quot;: 2,</span><br><span class="line"></span><br><span class="line">      &quot;widgetType&quot;: 0</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">  &quot;rowStyle&quot;: &#123;</span><br><span class="line"></span><br><span class="line">    &quot;marginRight&quot;: 75</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  &quot;rowType&quot;: 0</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-</li>
-</ol>
-<pre><code>static int m, n;
-static int *a;
-int main(){
-cout &lt;&lt; m &lt;&lt; &quot; &quot; &lt;&lt; n;
-cout &lt;&lt; *a;
-return 0;
-}</code></pre><p>在不赋初值时默认为0，指针默认为NULL；打印看不到任何结果</p>
-<p><img src="/2019/08/21/C-static和const整理/const1.png" alt="normal_const"></p>
-<ol start="2">
-<li><p>修饰普通函数，表明函数的作用范围，只有定义在该函数的文件内才能使用，在多人开发的项目中为了防止命名空间中的函数重名，可以加上static</p>
-</li>
-<li><p>修饰成员变量时,所有的对象只保存一个该变量，并且不需要生成对象就可以访问该变量。<br>举个例子如下：</p>
-<pre><code>class A{
-public:
-static int a;
-int b;
-A(){
-    b = 3;
-}
-};
-int A::a = 5;
-
-int main(){
-
-cout &lt;&lt; A::a&lt;&lt;&quot; &quot;;
-A c;
-cout &lt;&lt; c.b;
-return 0;
-}</code></pre></li>
-</ol>
-<p><img src="/2019/08/21/C-static和const整理/static2.png" alt="static2"></p>
-<p>需要注意静态成员变量必须在类外初始化，值得注意的是，如果不初始化静态成员变量，将会报错（使用mingw编译）。而他的性质也符合类中的public private和protected的性质，需要注意的是他不属于类，是一个全局变量。<br>其实从代码也可以看出，是在类外初始化，他所占的内存是不变的。</p>
-<ol start="4">
-<li>修饰成员函数，使得成员函数不需要生成对象就可以访问该函数，但是static成员函数中无法访问this指针。也就是无法访问其他非静态成员。稍加思考也可以理解，静态成员函数。本身也不属于类。<strong>但是还是有一点很重要，static成员也可以通过对象进行访问，也就是说可以通过对象进行访问，也可以不通过对象进行访问，只要是已经初始化过。</strong></li>
-</ol>
-<pre><code>#include&lt;iostream&gt;
-using namespace std;
-class A{
-    public:
-    static int a;
-    int b;
-    A(){
-        b = 3;
-    }
-
-    static void fun(){
-        cout &lt;&lt; &quot;this is fun&quot; &lt;&lt; endl;
-    }
-};
-int A::a = 5;
-
-int main(){
-    cout &lt;&lt; A::a&lt;&lt;&quot; &quot;;
-    A::fun();
-    A c;
-    cout &lt;&lt; c.b&lt;&lt;&quot; &quot;&lt;&lt;c.a;
-    c.fun();
-    return 0;
-}</code></pre><p>结果如下：<br><img src="/2019/08/21/C-static和const整理/static3.png" alt="static3"></p>
-<h3 id="const-整理"><a href="#const-整理" class="headerlink" title="const 整理"></a>const 整理</h3><h4 id="const用法"><a href="#const用法" class="headerlink" title="const用法"></a>const用法</h4><ol>
-<li>修饰变量，说明该变量不可以被改变</li>
-<li>修饰指针，分为指针常量和常量指针</li>
-<li>常量引用，经常用于形参类型，即避免了拷贝，有避免了对值的修改</li>
-<li>修饰成员函数，说明该成员函数不能修改成员变量。</li>
-</ol>
-<p>举例如下：</p>
-<pre><code>// 类
-class A
-{
-private:
-const int a;                // 常对象成员，只能在初始化列表赋值
-
-public:
-// 构造函数
-A() : a(0) { };
-A(int x) : a(x) { };        // 初始化列表
-
-// const可用于对重载函数的区分
-int getValue();             // 普通成员函数
-int getValue() const;       // 常成员函数，不得修改类中的任何数据成员的值
-
-
-void function()
-{
-// 对象
-A b;                        // 普通对象，可以调用全部成员函数、更新常成员变量
-const A a;                  // 常对象，只能调用常成员函数
-const A *p = &amp;a;            // 常指针
-const A &amp;q = a;             // 常引用
-
-// 指针
-char greeting[] = &quot;Hello&quot;;
-char* p1 = greeting;                // 指针变量，指向字符数组变量
-const char* p2 = greeting;          // 指针变量，指向字符数组常量
-char* const p3 = greeting;          // 常指针，指向字符数组变量
-const char* const p4 = greeting;    // 常指针，指向字符数组常量
-}
-
-// 函数
-void function1(const int Var);           // 传递过来的参数在函数内不可变
-void function2(const char* Var);         // 参数指针所指内容为常量
-void function3(char* const Var);         // 参数指针为常指针
-void function4(const int&amp; Var);          // 引用参数在函数内为常量
-
-// 函数返回值
-const int function5();      // 返回一个常数
-const int* function6();     // 返回一个指向常量的指针变量，使用：const int *p = function6();
-int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> static 和const中还是有很多容易混淆的东西，不过多写之后就会慢慢记住了。</p>
+<h3 id="渲染流程–ui"><a href="#渲染流程–ui" class="headerlink" title="渲染流程–ui"></a>渲染流程–ui</h3><p>&ensp;&ensp;这是一个”item“,其中的“key”值,对应从接口取数据的”key“值.“data”是一个数组,表示内部可以容纳多个”item“,”rowstyle“用来描绘该容器的位置 “rowType”描绘该容器的类型,比如是否嵌套等.<br>&ensp;&ensp;”widgetType“ 标识当前视图的类型,可能是view,label,button,image等. 因此对于每一个item,都可以按照类似的方式设置其内部的视图,默认内部视图是从左到右排列的,有了这个实例,可以看到,data内的每一个元素可以做很多的扩展,比如想添加borderline,添加富文本等,都可以新增一个key值去加以标识.最后值的渲染只需要保证前后端约定的”key”的内容一致即可.<br>&ensp;&ensp;cellforrow对数据源做了处理,也约定了卡片某个容器的位置,但是容器需要多大,最终整个卡片需要多高是需要通过heightforrow去处理的.<br>&ensp;&ensp;item中只指定了每个容器和容器内部每个视图间的间隔,因此容器大小和容器内每个视图的大小都需要根据内容进行处理. heightforrow 就是需要统计内部视图最终的高度来得到cell的高度.</p>
+<h3 id="渲染流程–上屏展示"><a href="#渲染流程–上屏展示" class="headerlink" title="渲染流程–上屏展示"></a>渲染流程–上屏展示</h3><p>&ensp;&ensp;当卡片的高度确定,卡片内的内容确定之后就可以通过数据源赋值然后上屏展示了.在页面的滑动过程中,因为会存在cell的复用机制,但是在业务上每个卡片的高度是不统一的,卡片的重用也是通过模版内的一个字段加以控制,就算是字段名相同,业务接口返回的数据也可能缺少某些条目导致卡片高度不同,因此在性能上会造成一定的损耗,不过这也是业务不断变化导致的不可控制的结果.理想情况下动态item创建的卡片应该变化很小,但是业务却不断往卡片中增加内容,导致规范性降低.</p>
+<h3 id="思考和感悟"><a href="#思考和感悟" class="headerlink" title="思考和感悟"></a>思考和感悟</h3><p>&ensp;&ensp;动态item是为了快速搭建ui和解决因业务迭代带来的app发版频次问题,在满帮主要应用在列表卡片上.但是由于以往的ui不规范,加上一开始时间紧迫导致设计的不完整,对于当前的迭代已经显得疲软了.但是动态item的思路是很不错的,他增加了一个配置文件,通过这个桥梁将一些依靠native代码的东西方法哦服务端接口.对于变动不大并且交互较少的视图是很有用的.并且可以在当前能力的基础上在扩展很多其他的能力.</p>
 
       
     </div>
@@ -612,15 +509,6 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
 
     <footer class="post-footer">
       
-        
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
-          
-        </div>
-      
 
       
       
@@ -630,8 +518,8 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/21/C-new和malloc的区别/" rel="next" title="C++ new和malloc的区别">
-                <i class="fa fa-chevron-left"></i> C++ new和malloc的区别
+              <a href="/2021/10/08/iOS多线程/" rel="next" title="iOS多线程">
+                <i class="fa fa-chevron-left"></i> iOS多线程
               </a>
             
           </div>
@@ -639,10 +527,6 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/23/data-base-复习/" rel="prev" title="data_base 复习">
-                data_base 复习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -903,7 +787,7 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static整理"><span class="nav-number">2.</span> <span class="nav-text">static整理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static用法"><span class="nav-number">2.1.</span> <span class="nav-text">static用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-整理"><span class="nav-number">3.</span> <span class="nav-text">const 整理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#const用法"><span class="nav-number">3.1.</span> <span class="nav-text">const用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染流程–流程图"><span class="nav-number">2.</span> <span class="nav-text">渲染流程–流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染流程–配置文件"><span class="nav-number">3.</span> <span class="nav-text">渲染流程–配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染流程–ui"><span class="nav-number">4.</span> <span class="nav-text">渲染流程–ui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染流程–上屏展示"><span class="nav-number">5.</span> <span class="nav-text">渲染流程–上屏展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考和感悟"><span class="nav-number">6.</span> <span class="nav-text">思考和感悟</span></a></li></ol></div>
             
 
           </div>

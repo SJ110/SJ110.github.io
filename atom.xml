@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-10-19T05:45:00.550Z</updated>
+  <updated>2021-10-24T02:32:01.822Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动态item实现的动态化</title>
+    <link href="http://yoursite.com/2021/10/24/%E5%8A%A8%E6%80%81item%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96/"/>
+    <id>http://yoursite.com/2021/10/24/%E5%8A%A8%E6%80%81item%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96/</id>
+    <published>2021-10-24T02:25:49.000Z</published>
+    <updated>2021-10-24T02:32:01.822Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&ensp;&ensp;和匹配侧的各位同学一起维护动态item已经有一段时间了,一开始接触感觉这个东西很高深莫测,随着接触时间的增加,相关业务开发的处理,算是对动态item整个渲染过程有一些理解.在这里写一篇日志记录一下.<br>&ensp;&ensp;动态item以更加快速的构建用户ui视图,可以降低app发版诉求甚至在一些场景下可以免于app发版.<br>&ensp;&ensp;其中快速构建视图是通过动态item提前将描述ui视图结构通过描述性语言事先存放,在渲染阶段通过读取描述性的json文件,使用事先规定好的规则将视图渲染上屏.<br>&ensp;&ensp;让app免于发版是通过将描述文件放置到服务端,通过app冷启动接口下发,这样可以做到增量更新,一些新的需求发布之后,只需修改描述文件中的某一项,不需要改动到native代码,即可完成视图的渲染,降低了发版次数.</p><a id="more"></a><h3 id="渲染流程–流程图"><a href="#渲染流程–流程图" class="headerlink" title="渲染流程–流程图"></a>渲染流程–流程图</h3><p>&ensp;&ensp;因为动态item存在这样的特性,相较于一般的ui层渲染,他需要多一个配置文件. 整个渲染流程图如下</p><p><img src="/2021/10/24/动态item实现的动态化/process.png" alt="process"></p><h3 id="渲染流程–配置文件"><a href="#渲染流程–配置文件" class="headerlink" title="渲染流程–配置文件"></a>渲染流程–配置文件</h3><p>&ensp;&ensp;在业务中中动态item主要用于列表的渲染,下面就以列表卡片为例概述下整个流程,因为卡片样式改动较小,并且交互较低.所以一次配置文件完成后,可以较长时间内不在变动.<br>&ensp;&ensp;对于一个列表卡片,渲染流程中主要关注tableview的两个代理方法一个是cellforrow方法,一个是heighforrow方法.其中cellforrow方法需要返回一个卡片,在这个方法内就可以按需进行ui的搭建.<br>&ensp;&ensp;&ensp;&ensp;动态item的ui搭建使用从上到下从做到右的顺序进行每一行作为一个容器,整个卡片又作为一个更大的容器,因此,在内部可以实现递归的UI搭建:以其中一条数据搭建为例:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">      &quot;fontColor&quot;: &quot;#333333&quot;,</span><br><span class="line"></span><br><span class="line">      &quot;fontSize&quot;: 18,</span><br><span class="line"></span><br><span class="line">      &quot;isBold&quot;: 1,</span><br><span class="line"></span><br><span class="line">      &quot;hasTags&quot;: 1,</span><br><span class="line"></span><br><span class="line">      &quot;key&quot;: &quot;startAndEnd&quot;,</span><br><span class="line"></span><br><span class="line">      &quot;maxLines&quot;: 2,</span><br><span class="line"></span><br><span class="line">      &quot;widgetType&quot;: 0</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">  &quot;rowStyle&quot;: &#123;</span><br><span class="line"></span><br><span class="line">    &quot;marginRight&quot;: 75</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  &quot;rowType&quot;: 0</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="渲染流程–ui"><a href="#渲染流程–ui" class="headerlink" title="渲染流程–ui"></a>渲染流程–ui</h3><p>&ensp;&ensp;这是一个”item“,其中的“key”值,对应从接口取数据的”key“值.“data”是一个数组,表示内部可以容纳多个”item“,”rowstyle“用来描绘该容器的位置 “rowType”描绘该容器的类型,比如是否嵌套等.<br>&ensp;&ensp;”widgetType“ 标识当前视图的类型,可能是view,label,button,image等. 因此对于每一个item,都可以按照类似的方式设置其内部的视图,默认内部视图是从左到右排列的,有了这个实例,可以看到,data内的每一个元素可以做很多的扩展,比如想添加borderline,添加富文本等,都可以新增一个key值去加以标识.最后值的渲染只需要保证前后端约定的”key”的内容一致即可.<br>&ensp;&ensp;cellforrow对数据源做了处理,也约定了卡片某个容器的位置,但是容器需要多大,最终整个卡片需要多高是需要通过heightforrow去处理的.<br>&ensp;&ensp;item中只指定了每个容器和容器内部每个视图间的间隔,因此容器大小和容器内每个视图的大小都需要根据内容进行处理. heightforrow 就是需要统计内部视图最终的高度来得到cell的高度.</p><h3 id="渲染流程–上屏展示"><a href="#渲染流程–上屏展示" class="headerlink" title="渲染流程–上屏展示"></a>渲染流程–上屏展示</h3><p>&ensp;&ensp;当卡片的高度确定,卡片内的内容确定之后就可以通过数据源赋值然后上屏展示了.在页面的滑动过程中,因为会存在cell的复用机制,但是在业务上每个卡片的高度是不统一的,卡片的重用也是通过模版内的一个字段加以控制,就算是字段名相同,业务接口返回的数据也可能缺少某些条目导致卡片高度不同,因此在性能上会造成一定的损耗,不过这也是业务不断变化导致的不可控制的结果.理想情况下动态item创建的卡片应该变化很小,但是业务却不断往卡片中增加内容,导致规范性降低.</p><h3 id="思考和感悟"><a href="#思考和感悟" class="headerlink" title="思考和感悟"></a>思考和感悟</h3><p>&ensp;&ensp;动态item是为了快速搭建ui和解决因业务迭代带来的app发版频次问题,在满帮主要应用在列表卡片上.但是由于以往的ui不规范,加上一开始时间紧迫导致设计的不完整,对于当前的迭代已经显得疲软了.但是动态item的思路是很不错的,他增加了一个配置文件,通过这个桥梁将一些依靠native代码的东西方法哦服务端接口.对于变动不大并且交互较少的视图是很有用的.并且可以在当前能力的基础上在扩展很多其他的能力.</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;&amp;ensp;&amp;ensp;和匹配侧的各位同学一起维护动态item已经有一段时间了,一开始接触感觉这个东西很高深莫测,随着接触时间的增加,相关业务开发的处理,算是对动态item整个渲染过程有一些理解.在这里写一篇日志记录一下.&lt;br&gt;&amp;ensp;&amp;ensp;动态item以更加快速的构建用户ui视图,可以降低app发版诉求甚至在一些场景下可以免于app发版.&lt;br&gt;&amp;ensp;&amp;ensp;其中快速构建视图是通过动态item提前将描述ui视图结构通过描述性语言事先存放,在渲染阶段通过读取描述性的json文件,使用事先规定好的规则将视图渲染上屏.&lt;br&gt;&amp;ensp;&amp;ensp;让app免于发版是通过将描述文件放置到服务端,通过app冷启动接口下发,这样可以做到增量更新,一些新的需求发布之后,只需修改描述文件中的某一项,不需要改动到native代码,即可完成视图的渲染,降低了发版次数.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="动态化" scheme="http://yoursite.com/categories/动态化/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>iOS多线程</title>
@@ -416,28 +435,6 @@
     
     
     <category term="openGL" scheme="http://yoursite.com/tags/openGL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>四月是你的谎言 ×，四月是你的ppt √</title>
-    <link href="http://yoursite.com/2019/10/23/%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84%E8%B0%8E%E8%A8%80-%C3%97%EF%BC%8C%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84ppt-%E2%88%9A/"/>
-    <id>http://yoursite.com/2019/10/23/%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84%E8%B0%8E%E8%A8%80-%C3%97%EF%BC%8C%E5%9B%9B%E6%9C%88%E6%98%AF%E4%BD%A0%E7%9A%84ppt-%E2%88%9A/</id>
-    <published>2019-10-23T13:49:17.000Z</published>
-    <updated>2019-10-23T14:31:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>终于在火车上补完了自己早就想看的四谎，虽然在火车上观看感受不是那么好，但是还是好多次差点落泪了，真的是猛男必备番。直接一张熏的治愈微笑镇楼</p><p><img src="/2019/10/23/四月是你的谎言-×，四月是你的ppt-√/sh.jpg" alt="xun"></p><a id="more"></a> <p>火车8小时57分钟，从上车开始看，看完之后自己放飞一会思想就下车了，时间也刚好。不过体验不是很好，以后有机会再刷一遍吧。</p><h3 id="yy-amp-amp-废话"><a href="#yy-amp-amp-废话" class="headerlink" title="yy &amp;&amp; 废话"></a>yy &amp;&amp; 废话</h3><p>看完这么好的一部番还是要写点啥，不然感觉挺浪费的。虽然吐槽了其中有很多ppt，但是遮不住这个不落俗套的故事，当然也许这也是很多番的常规套路，只不过我level还比较低看不出来而已。但是那句 “我喜欢了你十年，却用整个四月编织了一个不爱你的谎言”真的到了结尾才让人如此恸哭。</p><p>一个人的言行有时候会影响到别人在这里面也是体现的淋漓尽致。熏那种有时候有点泼但大多数时间又很温柔的性格在现实中有很多这样的人。哎，我这匮乏的语言，真不知道该怎么描述。心里的想法总是不能很好的写出来真的很烦。不过还是继续。最直观的体验是一颗炽热的心真的可以挽救一个在痛苦边缘不断挣扎的人。这无论对于公生还是熏都是如此。熏拯救了公生，公生也拯救了熏。（即使希望渺茫也无所谓，所以大家也都嚷着要寄刀片嘛）所谓的“友人A”不过也是个谎言罢了。 最后那句“我是否住进你的心里了呢？–连鞋也没脱就住进来了。”真的很想哭。很多感人的地方，我也不想用自己匮乏的语言去描绘，只会徒增笔墨而已。</p><p>但是，这样的人真的很难遇见(也许是我没有遇见而已)。像椿和学长似乎才是更贴近现实。弹幕里很多人说“青梅竹马比不过天降少女”还是什么的，我觉得这其实只是这部剧为了增加那种冲击感而设定的。故事想要表达一种相互拯救，互相依存（类似声之形），建立在这样的故事背景下当然更能引发观众的共鸣。椿很好，她和熏一样好，只不过故事主角是熏而已。喜欢一个人没有错，更何况是一个从小到大的玩伴。我不知道如何描述，反正椿也是很可怜的。不过也更现实。我们不过是羡慕像公生和熏那般的爱情罢了。如此治愈的笑容谁不愿意守护呢！但是这部剧的主旨还是之前所说那样，相互拯救，相互依存。这个世界本身就是自私的，能有一个人如此为尔，此生无憾。这样的人很难遇见，所以我们大多数人都是将自己的那种想法寄托了而已。不过，这也正是我喜欢她的原因啊。</p><p>当然，阿渡也是梦寐以求的中国好基友呢~</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;终于在火车上补完了自己早就想看的四谎，虽然在火车上观看感受不是那么好，但是还是好多次差点落泪了，真的是猛男必备番。直接一张熏的治愈微笑镇楼&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2019/10/23/四月是你的谎言-×，四月是你的ppt-√/sh.jpg&quot; alt=&quot;xun&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="其他" scheme="http://yoursite.com/categories/其他/"/>
-    
-    
-    <category term="感悟" scheme="http://yoursite.com/tags/感悟/"/>
     
   </entry>
   
