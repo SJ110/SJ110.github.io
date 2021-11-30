@@ -361,13 +361,6 @@
 
   
   <url>
-    <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2021-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/coding/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -382,7 +375,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
+    <loc>http://yoursite.com/tags/C/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -396,7 +389,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/flutter/</loc>
+    <loc>http://yoursite.com/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -410,6 +403,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/flutter/</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/database/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -417,14 +417,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/git/</loc>
+    <loc>http://yoursite.com/tags/iOS/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/iOS/</loc>
+    <loc>http://yoursite.com/tags/git/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -445,14 +445,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%A4%8D%E4%B9%A0/</loc>
+    <loc>http://yoursite.com/tags/%E5%85%B6%E4%BB%96/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E5%85%B6%E4%BB%96/</loc>
+    <loc>http://yoursite.com/tags/%E5%A4%8D%E4%B9%A0/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -489,13 +489,6 @@
 
   
   <url>
-    <loc>http://yoursite.com/categories/C/</loc>
-    <lastmod>2021-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/categories/leetcode/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -510,14 +503,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/iOS/</loc>
+    <loc>http://yoursite.com/categories/C/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
+    <loc>http://yoursite.com/categories/iOS/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -531,7 +524,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/dart/</loc>
+    <loc>http://yoursite.com/categories/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -539,6 +532,13 @@
   
   <url>
     <loc>http://yoursite.com/categories/%E5%85%B6%E4%BB%96/</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/dart/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -580,14 +580,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/%E5%A4%8D%E4%B9%A0/</loc>
+    <loc>http://yoursite.com/categories/%E5%8A%A8%E6%80%81%E5%8C%96/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/%E5%8A%A8%E6%80%81%E5%8C%96/</loc>
+    <loc>http://yoursite.com/categories/%E5%A4%8D%E4%B9%A0/</loc>
     <lastmod>2021-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
