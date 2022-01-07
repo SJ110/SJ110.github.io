@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+  <meta name="description" content="前言&amp;ensp;&amp;ensp;最近看了一些copyWithZone:这个方法相关的一些东西.没想到从这里可以延伸出来很多内容,包括深拷贝,浅拷贝,copy,mutableCopy,NSCopying协议,NSMutableCoping协议,单例等等东西.他们之间要么相互关联,要么环环相扣.也许拿出其中一点来可以说的比较清晰,但是全部合在一起又很乱了.因此写一篇文章来梳理一下这些知识脉络.">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 如何用OC如何写一个单例">
+<meta property="og:url" content="http://yoursite.com/2022/01/07/如何用OC如何写一个单例/index.html">
+<meta property="og:site_name" content="xiaopingpp">
+<meta property="og:description" content="前言&amp;ensp;&amp;ensp;最近看了一些copyWithZone:这个方法相关的一些东西.没想到从这里可以延伸出来很多内容,包括深拷贝,浅拷贝,copy,mutableCopy,NSCopying协议,NSMutableCoping协议,单例等等东西.他们之间要么相互关联,要么环环相扣.也许拿出其中一点来可以说的比较清晰,但是全部合在一起又很乱了.因此写一篇文章来梳理一下这些知识脉络.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-01-07T10:39:19.140Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 如何用OC如何写一个单例">
+<meta name="twitter:description" content="前言&amp;ensp;&amp;ensp;最近看了一些copyWithZone:这个方法相关的一些东西.没想到从这里可以延伸出来很多内容,包括深拷贝,浅拷贝,copy,mutableCopy,NSCopying协议,NSMutableCoping协议,单例等等东西.他们之间要么相互关联,要么环环相扣.也许拿出其中一点来可以说的比较清晰,但是全部合在一起又很乱了.因此写一篇文章来梳理一下这些知识脉络.">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xiaopingpp" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2022/01/07/如何用OC如何写一个单例/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> 如何用OC如何写一个单例 | xiaopingpp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xiaopingpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/01/07/如何用OC如何写一个单例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaopingpp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaopingpp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"> 如何用OC如何写一个单例
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+            <i class="fa fa-thumb-tack"></i>
+            <font color="7D26CD">top</font>
+            <span class="post-meta-divider">|</span>
+          
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-01-07 15:09:58 / 修改时间：18:39:19" itemprop="dateCreated datePublished" datetime="2022-01-07T15:09:58+08:00">2022-01-07</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">4 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&ensp;&ensp;最近看了一些<strong>copyWithZone:</strong>这个方法相关的一些东西.没想到从这里可以延伸出来很多内容,包括深拷贝,浅拷贝,copy,mutableCopy,NSCopying协议,NSMutableCoping协议,单例等等东西.他们之间要么相互关联,要么环环相扣.也许拿出其中一点来可以说的比较清晰,但是全部合在一起又很乱了.因此写一篇文章来梳理一下这些知识脉络.</p>
+<a id="more"></a>
+
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>&ensp;&ensp;首先从单例开始说起,因为单例里面涉及到上面比较多的东西.<br>&ensp;&ensp;单例指的是在app生命周期内只会存在一个实例的对象.无论实例化多少次,都只会在内存中存在一个地址.现在看一个简单的单例模式.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">///.h</span><br><span class="line">@interface SJPSingletonManager:NSObject</span><br><span class="line">+ (instancetype)shareManager;</span><br><span class="line">@end</span><br><span class="line">///.m</span><br><span class="line">@implementation SJPSingletonManager</span><br><span class="line"></span><br><span class="line">+(instancetype)shareManager &#123;</span><br><span class="line">    static SJPSingletonManager *manager = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        manager = [[SJPSingletonManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return manager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line">.....</span><br><span class="line">///testCode</span><br><span class="line">    SJPSingletonManager *manager1 = [SJPSingletonManager shareManager];</span><br><span class="line">    SJPSingletonManager *manager2 = [SJPSingletonManager shareManager];</span><br><span class="line">/// consle outprint</span><br><span class="line">2022-01-07 15:29:50.053345+0800 multi-thread-demo[87156:1046260] singleton:0x600002830000--0x600002830000</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;通过dispatch_once_t这种方式让初始化代码只执行一次.因此做到了多次实例化只得到一份内存的效果,但是这么写的缺点在于如果调用的人不适用暴露出来的shareManager方法,而是通过init或者new的方式进行初始化的话,得到的对象就不在是一个单例,因此需要把这两个入口也堵住.另外还了解到,无论是通过init的方式,还是通过new的方式创建对象,最终都会调用到<strong>allocWithZone:</strong>这个方法(经过验证确实是这样子的),因此我们可以少写一些代码,直接堵住<strong>allocWithZone:</strong>这个初始化方法.因此修改后的代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)shareManager &#123;</span><br><span class="line">    return [[self alloc] init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;</span><br><span class="line">    static SJPSingletonManager *_manager = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        if (!_manager) &#123;</span><br><span class="line">            _manager = [super allocWithZone:zone];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return _manager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;shareManager内部不在执行dispatch方法,而是放到<strong>allocWithZone:</strong>中执行.个人认为到这一步的话已经可以算是完整的单例了,但是还是有一些场景需要考虑下.</p>
+<ul>
+<li>如果调用方使用copy来对单例进行复制.</li>
+<li>如果调用方方使用mutableCopy来对单例进行复制.<br>&ensp;&ensp;copy和mutableCopy都是定义在NSCopying和NSMutableCopying协议中的方法,如果不继承这两个协议直接调用copy方法的话,直接调用<strong>copyWithZone:</strong>这个方法会造成crash.crash信息如下:</li>
+<li>Thread 1: “-[SJPSingletonManager copyWithZone:]: unrecognized selector sent to instance 0x600001328980”</li>
+</ul>
+<p>&ensp;&ensp;此处我发现了一个华点,如果不继承NSCopying协议,直接实现copyWithZone:这个方法,在实例对象调用copy方法时也不会crash,因此推测NSObject内部的实现代码大致是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">///没有前面的if条件判断</span><br><span class="line">[self performSelector:@selector(copyWithZone:)];</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;增加了<strong>copyWithZone:</strong>和<strong>mutableCopyWithZone:</strong>方法后,整体的代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@implementation SJPSingletonManager</span><br><span class="line"></span><br><span class="line">+(instancetype)shareManager &#123;</span><br><span class="line">    return [[self alloc] init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;</span><br><span class="line">    static SJPSingletonManager *_manager = nil;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        if (!_manager) &#123;</span><br><span class="line">            _manager = [super allocWithZone:zone];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return _manager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (nonnull id)copyWithZone:(nullable NSZone *)zone &#123;</span><br><span class="line">    return [SJPSingletonManager allocWithZone:zone];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (nonnull id)mutableCopyWithZone:(nullable NSZone *)zone &#123;</span><br><span class="line">    return [SJPSingletonManager allocWithZone:zone];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;到这一步应该已经算是一个完整的单例了.涵盖了可能想到的所有场景.</p>
+<h3 id="copy-mutableCopy"><a href="#copy-mutableCopy" class="headerlink" title="copy,mutableCopy"></a>copy,mutableCopy</h3><p>&ensp;&ensp;oc提供的集合对象:array,dictionary,string等内部都是实现了&lt;NSCopying,NSMutableCopying&gt;两个协议的,有一点需要明确,以上这些类型通过调用mutableCopy方法得到的一定是可变对象,通过copy方法调用得到的一定是immutable对象.考虑如下代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">///.h</span><br><span class="line">@interface classA : NSObject&lt;NSCopying,NSMutableCopying&gt;</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *array;</span><br><span class="line">@property (nonatomic, copy) NSString *str;</span><br><span class="line">@property (nonatomic, copy) NSArray *iArray;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">///.m</span><br><span class="line">- (instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        _iArray = @[@&quot;111&quot;,@&quot;222&quot;];</span><br><span class="line">        _str = @&quot;ssss&quot;;</span><br><span class="line">        _array = @[@&quot;3333&quot;].mutableCopy;</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (nonnull id)copyWithZone:(nullable NSZone *)zone &#123;</span><br><span class="line">    classA *A = [[classA alloc] init];</span><br><span class="line">    A.iArray = self.iArray.copy;</span><br><span class="line">    A.str = self.str.copy;</span><br><span class="line">    A.array = self.array.copy;</span><br><span class="line">    NSLog(@&quot;copy--%p,%p,---array:%p,%p&quot;,self.str,A.str,self.array,A.array);</span><br><span class="line">    return A;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (nonnull id)mutableCopyWithZone:(nullable NSZone *)zone &#123;</span><br><span class="line">    classA *A = [[classA alloc] init];</span><br><span class="line">    A.iArray = self.iArray.mutableCopy;</span><br><span class="line">    A.str = self.str.mutableCopy;</span><br><span class="line">    A.array = self.array.copy;</span><br><span class="line">    return A;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line">    classA *A = [classA new];</span><br><span class="line">    classA *Aa = [A copy];</span><br><span class="line">    classA *Aaa = [A mutableCopy];</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;通过上面的方式定义了copyWithZone和mutableCopyWithZone方法之后,我们可以对自定义的对象进行拷贝.得到的地址不同的对象.增加这个方法之后就可以对自定义的对象使用copy和mutableCopy方法.</p>
+<h3 id="深拷贝-浅拷贝"><a href="#深拷贝-浅拷贝" class="headerlink" title="深拷贝,浅拷贝"></a>深拷贝,浅拷贝</h3><p>&ensp;&ensp;前面说过,执行copy后得到的是不可变对象,执行mutableCopy方法之后得到的时候可变对象.这在深拷贝和浅拷贝上表现出来是这样的.上面代码运行后,可以得到log输出<br>  2022-01-07 17:50:05.046960+0800 multi-thread-demo[90687:1165918] copy–0x10260c5b8,0x10260c5b8,—array:0x6000008670f0,0x6000004fab00,</p>
+<p>&ensp;&ensp;分析:</p>
+<ul>
+<li>str是一个不可变的string对象,使用copy是浅拷贝,因此得到的是一份地址的拷贝且内容相同.以前曾经疑问一个点,虽然地址相同,但是对其中一个重新赋值之后为什么地址又不同呢,指向的内容也不同了呢,现在才发现,不可变对象本身是不可修改的,重新赋值只会重新申请一块内存存储新的对象.</li>
+<li>array是一个可变对象,使用copy之后获得一个不可变对象,不过也会生成新的数据地址.同时,使用mutableCopy是深拷贝,这里有一个点,一般开发过程中建议把对象声明为不可变的,如果在运行过程中一定需要修改对象内的元素的话,可以通过如下方式:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_iArray = @[@&quot;111&quot;,@&quot;222&quot;];</span><br><span class="line">NSMutableArray *mArray = [_iArray mutableCopy];</span><br><span class="line">[mArray setValue:@&quot;222&quot; forKey:@&quot;1111&quot;];</span><br><span class="line">_iArray = mArray.copy;</span><br><span class="line">/// 通过借助第三个变量来对不可变的变量进行修改.</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/12/06/Swift基础语法/" rel="next" title="Swift基础语法">
+                <i class="fa fa-chevron-left"></i> Swift基础语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Xiaopingpp">
+            
+              <p class="site-author-name" itemprop="name">Xiaopingpp</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/SJ110" title="GitHub &rarr; https://github.com/SJ110" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:songjunp@qq.com" title="E-Mail &rarr; mailto:songjunp@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://leetcode-cn.com/u/songjunp/" title="leetcode &rarr; https://leetcode-cn.com/u/songjunp/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>leetcode</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">2.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#copy-mutableCopy"><span class="nav-number">3.</span> <span class="nav-text">copy,mutableCopy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深拷贝-浅拷贝"><span class="nav-number">4.</span> <span class="nav-text">深拷贝,浅拷贝</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaopingpp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">211k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:12</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
