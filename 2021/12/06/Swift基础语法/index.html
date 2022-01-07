@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="xiaopingpp">
 <meta property="og:description" content="前言&amp;ensp;&amp;ensp;最近开始看下《Swift4从零到精通iOS开发》,学习下Swift的语法.也相当于做一个简单的读书笔记. &amp;ensp;&amp;ensp;虽然在毕业前也做过一丢丢的Swift语法学习,但是那个时候还没有接触到任何的iOS开发,当时学起来也是晦涩难懂,所以之前的学习就当作空白归零,现在重新开始新的Swift语法学习.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-12-18T09:27:55.387Z">
+<meta property="og:updated_time" content="2021-12-29T12:54:22.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift基础语法">
 <meta name="twitter:description" content="前言&amp;ensp;&amp;ensp;最近开始看下《Swift4从零到精通iOS开发》,学习下Swift的语法.也相当于做一个简单的读书笔记. &amp;ensp;&amp;ensp;虽然在毕业前也做过一丢丢的Swift语法学习,但是那个时候还没有接触到任何的iOS开发,当时学起来也是晦涩难懂,所以之前的学习就当作空白归零,现在重新开始新的Swift语法学习.">
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-12-18 17:27:55" itemprop="dateModified" datetime="2021-12-18T17:27:55+08:00">2021-12-18</time>
+                <time title="修改时间：2021-12-29 20:54:22" itemprop="dateModified" datetime="2021-12-29T20:54:22+08:00">2021-12-29</time>
               </span>
             
           
@@ -457,7 +457,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">7.3k</span>
+              <span title="本文字数">11k</span>
             </span>
           
 
@@ -469,7 +469,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">7 分钟</span>
+              <span title="阅读时长">10 分钟</span>
             </span>
           
 
@@ -679,12 +679,34 @@ mySort(array: &amp;tmpArray) {
 
 <p>/// 定义<br>    func foo5(myClosure:(Int,Int)-&gt;Bool){</p>
 <pre><code>}</code></pre><p>/// 调用<br>    foo5 {<br>        $0&lt;=$1<br>}</p>
-<pre><code>- 逃逸闭包和非逃逸闭包
-&amp;ensp;&amp;ensp;逃逸闭包指函数内的闭包在函数执行结束后在函数外依然可以执行.非逃逸闭包纸当函数的生命周期结束后,闭包也将被销毁.非逃逸闭包也不可以作为返回值返回.逃逸闭包一般用在异步操作中,比如接口调用之后对于返回结果的回调.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- 逃逸闭包和非逃逸闭包</span><br><span class="line">&amp;ensp;&amp;ensp;逃逸闭包指函数内的闭包在函数执行结束后在函数外依然可以执行.非逃逸闭包纸当函数的生命周期结束后,闭包也将被销毁.非逃逸闭包也不可以作为返回值返回.逃逸闭包一般用在异步操作中,比如接口调用之后对于返回结果的回调.</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;闭包类型是Swift中比较特殊的语法,需要多加练习.</span><br><span class="line"></span><br><span class="line">### 运算符重载和枚举</span><br><span class="line"></span><br><span class="line">#### 运算符重载</span><br><span class="line"> - 函数重载,是指参数列表不同,返回值不同的同名函数,OC中没有函数的重载,Swift中可以进行函数的重载</span><br></pre></td></tr></table></figure>
 
-&amp;ensp;&amp;ensp;闭包类型是Swift中比较特殊的语法,需要多加练习.
+<pre><code>func adds(params1:Int,params2:Int)-&gt;Int {
 
-...... 更新中</code></pre>
+}
+func adds(params1:String,params2:Int)-&gt;String {
+
+}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 运算符重载,Swift从2.x版本后剔除了++运算符,但是通过重载运算符可以自定义相关的方法.</span><br></pre></td></tr></table></figure>
+
+<p>/// 前缀++<br>prefix operator ++<br>prefix func ++(params:Int) -&gt; Int {<br>    var ret = params<br>    ret = ret+1<br>    return ret<br>}<br>/// 中缀运算符重载<br>infix operator ++<br>func ++(params:Int,params2:Int) -&gt; Int  {<br>    return (params * params2)<br>}<br>/// 后缀运算符重载<br>postfix operator ++<br>postfix func ++(params:Int) -&gt; Int {<br>    return params+1<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#### 枚举的创建和应用</span><br><span class="line">&amp;ensp;&amp;ensp;Swift中枚举的创建支持声明一个原始类型,如果定义为int类型时,如果设置第一个为1,后面的枚举都会自增1.</span><br></pre></td></tr></table></figure>
+
+<p>/// 声明字符枚举<br>enum charEnum:Character {<br>case a = “a”<br>case b = “b”<br>case c = “c”<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;Swift中枚举较为灵活,可以通过自定义枚举实现匹配</span><br></pre></td></tr></table></figure>
+
+<p>enum shape {<br>    case circle(center:(Double,Double),radius:(Double))<br>    case rectangle(center:(Double,Double),width:(Double),height:(Double))<br>    case triangle(point1:(Double,Double),point2:(Double,Double),point3:(Double,Double))<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">然后使用switch语句时根据样式进行匹配.</span><br><span class="line"></span><br><span class="line">### 类和结构体</span><br><span class="line">#### 类和结构体的区别</span><br><span class="line"> - 类中需要定一个初始化方法,进行内部成员的初始化,结构体不需要,结构体会自动生成一个初始化方法在内部</span><br><span class="line"> - 结构是值类型,进行赋值是会进行一份内存的拷贝,修改其中一个,另一个不会影响.类是引用类型,赋值后两份指向同一份内存.</span><br><span class="line"> - 类可以继承,结构体不能继承.</span><br><span class="line"> - Swift中结构体内部可以定义方法.</span><br><span class="line"></span><br><span class="line">#### 类的继承</span><br><span class="line"> - Swift中类可以被继承,实现子类自身所需要的特点.</span><br><span class="line"> - override关键字表示子类中重写父类中的方法.在重写的方法中可以通过super关键字调用父类的实现,然后继续子类的逻辑.</span><br><span class="line"> - final关键字可以修改类的方法,属性,类本身.被修饰后,不可以被子类继承或重写.</span><br><span class="line"></span><br><span class="line">#### 使用场景</span><br><span class="line"> - 结构体:如果成员比较简单,不需要继承,所描述的数据类型需要以复制的形式进行.则使用结构体来定义,否则使用类来定义.</span><br><span class="line"> - Swift中array,dictionary,string,set等类型都是使用struct来定义的.因此进行赋值时都会拷贝一份新的数据.</span><br><span class="line"></span><br><span class="line">### 构造方法的设计和使用</span><br><span class="line">&amp;ensp;&amp;ensp;Swift中的构造方法与OC中的有区别,OC中的构造方法需要返回一个(instanceType)类型,Swift中无返回类型,Swift为了实现类型安全的特性,给构造方法增加了一些原则.Swift中的构造放包括指定构造放和便利构造方法,可失败构造方法和必要构造方法.想通的是在构造子类时需要先构造一个父类.</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;Swift中可以进行属性监听,但是监听在给属性设置初始值和构造方法时豆不会出发,只有在构造完成之后,属性监听才会生效.</span><br></pre></td></tr></table></figure>
+
+<p>class MyClass {<br>    var count:Int = 0 {<br>        willSet {<br>            print(“willSet:count”)<br>        }<br>        didSet {<br>            print(“didSet:count”)<br>        }<br>    }<br>    init(params:Int) {<br>        count = params<br>    }<br>}<br>var objClass = MyClass(params: 5)<br>objClass.count = 3;  ///只有在初始化后赋值才会触发属性监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;对于结构体,可以不用实现其构造方法,编译器默认生成一个构造方法,将属性作为参数.**对于值类型结构,比如结构体,如果自己定义了一个构造方法,那么系统生成的构造方法将会失效**</span><br><span class="line"></span><br><span class="line">#### 指定构造方法和便利构造方法</span><br><span class="line">&amp;ensp;&amp;ensp;指定构造方法(Designnated)不需要任何关键字修饰,便利构造方法需要使用(Convenience)修饰.便利构造方法方便开发者使用.但是也需要遵循一些原则.</span><br><span class="line"> - 子类的指定构造方法中必须调用父类的指定构造方法</span><br><span class="line"> - 便利构造方法中必须调用当前类的其他构造方法</span><br><span class="line"> - 便利构造方法归根结底要调用某个指定构造方法</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;可以这样理解这三个原则,1、子类构造方法需要调用父类的构造方法.2、便利构造方法是为了方便开发这调用,但是便利构造方法最终依赖于指定构造方法.</span><br><span class="line"></span><br><span class="line">#### 构造方法的继承关系</span><br><span class="line"> - 在继承关系中,如果子类没有覆写或者重写任何指定构造方法,则默认子类会继承父类所有的指定构造方法. </span><br><span class="line"> - 如果子类提供了父类的指定构造方法,则子类默认继承父类的便利构造方法.</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;第一个原则说明子类如果自定义了指定构造方法,或者覆写了父类的某个指定构造方法,那么子类不在继承父类所有的指定构造方法.第二个原则说明由于所有的便利构造方法最终都会调用指定构造方法,因此无论子类中定义的便利构造方法与父类是否相同,都是子类独立的构造方法.</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;这里注意下覆写(override)和重载(overload)的概念,覆写是指子类对父类的方法进行重新定义.重载是指方法名相同,参数不同或者返回值不同的方法.</span><br><span class="line"></span><br><span class="line">#### 构造方法的安全行检查</span><br><span class="line">&amp;ensp;&amp;ensp;Swift在类的构造方法中会进行4项安全性检查.</span><br><span class="line"> - 在子类的构造方法中,必须完成当前类所有存储属性的构造,才能调用父类的指定构造方法,这样可以保证构造完成从父类继承下来的存储属性前,本身定义的存储属性也构造完成.</span><br><span class="line"> - 子类中如果要自定父类中的存储属性的值,需要在调用父类的构造方法之后再设置,可以保证在重新赋值时父类的属性已经构造完成.</span><br><span class="line"> - 如果便利构造方法中要重新设置某些存储属性的值,那么需要在调用指定构造方法之后设置,可以保证便利构造方法中的值不会被指定构造方法中的值覆盖.</span><br><span class="line"> - 子类在调用父类构造方法前,不能使用self引用属性,可以保证使用self调用实例本身时,实例已经构造完成.</span><br></pre></td></tr></table></figure>
+
+<p>class subCheck:check {<br>    var subProperty:Int<br>    init() {<br>        /// 原则1调用父类构造方法前,先完成自身属性赋值<br>        subProperty = 1;<br>        super.init(param: 0);<br>        /// 原则2 如果子类对父类属性重新赋值,需要在父类初始化方法之后,保证父类已经存在<br>        property = 2;<br>        /// 原则3完成父类构造方法之后,才能使用self关键字<br>        self.subProperty = 3;<br>    }<br>    convenience init(param1:Int,param2:Int) {<br>        self.init();<br>        /// 原则4 便利构造方法中要修改属性的值需要在指定构造方法之后,防止值被覆盖<br>        subProperty = 3;<br>        property = param2;<br>    }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 可失败构造方法和必要构造方法</span><br><span class="line">&amp;ensp;&amp;ensp;Swift为了处理某些可能空的值,引入了optional可选值类型,对于类的构造方法,如果传递的参数不符合要求时,可以让构造方法失败,此时需要使用可失败构造方法的语法.其次,可以设置某些构造方法为必要构造方法,如果类中的某些构造方法被指定为必要构造方法,则其子类必须实现这个方法.必要构造方法使用required关键字修饰.</span><br></pre></td></tr></table></figure>
+
+<p>class reCheck {<br>    var property:Int<br>    /// 可失败构造方法<br>    init?(params:Int) {<br>        guard params&gt;10 else {<br>            return nil<br>        }<br>        property = params;<br>    }<br>    /// 此构造方法必须子类实现<br>    required init(param1:Int,param2:Int) {<br>        property = param2;<br>    }<br>    deinit {<br>        print(“该类被销毁”);<br>    }</p>
+<p>}<br>```</p>
+<p>&ensp;&ensp;与构造方法相对应的是析构方法.使用deinit标识,当把实例置为nil时,实例会被释放</p>
+
       
     </div>
 
@@ -1015,7 +1037,7 @@ mySort(array: &amp;tmpArray) {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1027,7 +1049,7 @@ mySort(array: &amp;tmpArray) {
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">202k</span>
+    <span title="站点总字数">207k</span>
   
 
   
@@ -1036,7 +1058,7 @@ mySort(array: &amp;tmpArray) {
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">3:04</span>
+    <span title="站点阅读时长">3:08</span>
   
 </div>
 
